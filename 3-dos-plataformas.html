@@ -1,0 +1,891 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Dos plataformas · Alejandro Burdío</title><meta name="description" content="Portfolio de Alejandro Burdío García, desarrollador mobile Android e iOS.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..600&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{
+  --paper:#f3eee5;--paper2:#ebe4d7;--card:#fbf8f2;--ink:#17140f;--muted:#6d665b;--line:rgba(23,20,15,.12);
+  --and:#1fa463;--ios:#2f6bff;--warm:#ff6a3d;
+  --serif:"Fraunces",Georgia,serif;--sans:"Manrope",system-ui,sans-serif;--mono:"JetBrains Mono",ui-monospace,monospace;
+  --ease:cubic-bezier(.22,1,.36,1);--gut:clamp(16px,4vw,56px);
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme=light]){--paper:#100f0d;--paper2:#191714;--card:#1b1916;--ink:#f1ebe0;--muted:#a39b8e;--line:rgba(241,235,224,.12);--and:#3ddc84;--ios:#6b95ff}}
+:root[data-theme=dark]{--paper:#100f0d;--paper2:#191714;--card:#1b1916;--ink:#f1ebe0;--muted:#a39b8e;--line:rgba(241,235,224,.12);--and:#3ddc84;--ios:#6b95ff}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--sans);font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased;overflow-x:clip;transition:background .6s var(--ease),color .6s var(--ease)}
+::selection{background:var(--and);color:#fff}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+:focus-visible{outline:2px solid var(--ios);outline-offset:4px;border-radius:6px}
+.mono{font-family:var(--mono);font-size:12px;letter-spacing:.08em;text-transform:uppercase}
+.grain{position:fixed;inset:0;z-index:300;pointer-events:none;opacity:.07;mix-blend-mode:multiply;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+:root[data-theme=dark] .grain{mix-blend-mode:screen;opacity:.05}
+
+/* preloader */
+.pre{position:fixed;inset:0;z-index:500;background:var(--ink);color:var(--paper);display:flex;flex-direction:column;justify-content:space-between;padding:var(--gut);transition:transform 1s cubic-bezier(.76,0,.24,1)}
+.pre.out{transform:translateY(-100%)}
+.pre .mono{opacity:.6}
+.pre .n{font:300 clamp(90px,22vw,320px)/.8 var(--serif);letter-spacing:-.04em;font-variant-numeric:tabular-nums;align-self:flex-end}
+.pre .ab{font:italic 400 28px var(--serif)}
+
+/* cursor */
+.cur,.ring{position:fixed;left:0;top:0;z-index:400;pointer-events:none;border-radius:50%;mix-blend-mode:difference}
+.cur{width:8px;height:8px;margin:-4px 0 0 -4px;background:#fff}
+.ring{width:40px;height:40px;margin:-20px 0 0 -20px;border:1.5px solid #fff;transition:width .35s var(--ease),height .35s var(--ease),margin .35s var(--ease),background .35s}
+.ring.big{width:84px;height:84px;margin:-42px 0 0 -42px;background:#fff}
+@media (hover:none),(pointer:coarse){.cur,.ring{display:none}}
+
+/* nav */
+.bar{position:fixed;top:0;left:0;height:3px;z-index:120;background:linear-gradient(90deg,var(--and),var(--ios));transform-origin:0 50%;transform:scaleX(0);width:100%}
+.nav{position:fixed;top:0;left:0;right:0;z-index:110;display:flex;align-items:center;justify-content:space-between;padding:18px var(--gut);transition:transform .5s var(--ease)}
+.nav.hide{transform:translateY(-110%)}
+.logo{font:italic 500 24px var(--serif);display:flex;align-items:center;gap:10px}
+.logo i{width:10px;height:10px;border-radius:50%;background:var(--and);box-shadow:14px 0 0 var(--ios);margin-right:16px}
+.links{display:flex;gap:6px;padding:6px;border-radius:999px;background:color-mix(in srgb,var(--card) 75%,transparent);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);border:1px solid var(--line)}
+.links a{padding:8px 14px;border-radius:999px;font-size:14px;font-weight:600;transition:background .3s,color .3s}
+.links a:hover,.links a.on{background:var(--ink);color:var(--paper)}
+.theme{width:46px;height:46px;border-radius:50%;border:1px solid var(--line);display:grid;place-items:center;background:color-mix(in srgb,var(--card) 75%,transparent);backdrop-filter:blur(14px)}
+.theme svg{width:20px;height:20px;fill:none;stroke:currentColor;stroke-width:1.8;stroke-linecap:round;transition:transform .7s var(--ease)}
+:root[data-theme=dark] .theme svg{transform:rotate(180deg)}
+.theme .sun{transition:opacity .4s}.theme .moon{opacity:0;transition:opacity .4s}
+:root[data-theme=dark] .theme .sun{opacity:0}:root[data-theme=dark] .theme .moon{opacity:1}
+
+/* layout */
+section{position:relative;padding:0 var(--gut)}
+.wrap{max-width:1360px;margin:0 auto}
+.col{max-width:min(720px,56vw)}
+.kicker{display:flex;align-items:center;gap:12px;color:var(--muted);margin-bottom:28px}
+.kicker b{font-weight:500;color:var(--ink)}
+.kicker::after{content:"";flex:0 0 60px;height:1px;background:var(--line)}
+h2.title{font:400 clamp(44px,6.4vw,104px)/.95 var(--serif);letter-spacing:-.035em;font-variation-settings:"opsz" 144}
+h2.title em{font-style:italic;color:var(--and)}
+h2.title em.i{color:var(--ios)}
+
+/* hero */
+.hero{min-height:100vh;min-height:100svh;display:flex;align-items:center;padding-top:110px;padding-bottom:80px}
+.hero h1{font:300 clamp(54px,8.6vw,150px)/.9 var(--serif);letter-spacing:-.045em;font-variation-settings:"opsz" 144}
+.hero h1 .w{display:inline-block;overflow:hidden;vertical-align:top;padding-bottom:.08em}
+.hero h1 .w > span{display:inline-block;transform:translateY(110%);transition:transform 1.2s var(--ease)}
+.ready .hero h1 .w > span{transform:none}
+.hero h1 em{font-style:italic;font-weight:400}
+.hero h1 .g{color:var(--and)}.hero h1 .b{color:var(--ios)}
+.hero .lede{max-width:520px;margin-top:34px;font-size:clamp(17px,1.4vw,20px);color:var(--muted);opacity:0;transform:translateY(20px);transition:all 1s .5s var(--ease)}
+.hero .lede strong{color:var(--ink);font-weight:700}
+.ready .hero .lede,.ready .hero .meta{opacity:1;transform:none}
+.hero .meta{display:flex;flex-wrap:wrap;gap:12px;margin-top:34px;opacity:0;transform:translateY(20px);transition:all 1s .7s var(--ease)}
+.pill{display:inline-flex;align-items:center;gap:10px;padding:11px 18px;border-radius:999px;border:1px solid var(--line);font-size:14px;font-weight:600;background:var(--card)}
+.pill .live{width:8px;height:8px;border-radius:50%;background:var(--and);box-shadow:0 0 0 0 var(--and);animation:live 2s infinite}
+@keyframes live{70%{box-shadow:0 0 0 10px transparent}}
+.pill.dark{background:var(--ink);color:var(--paper);border-color:var(--ink)}
+.scroll-hint{position:absolute;left:var(--gut);bottom:28px;display:flex;align-items:center;gap:12px;color:var(--muted)}
+.scroll-hint i{width:22px;height:36px;border-radius:12px;border:1.5px solid currentColor;position:relative}
+.scroll-hint i::after{content:"";position:absolute;left:50%;top:7px;width:3px;height:7px;margin-left:-1.5px;border-radius:2px;background:currentColor;animation:wheel 1.8s infinite}
+@keyframes wheel{to{transform:translateY(12px);opacity:0}}
+
+/* teléfonos 3D */
+.rig{position:fixed;z-index:20;top:0;left:0;width:100%;height:100vh;pointer-events:none;perspective:1800px}
+.anchor{position:absolute;left:var(--ax,72%);top:50%;width:0;height:0;transform-style:preserve-3d}
+.p3{position:absolute;width:250px;height:520px;left:-125px;top:-260px;transform-style:preserve-3d;will-change:transform}
+.face{position:absolute;inset:0;border-radius:42px;backface-visibility:hidden}
+.front{transform:translateZ(7px);background:#0c0c0e;padding:9px;box-shadow:inset 0 0 0 1.5px #3a3a40}
+.back{transform:rotateY(180deg) translateZ(7px)}
+.side{position:absolute;backface-visibility:hidden}
+.side.l,.side.r{width:14px;top:30px;bottom:30px;left:118px}
+.side.l{transform:rotateY(-90deg) translateZ(125px)}
+.side.r{transform:rotateY(90deg) translateZ(125px)}
+.side.t,.side.b{height:14px;left:30px;right:30px;top:253px}
+.side.t{transform:rotateX(90deg) translateZ(260px)}
+.side.b{transform:rotateX(-90deg) translateZ(260px)}
+.p3.ios .back,.p3.ios .side{background:linear-gradient(135deg,#c9d4f2,#8ea4dd)}
+.p3.and .back,.p3.and .side{background:linear-gradient(135deg,#bfe8cf,#7ccf9f)}
+.p3.ios .back::before{content:"";position:absolute;left:18px;top:18px;width:96px;height:96px;border-radius:26px;background:rgba(255,255,255,.35);box-shadow:inset 0 0 0 1px rgba(255,255,255,.5)}
+.p3.ios .back::after{content:"";position:absolute;left:30px;top:30px;width:30px;height:30px;border-radius:50%;background:#1b1e2a;box-shadow:42px 0 0 #1b1e2a,21px 38px 0 #1b1e2a}
+.p3.and .back::before{content:"";position:absolute;left:0;right:0;top:56px;height:52px;background:#1d2420}
+.p3.and .back::after{content:"";position:absolute;left:46px;top:68px;width:28px;height:28px;border-radius:50%;background:#2e3a33;box-shadow:42px 0 0 #2e3a33,inset 0 0 0 6px #0e1411}
+.logo-b{position:absolute;left:50%;top:60%;transform:translate(-50%,-50%);font:italic 500 40px var(--serif);color:rgba(255,255,255,.7)}
+.scr{position:relative;width:100%;height:100%;border-radius:34px;overflow:hidden;background:#fff;font-family:var(--sans);color:#16130f}
+.notch{position:absolute;z-index:9;left:50%;top:9px;transform:translateX(-50%);width:84px;height:24px;border-radius:14px;background:#0c0c0e}
+.p3.and .notch{width:14px;height:14px;top:12px;border-radius:50%}
+.v{position:absolute;inset:0;padding:46px 18px 18px;opacity:0;transition:opacity .6s var(--ease),transform .8s var(--ease);transform:scale(1.04)}
+.v.on{opacity:1;transform:none}
+.sb{position:absolute;top:0;left:0;right:0;height:40px;display:flex;justify-content:space-between;align-items:center;padding:0 24px;font:700 12px var(--sans);z-index:8}
+.p3 .glare{position:absolute;inset:0;border-radius:34px;background:linear-gradient(115deg,rgba(255,255,255,.28),transparent 35%,transparent 70%,rgba(255,255,255,.08));pointer-events:none;z-index:10;mix-blend-mode:screen}
+
+/* pantallas */
+.v-home{background:radial-gradient(120% 80% at 0 0,#a6f1c6,transparent 60%),radial-gradient(100% 80% at 100% 100%,#b6c9ff,transparent 60%),#eef1ec}
+.v-home .clk{font:300 66px/1 var(--serif);letter-spacing:-.04em;margin-top:10px}
+.v-home .dt{font-size:12px;font-weight:600;opacity:.7}
+.v-home .apps{position:absolute;left:18px;right:18px;bottom:30px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.v-home .apps i{aspect-ratio:1;border-radius:50%;background:var(--c)}
+.p3.ios .v-home .apps i{border-radius:28%}
+.v-prof{background:#faf7f1;text-align:center}
+.v-prof .av{width:84px;height:84px;margin:18px auto 12px;border-radius:50%;display:grid;place-items:center;font:italic 500 32px var(--serif);color:#fff;background:conic-gradient(from 180deg,#1fa463,#2f6bff,#ff6a3d,#1fa463)}
+.v-prof b{display:block;font:500 21px/1.1 var(--serif)}
+.v-prof small{display:block;font-size:11.5px;color:#6d665b;margin-top:6px}
+.v-prof .tags{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:16px}
+.v-prof .tags span{font-size:10.5px;font-weight:700;padding:5px 9px;border-radius:999px;background:#ebe4d7}
+.v-prof .row{display:flex;justify-content:space-between;font-size:12px;padding:10px 4px;border-top:1px solid #e6dfd2;margin-top:6px;text-align:left}
+.v-prof .row:first-of-type{margin-top:22px}
+.v-stats{background:#16130f;color:#f3eee5;display:flex;flex-direction:column;justify-content:center}
+.v-stats .big{font:300 150px/.8 var(--serif);letter-spacing:-.06em}
+.v-stats .big + span{font:italic 400 26px var(--serif);color:#3ddc84}
+.v-stats p{font-size:12px;opacity:.7;margin-top:16px}
+.v-stats .bars{display:flex;gap:4px;align-items:flex-end;height:60px;margin-top:22px}
+.v-stats .bars i{flex:1;background:linear-gradient(#3ddc84,#2f6bff);border-radius:3px 3px 0 0;height:var(--h)}
+.v-sign{background:#f5f2ff}
+.v-sign h5,.v-blink h5,.v-bis h5,.v-laso h5{font:600 15px var(--sans);margin-bottom:12px}
+.doc{background:#fff;border-radius:14px;padding:14px;box-shadow:0 8px 24px -10px rgba(40,20,120,.25)}
+.doc i{display:block;height:6px;border-radius:3px;background:#e6e1f5;margin-bottom:7px}
+.doc i:nth-child(3n){width:70%}
+.doc svg{width:100%;height:70px;margin-top:6px}
+.doc path{fill:none;stroke:#5b3df5;stroke-width:2.5;stroke-linecap:round;stroke-dasharray:420;stroke-dashoffset:420}
+.v-sign.on .doc path{animation:sig 2s .4s var(--ease) forwards}
+@keyframes sig{to{stroke-dashoffset:0}}
+.btn-s{display:block;margin-top:14px;padding:12px;border-radius:12px;background:#5b3df5;color:#fff;font-weight:700;font-size:13px;text-align:center}
+.v-sign.on .btn-s{animation:ok .5s 2.4s both}
+@keyframes ok{from{background:#5b3df5}to{background:#1fa463}}
+.v-sign .chk{display:flex;gap:8px;align-items:center;font-size:11.5px;margin-top:10px;color:#6d665b}
+.v-sign .chk b{width:16px;height:16px;border-radius:50%;background:#1fa463;color:#fff;font-size:10px;display:grid;place-items:center}
+.v-blink{background:#fff4ec}
+.v-blink .pages{position:relative;height:250px;margin-top:6px}
+.v-blink .pg{position:absolute;inset:0 26px 0 0;background:#fff;border-radius:10px;box-shadow:0 10px 24px -12px rgba(160,60,0,.4);padding:14px;transform:rotate(var(--r)) translate(var(--x),0)}
+.v-blink .pg i{display:block;height:6px;border-radius:3px;background:#f6dccb;margin-bottom:8px}
+.v-blink .lock{position:absolute;right:6px;bottom:16px;width:56px;height:56px;border-radius:16px;background:#ff6a3d;display:grid;place-items:center;box-shadow:0 10px 20px -8px #ff6a3d}
+.v-blink .lock svg{width:26px;fill:none;stroke:#fff;stroke-width:2}
+.v-blink p{font-size:11px;color:#8a5a3a;margin-top:10px}
+.v-bis{background:#eafaf6}
+.fld{background:#fff;border-radius:10px;padding:8px 12px;margin-bottom:9px;font-size:11px;color:#6d665b;box-shadow:0 1px 0 rgba(0,0,0,.04)}
+.fld b{display:block;font-size:13px;color:#16130f;font-weight:600}
+.v-bis.on .fld{animation:fin .6s var(--ease) both}
+.v-bis.on .fld:nth-child(3){animation-delay:.1s}.v-bis.on .fld:nth-child(4){animation-delay:.2s}.v-bis.on .fld:nth-child(5){animation-delay:.3s}
+@keyframes fin{from{opacity:0;transform:translateX(20px)}}
+.v-bis .btn-s{background:#1fb6a6}
+.v-laso{background:#f1f1f3}
+.v-laso .it{display:flex;justify-content:space-between;align-items:center;font-size:12.5px;padding:12px 0;border-bottom:1px solid #e1e1e6}
+.v-laso .it b{color:#1fa463;font-size:11px}
+.v-contact{background:linear-gradient(160deg,#2f6bff,#1fa463)}
+.v-contact .clk{color:#fff;font:300 64px/1 var(--serif);text-align:center;margin-top:20px;letter-spacing:-.04em}
+.v-contact .nt{margin-top:40px;background:rgba(255,255,255,.85);backdrop-filter:blur(10px);border-radius:18px;padding:12px;display:flex;gap:10px;font-size:12px;transform:translateY(30px);opacity:0}
+.v-contact.on .nt{animation:nt .8s .4s cubic-bezier(.34,1.56,.64,1) forwards}
+@keyframes nt{to{transform:none;opacity:1}}
+.v-contact .nt i{flex:none;width:32px;height:32px;border-radius:9px;background:#1fa463}
+.v-contact .nt b{display:block;font-size:12.5px}
+
+/* marquee */
+.marquee{padding:60px 0 40px;overflow:hidden;position:relative;z-index:25}
+.mrow{display:flex;white-space:nowrap;font:400 clamp(40px,6vw,92px)/1.1 var(--serif);letter-spacing:-.03em;will-change:transform}
+.mrow span{display:inline-flex;align-items:center;gap:.4em;padding-right:.4em}
+.mrow span::after{content:"✳";font-size:.45em;color:var(--and)}
+.mrow.two span::after{color:var(--ios)}
+.mrow.two{font-style:italic;color:var(--muted)}
+
+/* perfil */
+.profile{padding-top:18vh;padding-bottom:18vh}
+.reveal-t{font:400 clamp(28px,3.1vw,48px)/1.2 var(--serif);letter-spacing:-.02em}
+.reveal-t span{opacity:.14;transition:opacity .3s}
+.reveal-t span.lit{opacity:1}
+.reveal-t span.k{color:var(--and);font-style:italic}
+.reveal-t span.k.i{color:var(--ios)}
+
+/* cifras */
+.stats{padding-bottom:20vh}
+.nums{display:grid;grid-template-columns:repeat(2,1fr);gap:0;border-top:1px solid var(--line)}
+.num{padding:34px 24px 34px 0;border-bottom:1px solid var(--line)}
+.num:nth-child(odd){border-right:1px solid var(--line)}
+.num:nth-child(even){padding-left:28px}
+.num b{display:block;font:300 clamp(80px,10vw,160px)/.85 var(--serif);letter-spacing:-.05em;font-variant-numeric:tabular-nums}
+.num span{color:var(--muted);font-size:15px}
+
+/* experiencia */
+.exp{height:calc(var(--n,4) * 85vh + 100vh);padding:0}
+.exp .pin{position:sticky;top:0;height:100vh;overflow:hidden;display:flex;flex-direction:column;justify-content:center;padding:90px var(--gut) 40px}
+.exp .head{display:flex;justify-content:space-between;align-items:flex-end;gap:30px;max-width:min(860px,60vw);margin-bottom:36px}
+.exp .count{font:300 64px/.8 var(--serif);font-variant-numeric:tabular-nums}
+.exp .count small{font-size:.4em;color:var(--muted)}
+.viewport{width:min(860px,60vw);overflow:hidden;-webkit-mask-image:linear-gradient(90deg,#000 85%,transparent);mask-image:linear-gradient(90deg,#000 85%,transparent)}
+.track{display:flex;gap:28px;will-change:transform}
+.job{flex:0 0 min(520px,46vw);min-height:420px;border-radius:28px;padding:30px;background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;transition:transform .6s var(--ease),opacity .6s;position:relative;overflow:hidden}
+.job.dim{opacity:.35;transform:scale(.94)}
+.job::before{content:"";position:absolute;right:-60px;top:-60px;width:200px;height:200px;border-radius:50%;background:var(--c);opacity:.14;filter:blur(10px)}
+.job .when{color:var(--muted)}
+.job h3{font:400 40px/1 var(--serif);letter-spacing:-.03em;margin:14px 0 6px}
+.job h4{font-size:15px;font-weight:600;color:var(--muted)}
+.job ul{list-style:none;margin-top:20px;display:grid;gap:10px}
+.job li{font-size:15px;line-height:1.45;padding-left:22px;position:relative}
+.job li::before{content:"";position:absolute;left:0;top:9px;width:10px;height:2px;background:var(--c)}
+.job .tags{margin-top:auto;padding-top:22px;display:flex;flex-wrap:wrap;gap:6px}
+.tag{font-size:12px;font-weight:700;padding:6px 11px;border-radius:999px;background:var(--paper2)}
+.prog{margin-top:30px;width:min(860px,60vw);height:2px;background:var(--line);position:relative}
+.prog i{position:absolute;inset:0;background:var(--ink);transform-origin:0;transform:scaleX(0)}
+
+/* proyectos */
+.projects{padding-top:16vh;padding-bottom:12vh;z-index:25}
+.bento{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:240px;gap:18px;margin-top:56px}
+.cell{position:relative;border-radius:28px;overflow:hidden;background:var(--card);border:1px solid var(--line);padding:26px;display:flex;flex-direction:column;justify-content:flex-end;transform-style:preserve-3d;transition:transform .5s var(--ease),box-shadow .5s;isolation:isolate}
+.cell:hover{box-shadow:0 30px 60px -30px rgba(0,0,0,.35)}
+.cell.a{grid-column:span 2;grid-row:span 2;background:#5b3df5;color:#fff;border:0}
+.cell.b{grid-row:span 2;background:var(--warm);color:#fff;border:0}
+.cell.c{grid-column:span 1}
+.cell.d{grid-column:span 2}
+.cell.e{grid-column:span 2}
+.cell .k{opacity:.7}
+.cell h3{font:400 clamp(26px,2.4vw,40px)/1.02 var(--serif);letter-spacing:-.03em;margin-top:8px}
+.cell.a h3{font-size:clamp(34px,3.6vw,58px)}
+.cell p{font-size:14.5px;line-height:1.5;max-height:0;opacity:0;overflow:hidden;transition:max-height .6s var(--ease),opacity .4s,margin .6s;margin-top:0}
+.cell:hover p,.cell:focus-within p,.cell.a p{max-height:160px;opacity:.85;margin-top:12px}
+.cell .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
+.cell .tag{background:rgba(127,127,127,.16)}
+.cell.a .tag,.cell.b .tag{background:rgba(255,255,255,.18)}
+.ill{position:absolute;inset:0;z-index:-1;pointer-events:none}
+.ill svg{position:absolute;overflow:visible}
+.cell .glow{position:absolute;inset:0;z-index:-1;background:radial-gradient(400px circle at var(--mx,50%) var(--my,50%),rgba(255,255,255,.18),transparent 45%);opacity:0;transition:opacity .4s}
+.cell:hover .glow{opacity:1}
+
+/* stack */
+.stack{padding-top:12vh;padding-bottom:12vh;z-index:25}
+.st-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:40px;margin-top:56px;align-items:start}
+.groups{display:grid;gap:14px}
+.grp{border-top:1px solid var(--line);padding-top:16px}
+.grp h3{margin-bottom:12px;color:var(--muted)}
+.chips{display:flex;flex-wrap:wrap;gap:8px}
+.chip{padding:10px 16px;border-radius:999px;border:1px solid var(--line);font-weight:600;font-size:15px;background:var(--card);transition:background .3s,color .3s,transform .3s var(--ease)}
+.chip:hover,.chip:focus-visible,.chip.on{background:var(--ink);color:var(--paper);transform:translateY(-3px)}
+.where{margin-top:22px;min-height:52px;font:italic 400 22px/1.3 var(--serif);color:var(--muted)}
+.where b{font-style:normal;font-family:var(--sans);font-weight:700;color:var(--ink);font-size:15px;display:block;letter-spacing:0}
+.box{position:relative;height:520px;border-radius:32px;background:var(--paper2);border:1px solid var(--line);overflow:hidden;touch-action:none}
+.box .lbl{position:absolute;left:22px;top:20px;color:var(--muted)}
+.box .lbl2{position:absolute;right:22px;top:20px;color:var(--muted)}
+.ball{position:absolute;left:0;top:0;padding:12px 20px;border-radius:999px;font-weight:700;font-size:16px;white-space:nowrap;cursor:grab;user-select:none;will-change:transform;color:#fff;box-shadow:0 10px 20px -10px rgba(0,0,0,.4)}
+.ball:active{cursor:grabbing}
+
+/* formación */
+.edu{padding-top:12vh;padding-bottom:12vh;z-index:25}
+.index{margin-top:56px;border-top:1px solid var(--line)}
+.ix{display:grid;grid-template-columns:90px 1fr auto;gap:20px;align-items:baseline;padding:26px 0;border-bottom:1px solid var(--line);position:relative;transition:padding .5s var(--ease)}
+.ix:hover{padding-left:16px}
+.ix .no{font:italic 400 22px var(--serif);color:var(--muted)}
+.ix h3{font:400 clamp(24px,2.6vw,40px)/1.1 var(--serif);letter-spacing:-.02em}
+.ix small{display:block;color:var(--muted);font-size:14px;margin-top:6px;font-family:var(--sans)}
+.ix .yr{font-family:var(--mono);font-size:13px;color:var(--muted)}
+.ix .kd{font-family:var(--mono);font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--and);margin-left:10px;vertical-align:middle}
+.ix .kd.c{color:var(--ios)}
+.float{position:fixed;left:0;top:0;z-index:60;width:240px;height:160px;border-radius:18px;pointer-events:none;opacity:0;transform:scale(.6) rotate(-6deg);transition:opacity .3s,transform .5s var(--ease);padding:18px;color:#fff;display:flex;flex-direction:column;justify-content:space-between;box-shadow:0 30px 60px -20px rgba(0,0,0,.45)}
+.float.on{opacity:1;transform:scale(1) rotate(-4deg)}
+.float b{font:400 54px/.9 var(--serif);letter-spacing:-.04em}
+.float span{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;opacity:.85}
+.langs{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-top:40px}
+.lg{border-radius:24px;padding:24px;background:var(--card);border:1px solid var(--line)}
+.lg b{font:400 34px var(--serif);display:block}
+.lg span{color:var(--muted);font-size:14px}
+.lg .m{display:flex;gap:4px;margin-top:16px}
+.lg .m i{flex:1;height:6px;border-radius:3px;background:var(--paper2)}
+.lg .m i.on{background:var(--ink)}
+.lg .m i.h{background:linear-gradient(90deg,var(--ink) 50%,var(--paper2) 50%)}
+.lg .cefr{display:flex;justify-content:space-between;font-family:var(--mono);font-size:10px;color:var(--muted);margin-top:6px}
+
+/* contacto */
+.contact{min-height:100vh;display:flex;align-items:center;padding-top:12vh;padding-bottom:8vh}
+.contact h2{font:300 clamp(70px,13vw,230px)/.85 var(--serif);letter-spacing:-.06em}
+.contact h2 em{font-style:italic;color:var(--and)}
+.contact p{max-width:480px;color:var(--muted);margin-top:26px;font-size:19px}
+.cta{display:flex;flex-wrap:wrap;align-items:center;gap:18px;margin-top:42px}
+.mag{position:relative;width:190px;height:190px;border-radius:50%;background:var(--ink);color:var(--paper);display:grid;place-items:center;font-weight:700;font-size:17px;transition:transform .4s var(--ease),background .4s}
+.mag:hover{background:var(--and)}
+.mag span{display:block;transition:transform .4s var(--ease);text-align:center;line-height:1.25}
+.copy{padding:16px 24px;border-radius:999px;border:1px solid var(--line);font-family:var(--mono);font-size:14px;display:flex;align-items:center;gap:12px;background:var(--card);transition:border-color .3s}
+.copy:hover{border-color:var(--ink)}
+.copy svg{width:18px;fill:none;stroke:currentColor;stroke-width:1.8}
+footer{padding:30px var(--gut) 40px;display:flex;justify-content:space-between;flex-wrap:wrap;gap:12px;color:var(--muted);border-top:1px solid var(--line);position:relative;z-index:25;background:var(--paper)}
+.toast{position:fixed;left:50%;bottom:28px;z-index:450;transform:translate(-50%,220%);background:var(--ink);color:var(--paper);padding:14px 22px;border-radius:999px;font-weight:600;font-size:15px;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+.toast.show{transform:translate(-50%,0)}
+
+/* aparición */
+.up{opacity:0;transform:translateY(40px);transition:opacity 1s var(--ease),transform 1.2s var(--ease)}
+.up.in{opacity:1;transform:none}
+
+@media (max-width:1100px){
+  .bento{grid-template-columns:repeat(2,1fr)}
+  .cell.c{grid-column:span 1}.cell.b{grid-row:span 2}
+}
+@media (max-width:900px){
+  .links{display:none}
+  .col,.exp .head,.viewport,.prog{max-width:none;width:100%}
+  .rig{position:absolute;height:100svh}
+  .anchor{left:50%!important;top:auto!important;bottom:-40px}
+  .hero{align-items:flex-start;min-height:auto;padding-bottom:640px}
+  .p3{transform-origin:50% 100%}
+  .exp{height:auto}
+  .exp .pin{position:static;height:auto;padding:12vh var(--gut) 0}
+  .track{flex-direction:column;transform:none!important}
+  .job{flex:none;min-height:0}
+  .job.dim{opacity:1;transform:none}
+  .exp .count,.prog{display:none}
+  .profile,.stats{padding-top:10vh;padding-bottom:10vh}
+  .st-grid{grid-template-columns:1fr}
+  .box{height:420px}
+  .float{display:none}
+  .ix{grid-template-columns:44px 1fr;gap:12px}
+  .ix .yr{grid-column:2}
+  .langs{grid-template-columns:1fr}
+  .scroll-hint{display:none}
+}
+@media (max-width:620px){
+  body{font-size:16px}
+  .bento{grid-template-columns:1fr;grid-auto-rows:auto}
+  .cell,.cell.a,.cell.b,.cell.c,.cell.d,.cell.e{grid-column:auto;grid-row:auto;min-height:280px}
+  .cell p{max-height:200px;opacity:.85;margin-top:12px}
+  .nums{grid-template-columns:1fr}
+  .num:nth-child(odd){border-right:0}.num:nth-child(even){padding-left:0}
+  .mag{width:150px;height:150px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+  .reveal-t span{opacity:1}
+}
+</style></head><body>
+<div class="pre" id="pre" aria-hidden="true">
+  <div class="mono">Alejandro Burdío García — Portfolio</div>
+  <div class="ab">Android &amp; iOS</div>
+  <div class="n" id="preN">0</div>
+</div>
+<div class="grain" aria-hidden="true"></div>
+<div class="cur" id="cur" aria-hidden="true"></div><div class="ring" id="ring" aria-hidden="true"></div>
+<div class="bar" id="bar" aria-hidden="true"></div>
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<header class="nav" id="nav">
+  <a class="logo" href="#top" aria-label="Inicio"><i aria-hidden="true"></i>Alejandro</a>
+  <nav class="links" aria-label="Secciones">
+    <a href="#perfil">Perfil</a><a href="#experiencia">Experiencia</a><a href="#proyectos">Proyectos</a><a href="#stack">Stack</a><a href="#formacion">Formación</a><a href="#contacto">Contacto</a>
+  </nav>
+  <button class="theme" id="theme" type="button" aria-label="Cambiar tema claro u oscuro">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><g class="sun"><circle cx="12" cy="12" r="4.5"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></g><path class="moon" d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z"/></svg>
+  </button>
+</header>
+
+<div class="rig" id="rig" aria-hidden="true"><div class="anchor" id="anchor"></div></div>
+
+<main id="top">
+  <section class="hero" data-phone="hero">
+    <div class="wrap" style="width:100%">
+      <div class="col">
+        <h1 aria-label="Construyo apps que caben en tu bolsillo.">
+          <span class="w"><span>Construyo</span></span> <span class="w"><span>apps</span></span><br>
+          <span class="w"><span>que</span></span> <span class="w"><span><em class="g">caben</em></span></span> <span class="w"><span>en</span></span><br>
+          <span class="w"><span>tu</span></span> <span class="w"><span><em class="b">bolsillo.</em></span></span>
+        </h1>
+        <p class="lede"><strong>Alejandro Burdío García</strong>, desarrollador mobile nativo. <span data-years></span> años publicando apps Android e iOS: Kotlin y Swift, de la primera línea a las stores.</p>
+        <div class="meta">
+          <span class="pill"><i class="live"></i>Zaragoza, España</span>
+          <a class="pill dark" href="#contacto" data-hover>Hablemos →</a>
+        </div>
+      </div>
+    </div>
+    <div class="scroll-hint mono"><i></i>Desliza</div>
+  </section>
+
+  <div class="marquee" aria-hidden="true">
+    <div class="mrow one" id="m1"></div>
+    <div class="mrow two" id="m2"></div>
+  </div>
+
+  <section class="profile" id="perfil" data-phone="perfil">
+    <div class="wrap"><div class="col">
+      <div class="kicker mono"><b>01</b> Perfil</div>
+      <p class="reveal-t" id="revealT"></p>
+    </div></div>
+  </section>
+
+  <section class="stats" data-phone="stats">
+    <div class="wrap"><div class="col">
+      <div class="kicker mono"><b>02</b> En cifras</div>
+      <div class="nums">
+        <div class="num up"><b data-count="years">0</b><span>años desarrollando apps, desde marzo de 2017</span></div>
+        <div class="num up"><b data-count="2">0</b><span>plataformas nativas: Android e iOS</span></div>
+        <div class="num up"><b data-count="2">0</b><span>stores con apps publicadas: Google Play y App Store</span></div>
+        <div class="num up"><b data-count="4">0</b><span>empresas, de las prácticas a un QTSP</span></div>
+      </div>
+    </div></div>
+  </section>
+
+  <section class="exp" id="experiencia" data-phone="exp">
+    <div class="pin">
+      <div class="head">
+        <div><div class="kicker mono"><b>03</b> Experiencia</div><h2 class="title">Dónde he <em>construido</em></h2></div>
+        <div class="count" aria-hidden="true"><span id="expN">01</span><small>/04</small></div>
+      </div>
+      <div class="viewport"><div class="track" id="track"></div></div>
+      <div class="prog" aria-hidden="true"><i id="expBar"></i></div>
+    </div>
+  </section>
+
+  <section class="projects" id="proyectos" data-phone="off">
+    <div class="wrap">
+      <div class="kicker mono"><b>04</b> Proyectos</div>
+      <h2 class="title up">Lo que he <em class="i">enviado</em> a producción</h2>
+      <div class="bento" id="bento"></div>
+    </div>
+  </section>
+
+  <section class="stack" id="stack" data-phone="off">
+    <div class="wrap">
+      <div class="kicker mono"><b>05</b> Stack</div>
+      <h2 class="title up">Herramientas <em>de serie</em></h2>
+      <div class="st-grid">
+        <div>
+          <div class="groups" id="groups"></div>
+          <p class="where" id="where" aria-live="polite">Pasa por una tecnología para ver dónde la he usado.</p>
+        </div>
+        <div class="box" id="box"><span class="lbl mono">Arrastra y lanza</span><span class="lbl2 mono">↻ doble clic</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="edu" id="formacion" data-phone="off">
+    <div class="wrap">
+      <div class="kicker mono"><b>06</b> Formación</div>
+      <h2 class="title up">Aprender <em class="i">no se compila</em> una sola vez</h2>
+      <div class="index" id="index"></div>
+      <div class="langs" id="langs"></div>
+    </div>
+  </section>
+  <div class="float" id="float" aria-hidden="true"><span id="fk"></span><b id="fy"></b></div>
+
+  <section class="contact" id="contacto" data-phone="contact">
+    <div class="wrap" style="width:100%"><div class="col">
+      <div class="kicker mono"><b>07</b> Contacto</div>
+      <h2>¿Habla&shy;<em>mos?</em></h2>
+      <p>Si tienes un proyecto mobile, una propuesta o simplemente quieres hablar de Android, iOS o de cómo sobrevivir a una release de viernes, escríbeme.</p>
+      <div class="cta">
+        <a class="mag" id="mag" data-mail href="#" data-hover><span>Escríbeme<br>✉</span></a>
+        <button class="copy" type="button" data-copy data-hover><svg viewBox="0 0 24 24" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h8"/></svg><span id="mailTxt"></span></button>
+      </div>
+    </div></div>
+  </section>
+</main>
+<footer><span>© <span id="yr"></span> Alejandro Burdío García</span><span>Hecho a mano, sin plantillas · Zaragoza</span><a href="#top" data-hover>Volver arriba ↑</a></footer>
+<script>
+const START = new Date(2017, 2, 1);
+const NOW = new Date();
+const YEARS = Math.floor((NOW - START) / (365.25 * 864e5));
+const EMAIL = 'alejandroburdiogarcia@gmail.com';
+
+const MONTHS = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+function span(from, to) {
+  const end = to || NOW;
+  let m = (end.getFullYear() - from.getFullYear()) * 12 + end.getMonth() - from.getMonth();
+  const y = Math.floor(m / 12); m %= 12;
+  return [y ? y + (y > 1 ? ' años' : ' año') : '', m ? m + (m > 1 ? ' meses' : ' mes') : ''].filter(Boolean).join(' ');
+}
+function fmt(d) { return d ? MONTHS[d.getMonth()] + ' ' + d.getFullYear() : 'Actualidad'; }
+
+const JOBS = [
+  { id: 'logalty', co: 'Logalty', role: 'Desarrollador Mobile / Multiplataforma', from: new Date(2020, 1), to: null, color: '#7b5cff',
+    tags: ['Kotlin', 'Java', 'Swift', 'NativeScript', 'Angular', '.NET'],
+    bullets: [
+      'Desarrollo y mantenimiento de apps Android (Java y Kotlin) con publicación y soporte en Google Play.',
+      'Desarrollo y mantenimiento de apps iOS en Swift con publicación y soporte en App Store Connect.',
+      'Desarrollo cross-platform con NativeScript + Angular (TypeScript) para Web, Android e iOS.',
+      'Aplicación .NET / C# (WinForms) para la integración con tabletas de firma DTU.'] },
+  { id: 'blink', co: 'BlinkLearning S.L.', role: 'Desarrollador Android', from: new Date(2018, 0), to: new Date(2020, 1), color: '#ff7a45',
+    tags: ['Java', 'C++ NDK', 'SQLite', 'PDFTron', 'Crashlytics'],
+    bullets: [
+      'Mantenimiento y nuevas funcionalidades de las apps de la plataforma educativa BlinkLearning (Google Play) en Android nativo (Java).',
+      'Encriptación de ficheros en C++ vía NDK / CMake e integración con la capa Java.',
+      'Diseño y mantenimiento de bases de datos SQLite y personalización de la librería de PDF PDFTron.',
+      'Publicación en Google Play, con monitorización de errores en Fabric / Firebase Crashlytics.',
+      'Soporte de versiones desde Android 4.0 (API 15) y control de dependencias con Gradle.'] },
+  { id: 'bis', co: 'Business in Store', role: 'Desarrollador Android · prácticas → contrato', from: new Date(2017, 2), to: new Date(2018, 0), color: '#1fb6a6',
+    tags: ['Java', 'PHP', 'SQL', 'SQLite', 'Fabric'],
+    bullets: [
+      'App Android nativa (Java) para gestión comercial y alta de clientes de SimonRack, con backend PHP / SQL y SQLite local.',
+      'App Android para gestión logística: nuevos desarrollos y mantenimiento.',
+      'Diseño de bases de datos y monitorización de errores con Fabric.'] },
+  { id: 'laso', co: 'Laso S.L.', role: 'Técnico informático · prácticas', from: new Date(2014, 2), to: new Date(2014, 5), color: '#8a8f98',
+    tags: ['Hardware', 'Soporte'],
+    bullets: ['Reparación hardware de equipos, atención al cliente y administración de usuarios.'] }
+];
+
+const PROJECTS = [
+  { t: 'Firma e identidad digital', co: 'Logalty', k: 'Android · iOS', g: ['#7b5cff', '#c04bff'],
+    d: 'Apps nativas en el ámbito de la firma electrónica y la identidad digital para un prestador cualificado de servicios de confianza (QTSP), publicadas y mantenidas en Google Play y App Store.',
+    tags: ['Kotlin', 'Java', 'Swift', 'Google Play', 'App Store Connect'] },
+  { t: 'Una base, tres plataformas', co: 'Logalty', k: 'Cross-platform', g: ['#e0234e', '#ff8a3d'],
+    d: 'Aplicaciones multiplataforma con NativeScript + Angular en TypeScript, desplegadas en Web, Android e iOS desde un mismo código.',
+    tags: ['NativeScript', 'Angular', 'TypeScript'] },
+  { t: 'Tabletas de firma DTU', co: 'Logalty', k: 'Escritorio', g: ['#2f6bff', '#22c1ee'],
+    d: 'Aplicación de escritorio .NET / C# con WinForms para integrarse con tabletas de firma DTU.',
+    tags: ['.NET', 'C#', 'WinForms'] },
+  { t: 'Libros digitales cifrados', co: 'BlinkLearning', k: 'Android', g: ['#ff7a45', '#ffc53d'],
+    d: 'App educativa Android con cifrado de ficheros en C++ vía NDK / CMake, visor PDF personalizado sobre PDFTron y base de datos SQLite. Compatible desde Android 4.0.',
+    tags: ['Java', 'C++ NDK', 'CMake', 'PDFTron', 'SQLite'] },
+  { t: 'Gestión comercial y logística', co: 'Business in Store', k: 'Android', g: ['#12b886', '#1fb6a6'],
+    d: 'Apps Android para la gestión comercial y el alta de clientes de SimonRack y para gestión logística, con backend PHP / SQL y SQLite local.',
+    tags: ['Java', 'PHP', 'SQL', 'SQLite'] }
+];
+
+const STACK = [
+  { g: 'Mobile', items: [
+    ['Android', 'Java · Kotlin', 'Logalty, BlinkLearning y Business in Store', '#3ddc84', 'KT'],
+    ['iOS', 'Swift', 'Apps nativas publicadas en App Store en Logalty', '#f05138', 'SW'],
+    ['NativeScript + Angular', 'TypeScript', 'Apps para Web, Android e iOS en Logalty', '#e0234e', 'NS']] },
+  { g: 'Otros lenguajes y entornos', items: [
+    ['.NET · C#', 'WinForms', 'Integración con tabletas de firma DTU', '#7b5cff', 'C#'],
+    ['C++', 'NDK · CMake', 'Cifrado de ficheros en BlinkLearning', '#2f6bff', 'C++'],
+    ['PHP', 'Backend', 'Servicios para las apps de Business in Store', '#777bb4', 'PHP'],
+    ['API REST', 'Integración', 'Comunicación de las apps con sus backends', '#0ea5e9', 'API']] },
+  { g: 'Bases de datos', items: [
+    ['SQLite', 'Local', 'Persistencia en apps Android', '#0f80cc', 'SQL'],
+    ['SQL Server', 'Servidor', '', '#cc2927', 'MS'],
+    ['MySQL', 'Servidor', '', '#00758f', 'MY']] },
+  { g: 'Herramientas', items: [
+    ['Gradle', 'Builds Android', 'Gestión de dependencias y builds', '#02303a', 'GR'],
+    ['Firebase Crashlytics', 'Monitorización', 'Antes Fabric; seguimiento de errores en producción', '#ffa000', 'FB'],
+    ['Google Play · App Store Connect', 'Publicación', 'Releases y soporte en ambas stores', '#34a853', 'ST']] },
+  { g: 'Otros', items: [
+    ['IA generativa', 'Curso certificado de Google', '', '#a855f7', 'AI'],
+    ['Unity', 'Motores de juego', '', '#222', 'U'],
+    ['Unreal Engine 4', 'Curso de videojuegos', '', '#313131', 'UE']] }
+];
+
+const EDU = [
+  { y: '2017', t: 'CFGS Desarrollo de Aplicaciones Multiplataforma', p: 'I.E.S. Santiago Hernández · Zaragoza', kind: 'Formación académica' },
+  { y: '2014', t: 'CFGM Sistemas Microinformáticos y Redes', p: 'I.E.S. Santiago Hernández · Zaragoza', kind: 'Formación académica' },
+  { y: 'Nov 2024', t: 'Curso certificado de IA · Google', p: 'Santander Open Academy', kind: 'Formación complementaria' },
+  { y: '2019', t: 'Kotlin para Android', p: 'Platzi', kind: 'Formación complementaria' },
+  { y: '2019', t: 'React Native', p: 'Platzi', kind: 'Formación complementaria' },
+  { y: '2018–19', t: 'Programación de videojuegos con Unreal Engine 4', p: 'iDesigner', kind: 'Formación complementaria' },
+  { y: '2017', t: 'Swift 4 en iOS 11', p: 'Udemy', kind: 'Formación complementaria' }
+];
+
+const LANGS = [['Español', 'Nativo', 6], ['Inglés', 'Intermedio (B1–B2)', 3.5]];
+
+const PROFILE = 'Desarrollador mobile especializado en aplicaciones nativas Android (Java / Kotlin) e iOS (Swift), con publicación y soporte en Google Play y App Store. También he desarrollado apps cross-platform con NativeScript + Angular y una aplicación .NET / WinForms para tabletas de firma DTU. Actualmente trabajo en Logalty, prestador cualificado de servicios de confianza (QTSP), en apps del ámbito de la firma electrónica y la identidad digital.';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const isSmall = () => innerWidth <= 900;
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const lerp = (a, b, t) => a + (b - a) * t;
+const root = document.documentElement;
+
+/* ---------- tema ---------- */
+try { const t = localStorage.getItem('ab-theme'); if (t) root.dataset.theme = t; } catch {}
+$('#theme').addEventListener('click', () => {
+  const dark = root.dataset.theme ? root.dataset.theme === 'dark' : matchMedia('(prefers-color-scheme: dark)').matches;
+  root.dataset.theme = dark ? 'light' : 'dark';
+  try { localStorage.setItem('ab-theme', root.dataset.theme); } catch {}
+});
+
+/* ---------- datos simples ---------- */
+$$('[data-years]').forEach(e => e.textContent = YEARS);
+$('#yr').textContent = NOW.getFullYear();
+$('#mailTxt').textContent = EMAIL;
+let toastT;
+function toast(m) { const t = $('#toast'); t.textContent = m; t.classList.add('show'); clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200); }
+document.addEventListener('click', async e => {
+  if (e.target.closest('[data-mail]')) { e.preventDefault(); location.href = 'mailto:' + EMAIL; }
+  if (e.target.closest('[data-copy]')) { try { await navigator.clipboard.writeText(EMAIL); toast('Email copiado ✓'); } catch { toast(EMAIL); } }
+});
+
+/* ---------- preloader ---------- */
+(function pre() {
+  const el = $('#pre'), n = $('#preN');
+  const done = () => { el.classList.add('out'); document.body.classList.add('ready'); setTimeout(() => el.remove(), 1100); };
+  if (RM) { el.remove(); document.body.classList.add('ready'); return; }
+  const t0 = performance.now(), D = 1500;
+  (function f(t) {
+    const p = clamp((t - t0) / D), e = 1 - Math.pow(1 - p, 3);
+    n.textContent = Math.round(e * 100);
+    p < 1 ? requestAnimationFrame(f) : setTimeout(done, 200);
+  })(t0);
+})();
+
+/* ---------- teléfonos ---------- */
+const bat = '<svg width="22" height="10" viewBox="0 0 22 10"><rect x=".5" y=".5" width="18" height="9" rx="2.5" fill="none" stroke="currentColor" opacity=".5"/><rect x="2" y="2" width="15" height="6" rx="1.5" fill="currentColor"/><rect x="19.5" y="3" width="1.5" height="4" rx=".7" fill="currentColor" opacity=".5"/></svg>';
+const dstr = (() => { const s = NOW.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' }); return s[0].toUpperCase() + s.slice(1); })();
+const VIEWS = `
+<div class="v v-home" data-v="home"><div class="dt">${dstr}</div><div class="clk" data-clock>9:41</div>
+  <div class="apps">${['#ff6a3d','#2f6bff','#1fa463','#ffb020','#5b3df5','#16130f','#e0234e','#1fb6a6'].map(c => `<i style="--c:${c}"></i>`).join('')}</div></div>
+<div class="v v-prof" data-v="prof"><div class="av">AB</div><b>Alejandro Burdío García</b><small>Desarrollador Mobile · Android & iOS</small>
+  <div class="tags"><span>Kotlin</span><span>Swift</span><span>Java</span><span>NativeScript</span></div>
+  <div class="row"><span>Ubicación</span><b style="font:600 12px var(--sans)">Zaragoza</b></div>
+  <div class="row"><span>Experiencia</span><b style="font:600 12px var(--sans)">${YEARS} años</b></div>
+  <div class="row"><span>Idiomas</span><b style="font:600 12px var(--sans)">ES · EN</b></div></div>
+<div class="v v-stats" data-v="stats"><div class="big">${YEARS}</div><span>años</span><p>publicando apps desde marzo de 2017</p>
+  <div class="bars">${Array.from({ length: YEARS + 1 }, (_, i) => `<i style="--h:${20 + i * (80 / YEARS)}%"></i>`).join('')}</div></div>
+<div class="v v-sign" data-v="logalty"><h5>Firma del documento</h5><div class="doc"><i></i><i></i><i></i><i></i><i></i>
+  <svg viewBox="0 0 200 70"><path d="M8 50c14-30 26-40 30-30s-12 34-4 34 18-38 26-36-6 30 2 30 14-22 22-22-2 18 6 18 12-14 18-14 4 10 12 10 20-8 40-6"/></svg></div>
+  <div class="chk"><b>✓</b>Identidad verificada</div><div class="chk"><b>✓</b>Documento íntegro</div><span class="btn-s">Firmar</span></div>
+<div class="v v-blink" data-v="blink"><h5>Libro digital</h5><div class="pages">
+  <div class="pg" style="--r:-6deg;--x:-4px"><i></i><i></i><i></i></div><div class="pg" style="--r:3deg;--x:6px"><i></i><i></i><i></i><i></i></div>
+  <div class="pg" style="--r:0deg;--x:0px"><i></i><i style="width:60%"></i><i></i><i></i><i style="width:80%"></i><i></i><i style="width:50%"></i></div>
+  <span class="lock"><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span></div>
+  <p>Cifrado nativo en C++ · NDK · PDFTron</p></div>
+<div class="v v-bis" data-v="bis"><h5>Alta de cliente</h5>
+  <div class="fld">Cliente<b>Nuevo cliente</b></div><div class="fld">Catálogo<b>SimonRack</b></div><div class="fld">Datos locales<b>SQLite · sin conexión</b></div><div class="fld">Backend<b>PHP · SQL</b></div>
+  <span class="btn-s">Dar de alta</span></div>
+<div class="v v-laso" data-v="laso"><h5>Diagnóstico del equipo</h5>
+  ${['Memoria', 'Disco', 'Red', 'Usuarios', 'Periféricos'].map(x => `<div class="it">${x}<b>✓ OK</b></div>`).join('')}</div>
+<div class="v v-contact" data-v="contact"><div class="clk" data-clock>9:41</div>
+  <div class="nt"><i></i><div><b>Alejandro · ahora</b>¿Hablamos? Escríbeme y te respondo.</div></div></div>`;
+function phone(kind) {
+  return `<div class="p3 ${kind}" id="ph-${kind}">
+    <div class="face back"><span class="logo-b">AB</span></div>
+    <div class="side l"></div><div class="side r"></div><div class="side t"></div><div class="side b"></div>
+    <div class="face front"><div class="scr"><div class="notch"></div><div class="sb"><span data-clock>9:41</span>${bat}</div>${VIEWS}<div class="glare"></div></div></div>
+  </div>`;
+}
+$('#anchor').innerHTML = phone('and') + phone('ios');
+const PI = $('#ph-ios'), PA = $('#ph-and');
+function tick() {
+  const t = new Date().toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  $$('[data-clock]').forEach(e => e.textContent = t);
+}
+tick(); setInterval(tick, 10000);
+function show(ph, v) {
+  if (ph._v === v) return; ph._v = v;
+  $$('.v', ph).forEach(x => x.classList.toggle('on', x.dataset.v === v));
+}
+
+/* estados del rig por sección */
+const ST = {
+  hero: p => ({ ax: .74, y: 0, rx: 6, ry: -22 + p * 10, rz: -3, s: 1, split: 1 - p, and: 1, v: 'home' }),
+  perfil: () => ({ ax: .76, y: 0, rx: 4, ry: -14, rz: 0, s: 1, split: 0, and: 0, v: 'prof' }),
+  stats: () => ({ ax: .76, y: 0, rx: 2, ry: 342, rz: 2, s: .96, split: 0, and: 0, v: 'stats' }),
+  exp: () => ({ ax: .82, y: 0, rx: 3, ry: 350, rz: 0, s: .94, split: 0, and: 0, v: expView }),
+  off: () => ({ ax: 1.3, y: 60, rx: 0, ry: 300, rz: 8, s: .9, split: 0, and: 0, v: null }),
+  contact: () => ({ ax: .76, y: 0, rx: 4, ry: 346, rz: -2, s: 1, split: 0, and: 0, v: 'contact' })
+};
+const cur = { ax: .74, y: 40, rx: 6, ry: -40, rz: -3, s: .9, split: 1, and: 1 };
+let mx = 0, my = 0, expView = 'laso';
+addEventListener('pointermove', e => { mx = e.clientX / innerWidth - .5; my = e.clientY / innerHeight - .5; }, { passive: true });
+const secs = $$('[data-phone]'), hero = $('.hero');
+function rigFrame() {
+  let key = 'hero', p = clamp(scrollY / (hero.offsetHeight * .7));
+  if (!isSmall()) {
+    for (const s of secs) if (s.getBoundingClientRect().top <= innerHeight * .5) key = s.dataset.phone;
+  }
+  const tg = ST[key](p), k = RM ? 1 : .075;
+  for (const prop in cur) cur[prop] = lerp(cur[prop], tg[prop], prop === 'split' && key === 'hero' ? .2 : k);
+  if (tg.v) { show(PI, tg.v); show(PA, key === 'hero' ? 'home' : tg.v); }
+  const anchor = $('#anchor');
+  if (!isSmall()) anchor.style.setProperty('--ax', (cur.ax * 100).toFixed(2) + '%');
+  const pr = RM ? 0 : 1, sm = isSmall() ? .62 : 1;
+  const sp = cur.split;
+  PI.style.transform = `translate3d(${sp * 70}px,${cur.y}px,${sp * 40}px) rotateX(${cur.rx - my * 8 * pr}deg) rotateY(${cur.ry + mx * 12 * pr}deg) rotateZ(${cur.rz}deg) scale(${cur.s * sm})`;
+  PA.style.transform = `translate3d(${-sp * 130}px,${cur.y + sp * 30}px,${-sp * 60}px) rotateX(${cur.rx - my * 8 * pr}deg) rotateY(${cur.ry + 14 * sp + mx * 12 * pr}deg) rotateZ(${cur.rz - 8 * sp}deg) scale(${cur.s * sm})`;
+  PA.style.opacity = clamp(cur.and * 1.4).toFixed(3);
+}
+
+/* ---------- marquee ---------- */
+const T1 = ['Kotlin', 'Swift', 'Java', 'NativeScript', 'Angular', 'TypeScript', 'C#', '.NET'];
+const T2 = ['Google Play', 'App Store', 'SQLite', 'C++ NDK', 'Gradle', 'Crashlytics', 'API REST', 'IA generativa'];
+const fill = (el, arr) => el.innerHTML = [...arr, ...arr, ...arr, ...arr].map(t => `<span>${t}</span>`).join('');
+fill($('#m1'), T1); fill($('#m2'), T2);
+let m1 = 0, m2 = 0, lastY = scrollY, vel = 0;
+function marqueeFrame() {
+  const dy = scrollY - lastY; lastY = scrollY;
+  vel = lerp(vel, dy, .1);
+  const base = RM ? 0 : .6, boost = RM ? 0 : Math.abs(vel) * .35;
+  const w1 = $('#m1').scrollWidth / 2, w2 = $('#m2').scrollWidth / 2;
+  m1 -= base + boost; m2 += base + boost;
+  if (-m1 >= w1) m1 += w1; if (m2 >= 0) m2 -= w2;
+  $('#m1').style.transform = `translate3d(${m1}px,0,0) skewX(${clamp(-vel * .3, -8, 8)}deg)`;
+  $('#m2').style.transform = `translate3d(${m2}px,0,0) skewX(${clamp(vel * .3, -8, 8)}deg)`;
+}
+m2 = -$('#m2').scrollWidth / 2;
+
+/* ---------- perfil palabra a palabra ---------- */
+const KEYS = { Android: '', iOS: 'i', Kotlin: '', Swift: 'i', NativeScript: '', Logalty: 'i', QTSP: 'i' };
+const words = PROFILE.split(' ').map(w => {
+  const bare = w.replace(/[(),.\/]/g, '');
+  return `<span class="${bare in KEYS ? 'k ' + KEYS[bare] : ''}">${w}</span>`;
+});
+$('#revealT').innerHTML = words.join(' ');
+const wordEls = $$('#revealT span'), prof = $('#perfil');
+function revealFrame() {
+  const r = prof.getBoundingClientRect();
+  const p = RM ? 1 : clamp((innerHeight * .75 - r.top) / (r.height * .8));
+  const n = Math.floor(p * wordEls.length);
+  wordEls.forEach((w, i) => w.classList.toggle('lit', i < n));
+}
+
+/* ---------- experiencia horizontal ---------- */
+const CHRONO = [...JOBS].reverse();
+const VIEW_OF = { laso: 'laso', bis: 'bis', blink: 'blink', logalty: 'logalty' };
+$('#track').innerHTML = CHRONO.map(j => `
+  <article class="job" style="--c:${j.color}">
+    <span class="when mono">${fmt(j.from)} — ${fmt(j.to)} · ${span(j.from, j.to)}</span>
+    <h3>${j.co}</h3><h4>${j.role}</h4>
+    <ul>${j.bullets.map(b => `<li>${b}</li>`).join('')}</ul>
+    <div class="tags">${j.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+  </article>`).join('');
+const expSec = $('#experiencia'), track = $('#track'), jobEls = $$('.job', track);
+expSec.style.setProperty('--n', CHRONO.length);
+let expIdx = -1;
+function expFrame() {
+  if (isSmall()) { jobEls.forEach(j => j.classList.remove('dim')); return; }
+  const r = expSec.getBoundingClientRect();
+  const p = clamp(-r.top / (r.height - innerHeight));
+  const card = jobEls[0].offsetWidth + 28;
+  const x = p * card * (CHRONO.length - 1);
+  track.style.transform = `translate3d(${-x}px,0,0)`;
+  $('#expBar').style.transform = `scaleX(${p})`;
+  const i = Math.round(p * (CHRONO.length - 1));
+  if (i !== expIdx) {
+    expIdx = i;
+    jobEls.forEach((j, k) => j.classList.toggle('dim', k !== i));
+    $('#expN').textContent = String(i + 1).padStart(2, '0');
+    expView = VIEW_OF[CHRONO[i].id];
+  }
+}
+
+/* ---------- bento ---------- */
+const ILL = [
+  `<svg viewBox="0 0 400 200" style="right:-20px;top:20px;width:70%;stroke:#fff;opacity:.55"><path fill="none" stroke-width="5" stroke-linecap="round" class="sigp" d="M10 140c30-70 60-100 70-70s-30 80-10 80 40-90 60-85-14 70 6 70 30-50 50-50-4 40 14 40 30-30 40-30 10 22 28 22 50-18 100-14"/></svg>
+   <svg viewBox="0 0 100 100" style="left:26px;top:26px;width:70px;stroke:#fff;opacity:.6;fill:none;stroke-width:3"><rect x="18" y="8" width="64" height="84" rx="8"/><path d="M30 30h40M30 44h40M30 58h24"/></svg>`,
+  `<svg viewBox="0 0 200 220" style="left:50%;top:26px;width:78%;transform:translateX(-50%);fill:none;stroke:#fff;stroke-width:3;opacity:.6"><rect x="10" y="10" width="150" height="100" rx="8"/><path d="M60 130h50M85 110v20"/><rect x="120" y="60" width="60" height="110" rx="12"/><rect x="40" y="90" width="56" height="104" rx="14"/></svg>`,
+  `<svg viewBox="0 0 120 120" style="right:18px;top:18px;width:110px;fill:none;stroke:currentColor;stroke-width:2.5;opacity:.5"><rect x="10" y="20" width="90" height="70" rx="8"/><path d="M30 70c10-14 18-14 22-4s10 6 16-4M95 15l15 15-40 40-18 4 4-18z"/></svg>`,
+  `<svg viewBox="0 0 220 120" style="right:24px;top:22px;width:46%;fill:none;stroke:currentColor;stroke-width:2.5;opacity:.45"><path d="M10 20c30-10 60-10 90 4v86c-30-14-60-14-90-4zM190 20c-30-10-60-10-90 4v86c30-14 60-14 90-4z"/><rect x="150" y="58" width="40" height="34" rx="6"/><path d="M158 58v-8a12 12 0 0 1 24 0v8"/></svg>`,
+  `<svg viewBox="0 0 220 120" style="right:24px;top:22px;width:46%;fill:none;stroke:currentColor;stroke-width:2.5;opacity:.45"><path d="M10 110h200M30 110V50h40v60M90 110V30h40v80M150 110V70h40v40"/><path d="M30 70h40M90 50h40M90 70h40M150 90h40"/></svg>`
+];
+$('#bento').innerHTML = PROJECTS.map((p, i) => `
+  <article class="cell ${'abcde'[i]} up" tabindex="0" data-hover>
+    <div class="ill">${ILL[i]}</div><div class="glow"></div>
+    <span class="k mono">${p.co} · ${p.k}</span><h3>${p.t}</h3><p>${p.d}</p>
+    <div class="tags">${p.tags.map(t => `<span class="tag">${t}</span>`).join('')}</div>
+  </article>`).join('');
+$$('.cell').forEach(c => {
+  c.addEventListener('pointermove', e => {
+    const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+    c.style.setProperty('--mx', x * 100 + '%'); c.style.setProperty('--my', y * 100 + '%');
+    if (!RM) c.style.transform = `perspective(900px) rotateX(${(.5 - y) * 6}deg) rotateY(${(x - .5) * 6}deg)`;
+  });
+  c.addEventListener('pointerleave', () => c.style.transform = '');
+});
+
+/* ---------- stack ---------- */
+$('#groups').innerHTML = STACK.map(g => `<div class="grp up"><h3 class="mono">${g.g}</h3><div class="chips">${g.items.map(([n, s, w]) => `<button class="chip" type="button" data-w="${(w || s).replace(/"/g, '&quot;')}" data-n="${n}">${n}</button>`).join('')}</div></div>`).join('');
+const where = $('#where');
+$$('.chip').forEach(c => {
+  const on = () => { $$('.chip.on').forEach(x => x.classList.remove('on')); c.classList.add('on'); where.innerHTML = `<b>${c.dataset.n}</b>${c.dataset.w}`; };
+  c.addEventListener('pointerenter', on); c.addEventListener('focus', on); c.addEventListener('click', on);
+});
+const BALLS = [['Kotlin', '#7f52ff'], ['Swift', '#f05138'], ['Java', '#e76f00'], ['Android', '#1fa463'], ['iOS', '#2f6bff'], ['NativeScript', '#3655ff'], ['Angular', '#dd0031'], ['TypeScript', '#3178c6'], ['C#', '#68217a'], ['.NET', '#512bd4'], ['C++', '#00599c'], ['SQLite', '#0f80cc'], ['Gradle', '#02303a'], ['PHP', '#777bb4'], ['Crashlytics', '#ffa000'], ['IA', '#a855f7'], ['MySQL', '#00758f'], ['Unity', '#222']];
+const box = $('#box'); let bodies = [], simOn = false, BW = 0, BH = 0, grab = null;
+function initBalls() {
+  box.querySelectorAll('.ball').forEach(b => b.remove());
+  const r = box.getBoundingClientRect(); BW = r.width; BH = r.height;
+  bodies = BALLS.map(([t, c], i) => {
+    const el = document.createElement('span'); el.className = 'ball'; el.textContent = t; el.style.background = c; box.appendChild(el);
+    const w = el.offsetWidth, h = el.offsetHeight;
+    return { el, w, h, x: 30 + Math.random() * (BW - w - 60), y: -h - i * 46 - Math.random() * 40, vx: (Math.random() - .5) * 6, vy: 0 };
+  });
+}
+function physics() {
+  if (!simOn) return;
+  for (const b of bodies) {
+    if (b === grab?.b) continue;
+    b.vy += .55; b.x += b.vx; b.y += b.vy;
+    if (b.y + b.h > BH) { b.y = BH - b.h; b.vy *= -.35; b.vx *= .9; if (Math.abs(b.vy) < 1) b.vy = 0; }
+    if (b.x < 0) { b.x = 0; b.vx *= -.6; }
+    if (b.x + b.w > BW) { b.x = BW - b.w; b.vx *= -.6; }
+  }
+  for (let it = 0; it < 3; it++) for (let i = 0; i < bodies.length; i++) for (let j = i + 1; j < bodies.length; j++) {
+    const a = bodies[i], b = bodies[j];
+    const dx = (b.x + b.w / 2) - (a.x + a.w / 2), dy = (b.y + b.h / 2) - (a.y + a.h / 2);
+    const ox = (a.w + b.w) / 2 - Math.abs(dx), oy = (a.h + b.h) / 2 - Math.abs(dy);
+    if (ox <= 0 || oy <= 0) continue;
+    const ga = a === grab?.b, gb = b === grab?.b, wa = ga ? 0 : gb ? 1 : .5, wb = gb ? 0 : ga ? 1 : .5;
+    if (ox < oy) { const s = Math.sign(dx) || 1; a.x -= s * ox * wa; b.x += s * ox * wb; const v = (a.vx + b.vx) / 2; a.vx = v; b.vx = v; }
+    else { const s = Math.sign(dy) || 1; a.y -= s * oy * wa; b.y += s * oy * wb; const v = (a.vy + b.vy) / 2; a.vy = v * .5; b.vy = v * .5; a.vx *= .96; b.vx *= .96; }
+  }
+  for (const b of bodies) b.el.style.transform = `translate3d(${b.x}px,${b.y}px,0) rotate(${clamp(b.vx * 2, -12, 12)}deg)`;
+}
+box.addEventListener('pointerdown', e => {
+  const el = e.target.closest('.ball'); if (!el) return;
+  const b = bodies.find(x => x.el === el), r = box.getBoundingClientRect();
+  grab = { b, ox: e.clientX - r.left - b.x, oy: e.clientY - r.top - b.y, lx: e.clientX, ly: e.clientY };
+  box.setPointerCapture(e.pointerId);
+});
+box.addEventListener('pointermove', e => {
+  if (!grab) return;
+  const r = box.getBoundingClientRect(), b = grab.b;
+  b.x = clamp(e.clientX - r.left - grab.ox, 0, BW - b.w); b.y = clamp(e.clientY - r.top - grab.oy, 0, BH - b.h);
+  b.vx = (e.clientX - grab.lx) * .8; b.vy = (e.clientY - grab.ly) * .8; grab.lx = e.clientX; grab.ly = e.clientY;
+});
+box.addEventListener('pointerup', () => grab = null);
+box.addEventListener('dblclick', () => bodies.forEach(b => { b.vy = -12 - Math.random() * 8; b.vx = (Math.random() - .5) * 16; }));
+new IntersectionObserver(es => es.forEach(e => { if (e.isIntersecting && !simOn) { initBalls(); simOn = true; } }), { threshold: .3 }).observe(box);
+addEventListener('resize', () => { if (simOn) { const r = box.getBoundingClientRect(); BW = r.width; BH = r.height; } });
+
+/* ---------- formación ---------- */
+const EC = ['#2f6bff', '#1fa463', '#a855f7', '#7f52ff', '#3655ff', '#ff6a3d', '#f05138'];
+$('#index').innerHTML = EDU.map((e, i) => `
+  <div class="ix up" data-i="${i}"><span class="no">${String(i + 1).padStart(2, '0')}</span>
+    <h3>${e.t}<span class="kd ${e.kind.includes('académica') ? '' : 'c'}">${e.kind.includes('académica') ? 'Académica' : 'Complementaria'}</span><small>${e.p}</small></h3>
+    <span class="yr">${e.y}</span></div>`).join('');
+$('#langs').innerHTML = LANGS.map(([l, lv, n]) => `<div class="lg up"><b>${l}</b><span>${lv}</span>
+  <div class="m">${[1, 2, 3, 4, 5, 6].map(k => `<i class="${k <= n ? 'on' : k - .5 <= n ? 'h' : ''}"></i>`).join('')}</div>
+  <div class="cefr"><span>A1</span><span>A2</span><span>B1</span><span>B2</span><span>C1</span><span>C2</span></div></div>`).join('');
+const flt = $('#float'); let fx = 0, fy = 0, ftx = 0, fty = 0;
+$$('.ix').forEach(r => {
+  r.addEventListener('pointerenter', () => {
+    const e = EDU[r.dataset.i]; $('#fk').textContent = e.p; $('#fy').textContent = e.y;
+    flt.style.background = `linear-gradient(135deg,${EC[r.dataset.i]},${EC[(+r.dataset.i + 2) % EC.length]})`;
+    flt.classList.add('on');
+  });
+  r.addEventListener('pointerleave', () => flt.classList.remove('on'));
+});
+addEventListener('pointermove', e => { ftx = e.clientX + 24; fty = e.clientY - 80; }, { passive: true });
+
+/* ---------- contador y apariciones ---------- */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add('in'); io.unobserve(e.target);
+  const c = e.target.querySelector('[data-count]');
+  if (c) {
+    const n = c.dataset.count === 'years' ? YEARS : +c.dataset.count, t0 = performance.now();
+    (function f(t) { const p = RM ? 1 : clamp((t - t0) / 1400); c.textContent = Math.round(n * (1 - Math.pow(1 - p, 4))); if (p < 1) requestAnimationFrame(f); })(t0);
+  }
+}), { threshold: .2 });
+$$('.up').forEach((el, i) => { el.style.transitionDelay = (i % 4) * 80 + 'ms'; io.observe(el); });
+
+/* ---------- botón magnético ---------- */
+const mag = $('#mag');
+addEventListener('pointermove', e => {
+  if (RM) return;
+  const r = mag.getBoundingClientRect(), cx = r.left + r.width / 2, cy = r.top + r.height / 2;
+  const dx = e.clientX - cx, dy = e.clientY - cy, d = Math.hypot(dx, dy);
+  if (d < r.width) { mag.style.transform = `translate(${dx * .3}px,${dy * .3}px)`; mag.firstChild.style.transform = `translate(${dx * .12}px,${dy * .12}px)`; }
+  else { mag.style.transform = ''; mag.firstChild.style.transform = ''; }
+}, { passive: true });
+
+/* ---------- cursor ---------- */
+const cd = $('#cur'), ring = $('#ring'); let rx = -100, ry = -100, px = -100, py = -100;
+addEventListener('pointermove', e => { px = e.clientX; py = e.clientY; cd.style.transform = `translate(${px}px,${py}px)`; }, { passive: true });
+document.addEventListener('pointerover', e => ring.classList.toggle('big', !!e.target.closest('a,button,[data-hover],.chip,.ball,.ix')));
+
+/* ---------- navegación ---------- */
+const nav = $('#nav'), links = $$('.links a'); let prevY = 0;
+function navFrame() {
+  const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
+  $('#bar').style.transform = `scaleX(${clamp(y / max)})`;
+  nav.classList.toggle('hide', y > prevY && y > 300);
+  prevY = y;
+  let id = '';
+  for (const a of links) { const s = $(a.getAttribute('href')); if (s && s.getBoundingClientRect().top < innerHeight * .5) id = a.getAttribute('href'); }
+  links.forEach(a => a.classList.toggle('on', a.getAttribute('href') === id));
+}
+
+/* ---------- bucle ---------- */
+(function loop() {
+  rigFrame(); marqueeFrame(); revealFrame(); expFrame(); physics(); navFrame();
+  rx = lerp(rx, px, .18); ry = lerp(ry, py, .18); ring.style.transform = `translate(${rx}px,${ry}px)`;
+  fx = lerp(fx, ftx, .14); fy = lerp(fy, fty, .14); flt.style.left = fx + 'px'; flt.style.top = fy + 'px';
+  requestAnimationFrame(loop);
+})();
+</script></body></html>

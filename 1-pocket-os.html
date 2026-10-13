@@ -1,0 +1,1158 @@
+<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Pocket OS · Alejandro Burdío</title><meta name="description" content="Portfolio de Alejandro Burdío García, desarrollador mobile Android e iOS.">
+<link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Roboto+Flex:opsz,wght@8..144,300..700&family=JetBrains+Mono:wght@400;500;600;700&family=Instrument+Serif:ital@0;1&display=swap" rel="stylesheet">
+<style>
+:root{
+  --page:#06070b;--ink:#f4f5f8;--ink2:rgba(244,245,248,.62);--line:rgba(255,255,255,.1);
+  --h:258;--glow:hsl(var(--h) 90% 60%);
+  --ease:cubic-bezier(.22,1,.36,1);--spring:cubic-bezier(.34,1.56,.64,1);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html,body{height:100%}
+body{background:var(--page);color:var(--ink);font-family:"Inter",-apple-system,BlinkMacSystemFont,sans-serif;overflow:hidden;-webkit-font-smoothing:antialiased}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+button:focus-visible,a:focus-visible,input:focus-visible{outline:2px solid var(--accent,#0a84ff);outline-offset:3px;border-radius:8px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+
+/* ===== Escritorio ===== */
+.ambient{position:fixed;inset:0;pointer-events:none;overflow:hidden}
+.ambient i{position:absolute;width:60vmax;height:60vmax;border-radius:50%;filter:blur(90px);opacity:.28;transition:background 1s}
+.ambient i:nth-child(1){background:hsl(var(--h) 90% 55%);left:30%;top:-20%;animation:drift 18s ease-in-out infinite alternate}
+.ambient i:nth-child(2){background:hsl(calc(var(--h) + 60) 90% 55%);right:-25%;bottom:-30%;animation:drift 22s ease-in-out infinite alternate-reverse}
+.ambient i:nth-child(3){background:hsl(calc(var(--h) - 70) 90% 50%);left:-25%;bottom:-25%;opacity:.16;animation:drift 26s ease-in-out infinite alternate}
+@keyframes drift{to{transform:translate(8vmax,6vmax) scale(1.15)}}
+.grain{position:fixed;inset:0;pointer-events:none;opacity:.06;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+.desk{position:relative;height:100%;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:4vw;padding:0 5vw}
+.side{max-width:420px}
+.side.l{justify-self:end;text-align:left}
+.eyebrow{font:500 12px/1 "JetBrains Mono",monospace;letter-spacing:.18em;text-transform:uppercase;color:var(--ink2);display:flex;align-items:center;gap:10px}
+.eyebrow b{width:8px;height:8px;border-radius:50%;background:#3ddc84;box-shadow:0 0 0 0 #3ddc8466;animation:ping 2s infinite}
+@keyframes ping{70%{box-shadow:0 0 0 10px #3ddc8400}100%{box-shadow:0 0 0 0 #3ddc8400}}
+.side h1{font:400 clamp(44px,5.4vw,84px)/.95 "Instrument Serif",serif;letter-spacing:-.02em;margin:22px 0 18px}
+.side h1 em{font-style:italic;background:linear-gradient(100deg,hsl(var(--h) 95% 75%),hsl(calc(var(--h) + 70) 95% 72%));-webkit-background-clip:text;background-clip:text;color:transparent;transition:all .8s}
+.side p{color:var(--ink2);font-size:15px;line-height:1.6}
+.plat{display:inline-flex;gap:6px;margin-top:26px;padding:5px;border:1px solid var(--line);border-radius:999px;background:rgba(255,255,255,.04);backdrop-filter:blur(12px);position:relative}
+.plat button{position:relative;z-index:1;padding:9px 18px;border-radius:999px;font-size:13px;font-weight:600;color:var(--ink2);transition:color .3s;display:flex;align-items:center;gap:8px}
+.plat button[aria-pressed=true]{color:#000}
+.plat .pill{position:absolute;top:5px;bottom:5px;left:5px;border-radius:999px;background:#fff;transition:transform .5s var(--spring),width .5s var(--spring)}
+.side.r{justify-self:start}
+.howto{list-style:none;display:grid;gap:14px}
+.howto li{display:flex;gap:14px;align-items:flex-start;font-size:14px;color:var(--ink2);line-height:1.45}
+.howto kbd{flex:none;min-width:34px;height:34px;display:grid;place-items:center;border:1px solid var(--line);border-radius:10px;font:600 13px "JetBrains Mono",monospace;color:var(--ink);background:rgba(255,255,255,.04)}
+.howto strong{color:var(--ink);font-weight:600;display:block;margin-bottom:2px}
+.classic-link{margin-top:30px;display:inline-flex;align-items:center;gap:10px;font-size:14px;color:var(--ink);border-bottom:1px solid var(--line);padding-bottom:4px;transition:border-color .3s,gap .3s}
+.classic-link:hover{border-color:var(--ink);gap:14px}
+
+/* ===== Teléfono ===== */
+.stage{perspective:1600px;width:calc(410px * var(--s,1));height:calc(864px * var(--s,1));display:grid;place-items:center}
+.tilt{width:100%;height:100%;transform-style:preserve-3d;will-change:transform}
+.device{width:410px;height:864px;transform:scale(var(--s,1));transform-origin:0 0;border-radius:68px;padding:10px;position:relative;
+  background:linear-gradient(145deg,#3a3b40,#16171a 40%,#2b2c30);
+  box-shadow:0 0 0 1.5px #55565c inset,0 0 0 2px #0b0b0d,0 60px 120px -30px rgba(0,0,0,.9),0 30px 80px -20px hsl(var(--h) 80% 40% / .45);transition:border-radius .6s var(--ease),box-shadow 1s}
+.device::before,.device::after{content:"";position:absolute;width:4px;border-radius:2px;background:#2a2b2f;left:-3px}
+.device::before{top:180px;height:64px;box-shadow:0 90px 0 #2a2b2f}
+.device::after{left:auto;right:-3px;top:220px;height:96px}
+.phone[data-os=android] .device,.device[data-os=android]{border-radius:52px}
+.screen{position:relative;width:100%;height:100%;border-radius:58px;overflow:hidden;background:#000;isolation:isolate;transition:border-radius .6s var(--ease);
+  font-family:var(--font);color:var(--text);user-select:none;-webkit-user-select:none}
+.cam{position:absolute;z-index:60;left:50%;top:11px;transform:translateX(-50%);width:124px;height:36px;border-radius:20px;background:#000;transition:all .6s var(--spring);pointer-events:none}
+.cam::after{content:"";position:absolute;right:14px;top:50%;width:11px;height:11px;margin-top:-5.5px;border-radius:50%;background:radial-gradient(circle at 35% 35%,#2c3a5a,#05070d 60%)}
+
+/* tokens de plataforma */
+.phone{--font:"Inter",-apple-system,sans-serif;--r-icon:16px;--r-card:18px;--accent:#0a84ff;
+  --bg:#000;--bg2:#1c1c1e;--bg3:#2c2c2e;--text:#fff;--text2:rgba(235,235,245,.6);--sep:rgba(84,84,88,.55);--glass:rgba(40,40,46,.55)}
+.phone[data-theme=light]{--accent:#007aff;--bg:#f2f2f7;--bg2:#fff;--bg3:#e9e9ee;--text:#000;--text2:rgba(60,60,67,.6);--sep:rgba(60,60,67,.18);--glass:rgba(255,255,255,.6)}
+.phone[data-os=android]{--font:"Roboto Flex","Roboto",sans-serif;--r-icon:50%;--r-card:26px;
+  --accent:hsl(var(--h) 85% 80%);--on-accent:hsl(var(--h) 60% 18%);
+  --bg:hsl(var(--h) 14% 7%);--bg2:hsl(var(--h) 16% 13%);--bg3:hsl(var(--h) 18% 19%);--text:hsl(var(--h) 20% 94%);--text2:hsl(var(--h) 10% 72%);--sep:hsl(var(--h) 10% 24%);--glass:hsl(var(--h) 20% 14% / .7)}
+.phone[data-os=android][data-theme=light]{--accent:hsl(var(--h) 55% 42%);--on-accent:#fff;
+  --bg:hsl(var(--h) 40% 97%);--bg2:hsl(var(--h) 45% 93%);--bg3:hsl(var(--h) 40% 88%);--text:hsl(var(--h) 25% 10%);--text2:hsl(var(--h) 10% 35%);--sep:hsl(var(--h) 20% 82%);--glass:hsl(var(--h) 50% 96% / .7)}
+.phone[data-os=android] .screen{border-radius:44px}
+.phone[data-os=android] .cam{width:24px;height:24px;top:14px;border-radius:50%}
+.phone[data-os=android] .cam::after{right:6.5px;width:11px;height:11px}
+.phone.morph .screen{animation:morph .7s var(--ease)}
+@keyframes morph{40%{filter:blur(8px) saturate(1.6);transform:scale(.965)}}
+
+/* barra de estado */
+.status{position:absolute;z-index:50;top:0;left:0;right:0;height:54px;display:flex;align-items:center;justify-content:space-between;padding:6px 34px 0 46px;font-weight:600;font-size:16px;color:#fff;transition:color .3s;pointer-events:none}
+.status.dark{color:var(--text)}
+.status .icons{display:flex;gap:6px;align-items:center}
+.status svg{height:12px;fill:currentColor}
+.status .cc-hit{pointer-events:auto;position:absolute;right:0;top:0;width:45%;height:100%}
+.phone[data-os=android] .status{height:44px;padding:4px 26px 0;font-size:14px;font-weight:500}
+
+/* fondo */
+.wall{position:absolute;inset:0;background:hsl(var(--h) 60% 8%);transition:background 1s}
+.wall i{position:absolute;border-radius:50%;filter:blur(40px);mix-blend-mode:screen;transition:background 1s}
+.wall i:nth-child(1){width:380px;height:380px;left:-120px;top:-60px;background:hsl(var(--h) 95% 58%);animation:w1 14s ease-in-out infinite alternate}
+.wall i:nth-child(2){width:340px;height:340px;right:-140px;top:260px;background:hsl(calc(var(--h) + 55) 95% 58%);animation:w2 17s ease-in-out infinite alternate}
+.wall i:nth-child(3){width:300px;height:300px;left:20px;bottom:-120px;background:hsl(calc(var(--h) - 60) 95% 52%);animation:w1 20s ease-in-out infinite alternate-reverse}
+@keyframes w1{to{transform:translate(90px,120px) scale(1.2)}}
+@keyframes w2{to{transform:translate(-110px,-80px) scale(.85)}}
+.phone[data-theme=light] .wall{background:hsl(var(--h) 80% 88%)}
+.phone[data-theme=light] .wall i{mix-blend-mode:multiply;opacity:.55}
+
+/* boot */
+.boot{position:absolute;inset:0;z-index:90;background:#000;display:grid;place-items:center;transition:opacity .6s,visibility .6s}
+.boot.done{opacity:0;visibility:hidden;pointer-events:none}
+.boot .logo{width:120px;height:120px;position:relative}
+.boot svg{width:100%;height:100%;overflow:visible}
+.boot .ring{fill:none;stroke:#222;stroke-width:3}
+.boot .prog{fill:none;stroke:url(#bg);stroke-width:3;stroke-linecap:round;stroke-dasharray:352;stroke-dashoffset:352;transform:rotate(-90deg);transform-origin:60px 60px}
+.boot .ab{font:700 34px "Inter",sans-serif;fill:#fff;letter-spacing:-1px;opacity:0;animation:in .8s .2s var(--ease) forwards}
+.boot .bmsg{position:absolute;bottom:120px;left:0;right:0;text-align:center;font:500 12px "JetBrains Mono",monospace;color:#8a8a92;letter-spacing:.08em}
+.boot .skip{position:absolute;bottom:60px;left:50%;transform:translateX(-50%);font-size:12px;color:#8a8a92;border:1px solid #2a2a2e;padding:7px 14px;border-radius:999px}
+.boot .skip:hover{color:#fff;border-color:#555}
+@keyframes in{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* bloqueo */
+.lock{position:absolute;inset:0;z-index:30;color:#fff;display:flex;flex-direction:column;align-items:center;touch-action:none;cursor:grab}
+.lock:active{cursor:grabbing}
+.lock .date{margin-top:86px;font-size:20px;font-weight:600;opacity:.9}
+.lock .clock{font-size:104px;font-weight:600;letter-spacing:-4px;line-height:1;margin-top:2px;font-variant-numeric:tabular-nums;background:linear-gradient(#fff,rgba(255,255,255,.75));-webkit-background-clip:text;background-clip:text;color:transparent}
+.phone[data-os=android] .lock{align-items:flex-start;padding:0 30px}
+.phone[data-os=android] .lock .clock{font-size:118px;font-weight:300;letter-spacing:-2px;line-height:.9;margin-top:76px;order:-1}
+.phone[data-os=android] .lock .date{margin-top:10px;font-size:16px;font-weight:500}
+.notif{margin-top:auto;margin-bottom:24px;width:calc(100% - 28px);align-self:center;display:flex;gap:12px;padding:14px;border-radius:22px;background:rgba(30,30,36,.42);backdrop-filter:blur(24px) saturate(1.6);-webkit-backdrop-filter:blur(24px) saturate(1.6);text-align:left;color:#fff;animation:notif 1s .4s var(--spring) both}
+.notif + .notif{margin-top:-14px;transform:scale(.94);opacity:.55;margin-bottom:112px;animation-delay:.6s;z-index:-1}
+@keyframes notif{from{transform:translateY(40px) scale(.9);opacity:0}}
+.notif .ico{flex:none;width:38px;height:38px;border-radius:10px}
+.phone[data-os=android] .notif{border-radius:26px;background:hsl(var(--h) 25% 16% / .7)}
+.phone[data-os=android] .notif .ico{border-radius:50%}
+.notif .t{display:flex;justify-content:space-between;font-size:14px;font-weight:600}
+.notif .t span{font-weight:400;opacity:.6;font-size:13px}
+.notif p{font-size:14px;line-height:1.35;opacity:.92;margin-top:2px}
+.lock .hint{position:absolute;bottom:26px;font-size:13px;opacity:.85;display:flex;flex-direction:column;align-items:center;gap:6px;left:0;right:0}
+.lock .hint svg{width:22px;animation:bob 1.6s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-6px)}}
+.lock .quick{position:absolute;bottom:44px;width:50px;height:50px;border-radius:50%;background:rgba(30,30,36,.45);backdrop-filter:blur(20px);display:grid;place-items:center}
+.lock .quick svg{width:22px;fill:none;stroke:#fff;stroke-width:1.8}
+.lock .quick.a{left:46px}.lock .quick.b{right:46px}
+.phone[data-os=android] .lock .quick{display:none}
+
+/* home */
+.home{position:absolute;inset:0;z-index:20;padding:64px 22px 0;display:flex;flex-direction:column;visibility:hidden}
+.phone.unlocked .home{visibility:visible}
+.widget{border-radius:26px;padding:18px;display:grid;grid-template-columns:auto 1fr;gap:4px 14px;align-items:center;background:var(--glass);backdrop-filter:blur(26px) saturate(1.5);-webkit-backdrop-filter:blur(26px) saturate(1.5);color:var(--text);margin-bottom:22px;text-align:left;width:100%}
+.avatar{width:58px;height:58px;border-radius:50%;display:grid;place-items:center;font:700 22px var(--font);color:#fff;background:conic-gradient(from 200deg,hsl(var(--h) 90% 60%),hsl(calc(var(--h) + 70) 90% 60%),hsl(calc(var(--h) - 60) 90% 58%),hsl(var(--h) 90% 60%));grid-row:span 2;position:relative}
+.avatar::after{content:"";position:absolute;inset:-4px;border-radius:50%;border:2px solid hsl(var(--h) 90% 70% / .5);animation:spin 8s linear infinite;border-top-color:transparent}
+@keyframes spin{to{transform:rotate(1turn)}}
+.widget h2{font-size:17px;font-weight:700;letter-spacing:-.01em}
+.widget .role{font-size:13px;color:var(--text2)}
+.widget .stats{grid-column:1/-1;display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}
+.widget .stats div{background:rgba(127,127,140,.12);border-radius:14px;padding:10px 8px;text-align:center}
+.widget .stats b{display:block;font-size:22px;font-weight:700;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.widget .stats span{font-size:10.5px;color:var(--text2);line-height:1.2;display:block}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:22px 10px}
+.app{display:flex;flex-direction:column;align-items:center;gap:7px;font-size:11.5px;color:#fff;text-shadow:0 1px 4px rgba(0,0,0,.4);transition:transform .25s var(--ease)}
+.phone[data-theme=light] .app{color:#000;text-shadow:none}
+.app:active .icon{transform:scale(.88);filter:brightness(.85)}
+.icon{width:62px;height:62px;border-radius:var(--r-icon);display:grid;place-items:center;position:relative;box-shadow:0 6px 16px -6px rgba(0,0,0,.45);transition:border-radius .6s var(--spring),transform .2s var(--ease),filter .2s}
+.phone:not([data-os=android]) .icon{border-radius:26%}
+.icon::before{content:"";position:absolute;inset:0;border-radius:inherit;background:linear-gradient(rgba(255,255,255,.25),transparent 50%);pointer-events:none}
+.icon svg{width:30px;height:30px;fill:none;stroke:#fff;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round;position:relative}
+.icon .badge{position:absolute;top:-5px;right:-5px;min-width:22px;height:22px;padding:0 6px;border-radius:11px;background:#ff3b30;color:#fff;font:600 13px/22px var(--font);text-shadow:none;animation:pop .5s 1.4s var(--spring) both}
+@keyframes pop{from{transform:scale(0)}}
+.phone[data-os=android] .icon .badge{min-width:12px;height:12px;padding:0;font-size:0;top:0;right:0}
+.minis{display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:22px}
+.mini-w{border-radius:24px;padding:14px 16px;aspect-ratio:1/.82;display:flex;flex-direction:column;text-align:left;background:var(--glass);backdrop-filter:blur(26px) saturate(1.5);-webkit-backdrop-filter:blur(26px) saturate(1.5);color:var(--text)}
+.mini-w small{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.06em;color:var(--accent)}
+.mini-w b{font-size:20px;font-weight:700;letter-spacing:-.02em;margin-top:6px;line-height:1.1}
+.mini-w span{font-size:12px;color:var(--text2);margin-top:auto;line-height:1.3}
+.mini-w .st{display:flex;align-items:center;gap:6px;font-size:13px;font-weight:600;color:var(--text);margin-top:6px}
+.mini-w .st i{width:16px;height:16px;border-radius:50%;background:#34c759;display:grid;place-items:center;font-style:normal;font-size:10px;color:#fff}
+.home .minis{opacity:0;transform:scale(.6)}
+.phone.unlocked .home .minis{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .7s var(--spring);transition-delay:300ms}
+.dots{display:flex;justify-content:center;gap:7px;margin:auto 0 14px}
+.dots i{width:7px;height:7px;border-radius:50%;background:rgba(255,255,255,.35)}
+.dots i:first-child{background:#fff}
+.dock{margin:0 -8px 30px;padding:14px 16px;border-radius:34px;display:grid;grid-template-columns:repeat(4,1fr);gap:10px;justify-items:center;background:rgba(255,255,255,.12);backdrop-filter:blur(26px) saturate(1.5);-webkit-backdrop-filter:blur(26px) saturate(1.5)}
+.dock .app > span:last-child{display:none}
+.phone[data-os=android] .dock{background:none;backdrop-filter:none;-webkit-backdrop-filter:none;margin-bottom:26px}
+.phone[data-os=android] .dots{display:none}
+.phone[data-os=android] .home::after{content:"Buscar";order:9;margin:0 0 30px;height:52px;border-radius:26px;background:var(--bg2);color:var(--text2);display:flex;align-items:center;padding:0 22px;font-size:15px}
+.home .grid .app,.home .widget,.home .dock{opacity:0;transform:scale(.6)}
+.phone.unlocked .home .grid .app,.phone.unlocked .home .widget,.phone.unlocked .home .dock{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .7s var(--spring);transition-delay:calc(var(--i,0) * 35ms + 80ms)}
+
+/* barra inferior */
+.navbar{position:absolute;z-index:70;left:0;right:0;bottom:0;height:34px;display:grid;place-items:center;touch-action:none}
+.navbar button{width:140px;height:5px;border-radius:3px;background:#fff;opacity:.9;transition:background .3s,width .4s var(--spring);padding:0;position:relative}
+.navbar button::after{content:"";position:absolute;inset:-14px -10px}
+.navbar.dark button{background:var(--text)}
+.phone[data-os=android] .navbar button{width:110px;height:4px}
+
+/* ventana de app */
+.appwin{position:absolute;inset:0;z-index:40;background:var(--bg);color:var(--text);display:none;flex-direction:column;overflow:hidden;transform-origin:0 0}
+.appwin.open{display:flex}
+.appwin .content{opacity:0}
+.appwin.ready .content{opacity:1;transition:opacity .25s}
+.bar{flex:none;padding:56px 18px 6px;display:flex;align-items:center;gap:8px;position:relative;z-index:2;background:var(--bg)}
+.bar .back{display:flex;align-items:center;gap:2px;color:var(--accent);font-size:17px;padding:6px 6px 6px 0}
+.bar .back svg{width:22px;height:22px;fill:none;stroke:currentColor;stroke-width:2.4;stroke-linecap:round;stroke-linejoin:round}
+.bar .back .t-and{display:none}
+.bar .ttl-s{position:absolute;left:0;right:0;text-align:center;font-weight:600;font-size:17px;opacity:0;transition:opacity .2s;pointer-events:none;bottom:12px}
+.appwin.scrolled .bar{box-shadow:0 1px 0 var(--sep)}
+.appwin.scrolled .bar .ttl-s{opacity:1}
+.phone[data-os=android] .bar{padding:48px 10px 8px}
+.phone[data-os=android] .bar .back{color:var(--text);width:48px;height:48px;justify-content:center;border-radius:50%;padding:0}
+.phone[data-os=android] .bar .back:hover{background:var(--bg2)}
+.phone[data-os=android] .bar .back .t-ios{display:none}
+.phone[data-os=android] .bar .back .t-and{display:block}
+.phone[data-os=android] .bar .ttl-s{position:static;opacity:1;text-align:left;font-size:22px;font-weight:400}
+.phone[data-os=android] .appwin.scrolled .bar{box-shadow:none;background:var(--bg2)}
+.scroll{flex:1;overflow-y:auto;overflow-x:hidden;padding:0 18px 60px;scrollbar-width:none;overscroll-behavior:contain;user-select:text;-webkit-user-select:text}
+.scroll::-webkit-scrollbar{display:none}
+.big-t{font-size:34px;font-weight:700;letter-spacing:-.02em;margin:2px 0 16px}
+.phone[data-os=android] .big-t{display:none}
+.rv{opacity:0;transform:translateY(16px)}
+.appwin.ready .rv{opacity:1;transform:none;transition:opacity .5s var(--ease),transform .7s var(--ease);transition-delay:calc(var(--i,0) * 55ms)}
+.card{background:var(--bg2);border-radius:var(--r-card);padding:16px}
+.label{font-size:13px;color:var(--text2);text-transform:uppercase;letter-spacing:.04em;margin:22px 4px 8px}
+.phone[data-os=android] .label{text-transform:none;letter-spacing:0;color:var(--accent);font-weight:500;font-size:14px}
+.chip{display:inline-flex;align-items:center;gap:6px;padding:5px 10px;border-radius:999px;font-size:12px;font-weight:500;background:var(--bg3);color:var(--text)}
+.chips{display:flex;flex-wrap:wrap;gap:6px}
+.dot{width:7px;height:7px;border-radius:50%}
+
+/* perfil */
+.prof-head{text-align:center;padding:4px 0 8px}
+.prof-head .avatar{width:110px;height:110px;font-size:40px;margin:0 auto 14px}
+.prof-head h3{font-size:24px;font-weight:700;letter-spacing:-.02em}
+.prof-head p{color:var(--text2);font-size:15px;margin-top:4px}
+.kpis{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.kpis .card{padding:14px}
+.kpis b{font-size:30px;font-weight:700;letter-spacing:-.03em;display:block;color:var(--accent);font-variant-numeric:tabular-nums}
+.kpis span{font-size:12.5px;color:var(--text2)}
+.prose{font-size:15.5px;line-height:1.55}
+.lang{display:flex;justify-content:space-between;align-items:center;padding:12px 0}
+.lang + .lang{border-top:1px solid var(--sep)}
+.lang small{color:var(--text2);font-size:13px}
+.cefr{display:flex;gap:3px;margin-top:6px}
+.cefr i{width:22px;height:5px;border-radius:3px;background:var(--bg3)}
+.cefr i.on{background:var(--accent)}
+.cefr i.half{background:linear-gradient(90deg,var(--accent) 50%,var(--bg3) 50%)}
+
+/* experiencia */
+.tl{position:relative;padding-left:22px}
+.tl::before{content:"";position:absolute;left:6px;top:10px;bottom:10px;width:2px;background:linear-gradient(var(--accent),var(--sep))}
+.job{position:relative;margin-bottom:14px}
+.job::before{content:"";position:absolute;left:-22px;top:22px;width:14px;height:14px;border-radius:50%;background:var(--bg);border:3px solid var(--accent)}
+.job.now::before{background:var(--accent);box-shadow:0 0 0 6px color-mix(in srgb,var(--accent) 25%,transparent)}
+.job .head{display:flex;gap:12px;align-items:center;width:100%;text-align:left}
+.logo{flex:none;width:44px;height:44px;border-radius:12px;display:grid;place-items:center;font-weight:800;font-size:17px;color:#fff}
+.job h4{font-size:16px;font-weight:650}
+.job .sub{font-size:13px;color:var(--text2)}
+.job .chev{margin-left:auto;width:18px;height:18px;fill:none;stroke:var(--text2);stroke-width:2.2;transition:transform .4s var(--ease);flex:none}
+.job.exp .chev{transform:rotate(90deg)}
+.job .body{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.job.exp .body{grid-template-rows:1fr}
+.job .body > div{overflow:hidden}
+.job ul{list-style:none;padding-top:12px;display:grid;gap:9px}
+.job li{font-size:14px;line-height:1.45;padding-left:16px;position:relative}
+.job li::before{content:"";position:absolute;left:2px;top:8px;width:6px;height:6px;border-radius:2px;background:var(--accent);opacity:.8}
+.job .meta{display:flex;gap:6px;flex-wrap:wrap;margin-top:12px}
+
+/* proyectos */
+.today-d{font-size:13px;color:var(--text2);text-transform:uppercase;font-weight:600;letter-spacing:.02em}
+.proj{position:relative;border-radius:22px;overflow:hidden;margin-bottom:18px;background:var(--bg2);box-shadow:0 14px 30px -18px rgba(0,0,0,.6);transition:transform .3s var(--ease)}
+.proj:active{transform:scale(.98)}
+.proj .art{height:200px;position:relative;overflow:hidden;display:grid;place-items:center}
+.proj .art .lbl{position:absolute;left:18px;top:16px;font-size:12px;font-weight:700;letter-spacing:.06em;color:rgba(255,255,255,.75);text-transform:uppercase}
+.proj .art::after{content:"";position:absolute;inset:40% 0 0;background:linear-gradient(transparent,rgba(0,0,0,.45))}
+.proj .art h4{position:absolute;z-index:1;text-shadow:0 2px 12px rgba(0,0,0,.3);left:18px;right:18px;bottom:16px;font-size:24px;line-height:1.05;font-weight:800;color:#fff;letter-spacing:-.02em;text-align:left}
+.proj .more{display:grid;grid-template-rows:0fr;transition:grid-template-rows .5s var(--ease)}
+.proj.exp .more{grid-template-rows:1fr}
+.proj .more > div{overflow:hidden}
+.proj .more p{padding:16px 18px 10px;font-size:14.5px;line-height:1.5}
+.proj .more .chips{padding:0 18px 18px}
+.proj .foot{display:flex;align-items:center;gap:10px;padding:12px 18px;border-top:1px solid var(--sep);text-align:left;width:100%}
+.proj .foot .mini{width:36px;height:36px;border-radius:9px;flex:none}
+.proj .foot b{font-size:14px;display:block}
+.proj .foot small{font-size:12px;color:var(--text2)}
+.proj .foot .get{margin-left:auto;padding:6px 16px;border-radius:999px;background:var(--bg3);color:var(--accent);font-weight:700;font-size:13px}
+.mock{width:120px;height:210px;border-radius:20px;border:3px solid rgba(255,255,255,.85);transform:rotate(-8deg) translateY(30px);background:rgba(255,255,255,.12);backdrop-filter:blur(4px);padding:14px 10px;display:grid;gap:8px;align-content:start}
+.mock i{display:block;height:8px;border-radius:4px;background:rgba(255,255,255,.6)}
+.mock i.s{width:60%}.mock i.b{height:46px;border-radius:8px;background:rgba(255,255,255,.3)}
+
+/* stack (ajustes) */
+.group{background:var(--bg2);border-radius:12px;overflow:hidden}
+.phone[data-os=android] .group{border-radius:24px}
+.row{display:flex;align-items:center;gap:12px;padding:11px 14px;min-height:48px;position:relative;width:100%;text-align:left}
+.row + .row::before{content:"";position:absolute;top:0;right:0;left:56px;height:1px;background:var(--sep)}
+.row .sq{flex:none;width:30px;height:30px;border-radius:8px;display:grid;place-items:center;color:#fff;font:700 11px "JetBrains Mono",monospace}
+.phone[data-os=android] .row .sq{border-radius:50%}
+.row .tx{flex:1;min-width:0}
+.row .tx b{font-weight:500;font-size:15.5px;display:block}
+.row .tx small{font-size:12.5px;color:var(--text2);display:block;line-height:1.35;margin-top:1px}
+.tg{flex:none;width:51px;height:31px;border-radius:16px;background:var(--bg3);position:relative;transition:background .35s}
+.tg::after{content:"";position:absolute;left:2px;top:2px;width:27px;height:27px;border-radius:50%;background:#fff;box-shadow:0 2px 4px rgba(0,0,0,.25);transition:transform .45s var(--spring)}
+.tg.on{background:#34c759}
+.tg.on::after{transform:translateX(20px)}
+.phone[data-os=android] .tg{width:52px;height:32px;border:2px solid var(--text2);background:transparent}
+.phone[data-os=android] .tg::after{width:16px;height:16px;left:6px;top:6px;background:var(--text2);box-shadow:none;transition:transform .45s var(--spring),width .3s,height .3s,background .3s}
+.phone[data-os=android] .tg.on{background:var(--accent);border-color:var(--accent)}
+.phone[data-os=android] .tg.on::after{width:24px;height:24px;left:2px;top:2px;transform:translateX(20px);background:var(--on-accent)}
+.seg{display:grid;grid-template-columns:1fr 1fr;padding:3px;border-radius:10px;background:var(--bg3);position:relative;margin:4px 0}
+.seg button{padding:9px;font-size:14px;font-weight:600;z-index:1;border-radius:8px;transition:color .3s}
+.seg .knob{position:absolute;top:3px;bottom:3px;left:3px;width:calc(50% - 3px);border-radius:8px;background:var(--bg2);box-shadow:0 2px 8px rgba(0,0,0,.2);transition:transform .45s var(--spring)}
+.seg[data-v="1"] .knob{transform:translateX(100%)}
+.phone[data-os=android] .seg{border-radius:999px;background:transparent;border:1px solid var(--sep)}
+.phone[data-os=android] .seg .knob{border-radius:999px;background:var(--accent)}
+.phone[data-os=android] .seg button[aria-pressed=true]{color:var(--on-accent)}
+.swatches{display:flex;gap:10px;padding:12px 14px}
+.swatches button{width:34px;height:34px;border-radius:50%;background:hsl(var(--sw) 85% 60%);box-shadow:0 0 0 2px var(--bg2),0 0 0 4px transparent;transition:box-shadow .3s,transform .3s var(--spring)}
+.swatches button[aria-pressed=true]{box-shadow:0 0 0 3px var(--bg2),0 0 0 5px hsl(var(--sw) 85% 60%);transform:scale(1.08)}
+
+/* wallet */
+.wallet{position:relative;height:var(--wh,600px);transition:height .6s var(--ease)}
+.pass{position:absolute;left:0;right:0;height:210px;border-radius:16px;padding:16px 18px;color:#fff;text-align:left;display:flex;flex-direction:column;box-shadow:0 -6px 18px -8px rgba(0,0,0,.5),inset 0 1px 0 rgba(255,255,255,.2);transition:transform .7s var(--spring);overflow:hidden}
+.pass::after{content:"";position:absolute;inset:0;background:radial-gradient(120% 80% at 100% 0,rgba(255,255,255,.22),transparent 55%);pointer-events:none}
+.pass .top{display:flex;justify-content:space-between;align-items:flex-start;gap:10px}
+.pass .iss{font-size:12px;font-weight:600;opacity:.85;text-transform:uppercase;letter-spacing:.06em}
+.pass .yr{font:700 13px "JetBrains Mono",monospace;padding:3px 8px;border-radius:6px;background:rgba(0,0,0,.2)}
+.pass h4{font-size:19px;line-height:1.15;font-weight:700;margin-top:12px;max-width:85%}
+.pass .bot{margin-top:auto;display:flex;justify-content:space-between;align-items:flex-end;font-size:12px;opacity:.9}
+.pass .qr{width:54px;height:54px;border-radius:6px;background:#fff;padding:5px;display:grid;grid-template-columns:repeat(7,1fr);gap:1px}
+.pass .qr i{background:#111;border-radius:1px}
+.pass .qr i.o{background:transparent}
+
+/* mensajes */
+.chat-h{display:flex;flex-direction:column;align-items:center;gap:6px;padding:0 0 12px;border-bottom:1px solid var(--sep);margin:0 -18px 12px}
+.chat-h .avatar{width:56px;height:56px;font-size:20px}
+.chat-h b{font-size:13px;font-weight:500}
+.chat-h small{font-size:11px;color:#34c759}
+.msgs{display:flex;flex-direction:column;gap:6px}
+.msg{max-width:78%;padding:9px 14px;border-radius:20px;font-size:15.5px;line-height:1.35;align-self:flex-start;background:var(--bg3);animation:bub .45s var(--spring) both;transform-origin:0 100%}
+.msg.me{align-self:flex-end;background:var(--accent);color:#fff;transform-origin:100% 100%}
+.phone[data-os=android] .msg{background:var(--bg2)}
+.phone[data-os=android] .msg.me{color:var(--on-accent)}
+@keyframes bub{from{transform:scale(.4);opacity:0}}
+.typing{display:flex;gap:4px;padding:13px 16px}
+.typing i{width:8px;height:8px;border-radius:50%;background:var(--text2);animation:tdot 1.2s infinite}
+.typing i:nth-child(2){animation-delay:.15s}.typing i:nth-child(3){animation-delay:.3s}
+@keyframes tdot{30%{transform:translateY(-4px);opacity:1}0%,60%,100%{opacity:.4}}
+.replies{display:flex;flex-wrap:wrap;gap:8px;justify-content:flex-end;margin-top:14px}
+.replies button{padding:9px 14px;border-radius:999px;border:1.5px solid var(--accent);color:var(--accent);font-size:14px;font-weight:600;animation:bub .45s var(--spring) both}
+.replies button:hover{background:var(--accent);color:var(--on-accent,#fff)}
+
+/* terminal */
+.appwin.term{background:#0b0d10;--text:#d7dae0}
+.appwin.term .bar{background:#0b0d10}
+.appwin.term .bar .back,.appwin.term .bar .ttl-s{color:#3ddc84}
+.term-out{font:13px/1.55 "JetBrains Mono",monospace;color:#c9d1d9;white-space:pre-wrap;word-break:break-word}
+.term-out .p{color:#3ddc84}.term-out .c{color:#79c0ff}.term-out .y{color:#e3b341}.term-out .m{color:#d2a8ff}.term-out .d{color:#8b949e}.term-out .r{color:#ff7b72}
+.term-in{display:flex;gap:8px;font:13px "JetBrains Mono",monospace;align-items:center;margin-top:4px}
+.term-in span{color:#3ddc84;white-space:nowrap}
+.term-in input{flex:1;min-width:0;background:none;border:0;color:#fff;font:inherit;caret-color:#3ddc84;outline:none}
+
+/* centro de control */
+.cc{position:absolute;inset:0;z-index:80;padding:70px 22px 30px;background:rgba(0,0,0,.25);backdrop-filter:blur(30px) saturate(1.4);-webkit-backdrop-filter:blur(30px) saturate(1.4);opacity:0;visibility:hidden;transition:opacity .35s,visibility .35s;color:#fff}
+.cc.open{opacity:1;visibility:visible}
+.cc .tiles{display:grid;grid-template-columns:1fr 1fr;gap:14px;transform:translateY(-30px) scale(.94);transition:transform .55s var(--spring)}
+.cc.open .tiles{transform:none}
+.tile{border-radius:24px;padding:16px;background:rgba(80,80,90,.45);text-align:left;display:flex;flex-direction:column;gap:22px;min-height:110px;transition:background .3s,transform .2s}
+.tile:active{transform:scale(.96)}
+.tile svg{width:26px;height:26px;fill:none;stroke:currentColor;stroke-width:1.9;stroke-linecap:round;stroke-linejoin:round}
+.tile b{font-size:15px;font-weight:600;display:block}
+.tile small{font-size:12.5px;opacity:.7}
+.tile.on{background:#fff;color:#000}
+.cc .note{text-align:center;margin-top:22px;font-size:12px;opacity:.6}
+.phone[data-os=android] .cc{background:hsl(var(--h) 20% 8% / .6)}
+.phone[data-os=android] .tile{border-radius:28px;background:hsl(var(--h) 18% 22% / .9)}
+.phone[data-os=android] .tile.on{background:hsl(var(--h) 85% 80%);color:hsl(var(--h) 60% 15%)}
+
+/* toast */
+.toast{position:absolute;z-index:95;left:50%;top:14px;transform:translate(-50%,-80px);padding:10px 18px;border-radius:22px;background:#111;color:#fff;font-size:13.5px;font-weight:500;white-space:nowrap;transition:transform .6s var(--spring);box-shadow:0 10px 30px rgba(0,0,0,.4);display:flex;gap:8px;align-items:center}
+.toast.show{transform:translate(-50%,0)}
+.phone[data-os=android] .toast{top:auto;bottom:70px;transform:translate(-50%,120px);border-radius:8px;background:#e8e8ef;color:#111}
+.phone[data-os=android] .toast.show{transform:translate(-50%,0)}
+
+/* CV clásico */
+.classic{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.55);backdrop-filter:blur(8px);display:flex;justify-content:center;align-items:flex-end;opacity:0;visibility:hidden;transition:opacity .4s,visibility .4s}
+.classic.open{opacity:1;visibility:visible}
+.classic .sheet{width:min(860px,100%);height:92vh;background:#fbfaf7;color:#16171b;border-radius:28px 28px 0 0;overflow:auto;padding:56px clamp(22px,6vw,72px) 80px;transform:translateY(60px);transition:transform .6s var(--ease);position:relative;font-family:"Inter",sans-serif}
+.classic.open .sheet{transform:none}
+.classic .x{position:sticky;top:0;float:right;margin:-30px -40px 0 0;width:40px;height:40px;border-radius:50%;background:#eceae4;font-size:20px}
+.classic h2{font:400 54px/1 "Instrument Serif",serif;letter-spacing:-.01em}
+.classic h3{font:600 12px "JetBrains Mono",monospace;letter-spacing:.14em;text-transform:uppercase;color:#7a7a82;margin:40px 0 14px;padding-bottom:10px;border-bottom:1px solid #e6e3dc}
+.classic .lead{font-size:17px;line-height:1.6;color:#3a3b42;margin-top:14px;max-width:640px}
+.classic .c-meta{margin-top:12px;color:#6a6b72;font-size:14px;display:flex;flex-wrap:wrap;gap:6px 18px}
+.classic .c-meta a{color:#16171b}
+.classic .c-job{display:grid;grid-template-columns:150px 1fr;gap:6px 24px;margin-bottom:22px}
+.classic .c-job .when{font:500 12.5px "JetBrains Mono",monospace;color:#7a7a82;padding-top:3px}
+.classic .c-job b{font-size:16px}
+.classic .c-job ul{margin:8px 0 0 18px;color:#3a3b42;font-size:14.5px;line-height:1.55}
+.classic .c-cols{display:grid;grid-template-columns:1fr 1fr;gap:10px 40px;font-size:14.5px;line-height:1.5;color:#3a3b42}
+.classic .c-cols b{color:#16171b}
+
+@media (max-width:1100px){.side.r{display:none}.desk{grid-template-columns:1fr auto}}
+@media (max-width:760px){
+  body{overflow:hidden}
+  .desk{display:block;padding:0}
+  .side,.ambient,.grain{display:none}
+  .stage{width:100vw;height:100dvh;perspective:none}
+  .tilt{transform:none!important}
+  .device{width:100vw;height:100dvh;transform:none;padding:0;border-radius:0!important;background:none;box-shadow:none}
+  .device::before,.device::after,.cam{display:none}
+  .screen{border-radius:0!important}
+  .classic .c-job{grid-template-columns:1fr}
+  .classic .c-cols{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important;transition-delay:0s!important}
+}
+
+.w-hint{color:var(--text2);font-size:14px;margin:-8px 0 16px}
+.btns{display:flex;gap:10px;margin-top:18px}
+</style></head><body>
+<div class="ambient" aria-hidden="true"><i></i><i></i><i></i></div>
+<div class="grain" aria-hidden="true"></div>
+
+<main class="desk">
+  <section class="side l">
+    <div class="eyebrow"><b></b> Zaragoza · Disponible para hablar</div>
+    <h1>Alejandro<br>Burdío. <em>Apps que<br>caben en tu bolsillo.</em></h1>
+    <p>Desarrollador mobile nativo Android e iOS desde hace <span data-years></span> años. Este portfolio es un teléfono: desbloquéalo y abre las apps.</p>
+    <div class="plat" role="group" aria-label="Plataforma del teléfono">
+      <span class="pill" aria-hidden="true"></span>
+      <button type="button" data-os-btn="ios" aria-pressed="true"><svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M16.4 12.6c0-2.6 2.1-3.8 2.2-3.9-1.2-1.8-3.1-2-3.7-2-1.6-.2-3.1.9-3.9.9-.8 0-2-.9-3.4-.9-1.7 0-3.3 1-4.2 2.6-1.8 3.1-.5 7.7 1.3 10.2.9 1.2 1.9 2.6 3.2 2.6 1.3-.1 1.8-.8 3.3-.8s2 .8 3.4.8c1.4 0 2.3-1.3 3.1-2.5 1-1.4 1.4-2.8 1.4-2.9-.1 0-2.7-1-2.7-4.1zM13.9 5c.7-.9 1.2-2 1-3.2-1 0-2.3.7-3 1.6-.7.8-1.2 2-1.1 3.1 1.2.1 2.3-.6 3.1-1.5z"/></svg>iOS</button>
+      <button type="button" data-os-btn="android" aria-pressed="false"><svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.6 9.48l1.84-3.18a.38.38 0 0 0-.66-.38l-1.86 3.23a11.5 11.5 0 0 0-9.84 0L5.22 5.92a.38.38 0 0 0-.66.38L6.4 9.48A10.8 10.8 0 0 0 1 18h22a10.8 10.8 0 0 0-5.4-8.52zM7 15.25a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5zm10 0a1.25 1.25 0 1 1 0-2.5 1.25 1.25 0 0 1 0 2.5z"/></svg>Android</button>
+    </div>
+  </section>
+
+  <div class="stage phone" id="phone" data-os="ios" data-theme="dark">
+    <div class="tilt" id="tilt">
+      <div class="device">
+        <div class="cam" aria-hidden="true"></div>
+        <div class="screen" id="screen" role="application" aria-label="Teléfono interactivo AB OS">
+          <div class="wall" aria-hidden="true"><i></i><i></i><i></i></div>
+
+          <div class="status" id="status">
+            <span data-time>9:41</span>
+            <span class="icons" aria-hidden="true">
+              <svg viewBox="0 0 18 12"><rect x="0" y="8" width="3" height="4" rx="1"/><rect x="5" y="5.5" width="3" height="6.5" rx="1"/><rect x="10" y="3" width="3" height="9" rx="1"/><rect x="15" y="0" width="3" height="12" rx="1"/></svg>
+              <svg viewBox="0 0 16 12"><path d="M8 2.3c2.3 0 4.4.9 6 2.4l1.2-1.2A10.2 10.2 0 0 0 8 .6 10.2 10.2 0 0 0 .8 3.5L2 4.7a8.6 8.6 0 0 1 6-2.4zm0 3.4c1.4 0 2.6.5 3.6 1.4l1.2-1.2A6.8 6.8 0 0 0 8 4a6.8 6.8 0 0 0-4.8 1.9l1.2 1.2c1-.9 2.2-1.4 3.6-1.4zM8 9.2 6.2 9.3 8 11.2l1.8-1.9z"/></svg>
+              <svg viewBox="0 0 27 12"><rect x=".5" y=".5" width="23" height="11" rx="3.5" fill="none" stroke="currentColor" opacity=".4"/><rect x="2" y="2" width="20" height="8" rx="2"/><rect x="24.5" y="4" width="1.8" height="4" rx=".9" opacity=".5"/></svg>
+            </span>
+            <button class="cc-hit" type="button" aria-label="Abrir centro de control" data-cc></button>
+          </div>
+
+          <div class="boot" id="boot">
+            <div class="logo">
+              <svg viewBox="0 0 120 120" aria-hidden="true">
+                <defs><linearGradient id="bg" x1="0" x2="1"><stop offset="0" stop-color="#3ddc84"/><stop offset=".5" stop-color="#7b8cff"/><stop offset="1" stop-color="#f05138"/></linearGradient></defs>
+                <circle class="ring" cx="60" cy="60" r="56"/>
+                <circle class="prog" id="bootProg" cx="60" cy="60" r="56"/>
+                <text class="ab" x="60" y="72" text-anchor="middle">AB</text>
+              </svg>
+            </div>
+            <p class="bmsg" id="bootMsg">Iniciando AB OS…</p>
+            <button class="skip" type="button" id="skipBoot">Saltar intro · Esc</button>
+          </div>
+
+          <div class="lock" id="lock" tabindex="0" aria-label="Pantalla de bloqueo. Pulsa Intro o desliza hacia arriba para desbloquear">
+            <div class="date" data-date></div>
+            <div class="clock" data-clock>9:41</div>
+            <div class="notif">
+              <span class="ico" style="background:linear-gradient(#5df07a,#22b84a)"></span>
+              <div><div class="t">Alejandro <span>ahora</span></div><p>¡Hola! 👋 Desarrollo apps Android e iOS desde 2017. Desliza hacia arriba para conocerme.</p></div>
+            </div>
+            <div class="notif" aria-hidden="true">
+              <span class="ico" style="background:linear-gradient(#5aa8ff,#2365e8)"></span>
+              <div><div class="t">Google Play <span>hace 1 min</span></div><p>Nueva versión publicada.</p></div>
+            </div>
+            <span class="quick a" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M9 2h6l-1 7h-4zM10 9h4v13h-4z"/></svg></span>
+            <span class="quick b" aria-hidden="true"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="3"/><circle cx="12" cy="13.5" r="3.5"/><path d="M8 7l1.5-3h5L16 7"/></svg></span>
+            <div class="hint"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M6 15l6-6 6 6"/></svg>Desliza para desbloquear</div>
+          </div>
+
+          <div class="home" id="home">
+            <button class="widget" type="button" data-open="perfil" style="--i:0">
+              <span class="avatar">AB</span>
+              <h2>Alejandro Burdío García</h2>
+              <span class="role">Desarrollador Mobile · Android & iOS</span>
+              <span class="stats">
+                <div><b data-years>9</b><span>años creando apps</span></div>
+                <div><b>2</b><span>plataformas nativas</span></div>
+                <div><b>4</b><span>empresas</span></div>
+              </span>
+            </button>
+            <div class="grid" id="grid"></div>
+            <div class="minis">
+              <button class="mini-w" type="button" data-open="experiencia"><small>Ahora</small><b>Logalty</b><span>Desde feb 2020<br><span data-now-span></span></span></button>
+              <button class="mini-w" type="button" data-open="proyectos"><small>Publicando en</small><span class="st"><i>✓</i>Google Play</span><span class="st"><i>✓</i>App Store</span><span>Android · iOS · Web</span></button>
+            </div>
+            <div class="dots" aria-hidden="true"><i></i><i></i></div>
+            <div class="dock" id="dock" style="--i:12"></div>
+          </div>
+
+          <section class="appwin" id="appwin" aria-modal="true" role="dialog" aria-labelledby="appTitle">
+            <div class="bar">
+              <button class="back" type="button" data-close aria-label="Volver al inicio">
+                <svg class="t-ios" viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7"/></svg><span class="t-ios">Inicio</span>
+                <svg class="t-and" viewBox="0 0 24 24"><path d="M20 12H5M11 5l-7 7 7 7"/></svg>
+              </button>
+              <span class="ttl-s" id="appTitle"></span>
+            </div>
+            <div class="scroll content" id="appBody"></div>
+          </section>
+
+          <div class="cc" id="cc" role="dialog" aria-label="Centro de control">
+            <div class="tiles">
+              <button class="tile" type="button" data-cc-os><svg viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="3"/><path d="M10 18h4"/></svg><span><b>Plataforma</b><small data-os-label>iOS</small></span></button>
+              <button class="tile" type="button" data-cc-theme><svg viewBox="0 0 24 24"><path d="M21 13A9 9 0 1 1 11 3a7 7 0 0 0 10 10z"/></svg><span><b>Modo oscuro</b><small data-theme-label>Activado</small></span></button>
+              <button class="tile" type="button" data-cc-color><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 3a9 9 0 0 0 0 18c1.5 0 2-1 2-2s-1-1.5-1-2.5 1-1.5 2-1.5h2a4 4 0 0 0 4-4c0-4.4-4-8-9-8z"/><circle cx="7.5" cy="11" r="1"/><circle cx="10" cy="7" r="1"/><circle cx="15" cy="7.5" r="1"/></svg><span><b>Color</b><small>Cambiar tono</small></span></button>
+              <button class="tile" type="button" data-cc-lock><svg viewBox="0 0 24 24"><rect x="5" y="11" width="14" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><span><b>Bloquear</b><small>Volver al inicio</small></span></button>
+            </div>
+            <p class="note">Toca fuera o pulsa Esc para cerrar</p>
+          </div>
+
+          <div class="toast" id="toast" role="status" aria-live="polite"></div>
+          <div class="navbar" id="navbar"><button type="button" aria-label="Ir a inicio" data-home></button></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <section class="side r">
+    <ul class="howto">
+      <li><kbd>↑</kbd><span><strong>Desbloquea</strong>Arrastra la pantalla de bloqueo hacia arriba o pulsa Intro.</span></li>
+      <li><kbd>⏎</kbd><span><strong>Abre las apps</strong>Cada una es una parte del CV: experiencia, proyectos, stack…</span></li>
+      <li><kbd>⇄</kbd><span><strong>Cambia de plataforma</strong>El mismo teléfono en iOS y en Android, en vivo.</span></li>
+      <li><kbd>↓</kbd><span><strong>Centro de control</strong>Toca la esquina superior derecha de la pantalla.</span></li>
+      <li><kbd>esc</kbd><span><strong>Vuelve</strong>Cierra la app abierta o el centro de control.</span></li>
+    </ul>
+    <button class="classic-link" type="button" data-classic>Ver versión clásica del CV <span aria-hidden="true">→</span></button>
+  </section>
+</main>
+
+<div class="classic" id="classic" role="dialog" aria-modal="true" aria-label="CV clásico">
+  <article class="sheet" id="classicSheet"></article>
+</div>
+<script>
+const START = new Date(2017, 2, 1);
+const NOW = new Date();
+const YEARS = Math.floor((NOW - START) / (365.25 * 864e5));
+const EMAIL = 'alejandroburdiogarcia@gmail.com';
+
+const MONTHS = ['Ene','Feb','Mar','Abr','May','Jun','Jul','Ago','Sep','Oct','Nov','Dic'];
+function span(from, to) {
+  const end = to || NOW;
+  let m = (end.getFullYear() - from.getFullYear()) * 12 + end.getMonth() - from.getMonth();
+  const y = Math.floor(m / 12); m %= 12;
+  return [y ? y + (y > 1 ? ' años' : ' año') : '', m ? m + (m > 1 ? ' meses' : ' mes') : ''].filter(Boolean).join(' ');
+}
+function fmt(d) { return d ? MONTHS[d.getMonth()] + ' ' + d.getFullYear() : 'Actualidad'; }
+
+const JOBS = [
+  { id: 'logalty', co: 'Logalty', role: 'Desarrollador Mobile / Multiplataforma', from: new Date(2020, 1), to: null, color: '#7b5cff',
+    tags: ['Kotlin', 'Java', 'Swift', 'NativeScript', 'Angular', '.NET'],
+    bullets: [
+      'Desarrollo y mantenimiento de apps Android (Java y Kotlin) con publicación y soporte en Google Play.',
+      'Desarrollo y mantenimiento de apps iOS en Swift con publicación y soporte en App Store Connect.',
+      'Desarrollo cross-platform con NativeScript + Angular (TypeScript) para Web, Android e iOS.',
+      'Aplicación .NET / C# (WinForms) para la integración con tabletas de firma DTU.'] },
+  { id: 'blink', co: 'BlinkLearning S.L.', role: 'Desarrollador Android', from: new Date(2018, 0), to: new Date(2020, 1), color: '#ff7a45',
+    tags: ['Java', 'C++ NDK', 'SQLite', 'PDFTron', 'Crashlytics'],
+    bullets: [
+      'Mantenimiento y nuevas funcionalidades de las apps de la plataforma educativa BlinkLearning (Google Play) en Android nativo (Java).',
+      'Encriptación de ficheros en C++ vía NDK / CMake e integración con la capa Java.',
+      'Diseño y mantenimiento de bases de datos SQLite y personalización de la librería de PDF PDFTron.',
+      'Publicación en Google Play, con monitorización de errores en Fabric / Firebase Crashlytics.',
+      'Soporte de versiones desde Android 4.0 (API 15) y control de dependencias con Gradle.'] },
+  { id: 'bis', co: 'Business in Store', role: 'Desarrollador Android · prácticas → contrato', from: new Date(2017, 2), to: new Date(2018, 0), color: '#1fb6a6',
+    tags: ['Java', 'PHP', 'SQL', 'SQLite', 'Fabric'],
+    bullets: [
+      'App Android nativa (Java) para gestión comercial y alta de clientes de SimonRack, con backend PHP / SQL y SQLite local.',
+      'App Android para gestión logística: nuevos desarrollos y mantenimiento.',
+      'Diseño de bases de datos y monitorización de errores con Fabric.'] },
+  { id: 'laso', co: 'Laso S.L.', role: 'Técnico informático · prácticas', from: new Date(2014, 2), to: new Date(2014, 5), color: '#8a8f98',
+    tags: ['Hardware', 'Soporte'],
+    bullets: ['Reparación hardware de equipos, atención al cliente y administración de usuarios.'] }
+];
+
+const PROJECTS = [
+  { t: 'Firma e identidad digital', co: 'Logalty', k: 'Android · iOS', g: ['#7b5cff', '#c04bff'],
+    d: 'Apps nativas en el ámbito de la firma electrónica y la identidad digital para un prestador cualificado de servicios de confianza (QTSP), publicadas y mantenidas en Google Play y App Store.',
+    tags: ['Kotlin', 'Java', 'Swift', 'Google Play', 'App Store Connect'] },
+  { t: 'Una base, tres plataformas', co: 'Logalty', k: 'Cross-platform', g: ['#e0234e', '#ff8a3d'],
+    d: 'Aplicaciones multiplataforma con NativeScript + Angular en TypeScript, desplegadas en Web, Android e iOS desde un mismo código.',
+    tags: ['NativeScript', 'Angular', 'TypeScript'] },
+  { t: 'Tabletas de firma DTU', co: 'Logalty', k: 'Escritorio', g: ['#2f6bff', '#22c1ee'],
+    d: 'Aplicación de escritorio .NET / C# con WinForms para integrarse con tabletas de firma DTU.',
+    tags: ['.NET', 'C#', 'WinForms'] },
+  { t: 'Libros digitales cifrados', co: 'BlinkLearning', k: 'Android', g: ['#ff7a45', '#ffc53d'],
+    d: 'App educativa Android con cifrado de ficheros en C++ vía NDK / CMake, visor PDF personalizado sobre PDFTron y base de datos SQLite. Compatible desde Android 4.0.',
+    tags: ['Java', 'C++ NDK', 'CMake', 'PDFTron', 'SQLite'] },
+  { t: 'Gestión comercial y logística', co: 'Business in Store', k: 'Android', g: ['#12b886', '#1fb6a6'],
+    d: 'Apps Android para la gestión comercial y el alta de clientes de SimonRack y para gestión logística, con backend PHP / SQL y SQLite local.',
+    tags: ['Java', 'PHP', 'SQL', 'SQLite'] }
+];
+
+const STACK = [
+  { g: 'Mobile', items: [
+    ['Android', 'Java · Kotlin', 'Logalty, BlinkLearning y Business in Store', '#3ddc84', 'KT'],
+    ['iOS', 'Swift', 'Apps nativas publicadas en App Store en Logalty', '#f05138', 'SW'],
+    ['NativeScript + Angular', 'TypeScript', 'Apps para Web, Android e iOS en Logalty', '#e0234e', 'NS']] },
+  { g: 'Otros lenguajes y entornos', items: [
+    ['.NET · C#', 'WinForms', 'Integración con tabletas de firma DTU', '#7b5cff', 'C#'],
+    ['C++', 'NDK · CMake', 'Cifrado de ficheros en BlinkLearning', '#2f6bff', 'C++'],
+    ['PHP', 'Backend', 'Servicios para las apps de Business in Store', '#777bb4', 'PHP'],
+    ['API REST', 'Integración', 'Comunicación de las apps con sus backends', '#0ea5e9', 'API']] },
+  { g: 'Bases de datos', items: [
+    ['SQLite', 'Local', 'Persistencia en apps Android', '#0f80cc', 'SQL'],
+    ['SQL Server', 'Servidor', '', '#cc2927', 'MS'],
+    ['MySQL', 'Servidor', '', '#00758f', 'MY']] },
+  { g: 'Herramientas', items: [
+    ['Gradle', 'Builds Android', 'Gestión de dependencias y builds', '#02303a', 'GR'],
+    ['Firebase Crashlytics', 'Monitorización', 'Antes Fabric; seguimiento de errores en producción', '#ffa000', 'FB'],
+    ['Google Play · App Store Connect', 'Publicación', 'Releases y soporte en ambas stores', '#34a853', 'ST']] },
+  { g: 'Otros', items: [
+    ['IA generativa', 'Curso certificado de Google', '', '#a855f7', 'AI'],
+    ['Unity', 'Motores de juego', '', '#222', 'U'],
+    ['Unreal Engine 4', 'Curso de videojuegos', '', '#313131', 'UE']] }
+];
+
+const EDU = [
+  { y: '2017', t: 'CFGS Desarrollo de Aplicaciones Multiplataforma', p: 'I.E.S. Santiago Hernández · Zaragoza', kind: 'Formación académica' },
+  { y: '2014', t: 'CFGM Sistemas Microinformáticos y Redes', p: 'I.E.S. Santiago Hernández · Zaragoza', kind: 'Formación académica' },
+  { y: 'Nov 2024', t: 'Curso certificado de IA · Google', p: 'Santander Open Academy', kind: 'Formación complementaria' },
+  { y: '2019', t: 'Kotlin para Android', p: 'Platzi', kind: 'Formación complementaria' },
+  { y: '2019', t: 'React Native', p: 'Platzi', kind: 'Formación complementaria' },
+  { y: '2018–19', t: 'Programación de videojuegos con Unreal Engine 4', p: 'iDesigner', kind: 'Formación complementaria' },
+  { y: '2017', t: 'Swift 4 en iOS 11', p: 'Udemy', kind: 'Formación complementaria' }
+];
+
+const LANGS = [['Español', 'Nativo', 6], ['Inglés', 'Intermedio (B1–B2)', 3.5]];
+
+const PROFILE = 'Desarrollador mobile especializado en aplicaciones nativas Android (Java / Kotlin) e iOS (Swift), con publicación y soporte en Google Play y App Store. También he desarrollado apps cross-platform con NativeScript + Angular y una aplicación .NET / WinForms para tabletas de firma DTU. Actualmente trabajo en Logalty, prestador cualificado de servicios de confianza (QTSP), en apps del ámbito de la firma electrónica y la identidad digital.';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => [...r.querySelectorAll(s)];
+const RM = matchMedia('(prefers-reduced-motion: reduce)').matches;
+const phone = $('#phone'), screenEl = $('#screen'), appwin = $('#appwin'), appBody = $('#appBody');
+const home = $('#home'), lock = $('#lock'), cc = $('#cc'), statusEl = $('#status'), navbar = $('#navbar');
+let current = null, unlocked = false;
+
+$$('[data-years]').forEach(e => e.textContent = YEARS);
+$$('[data-now-span]').forEach(e => e.textContent = span(JOBS[0].from));
+
+/* ---------- reloj ---------- */
+function tick() {
+  const d = new Date();
+  const t = d.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  $$('[data-time],[data-clock]').forEach(e => e.textContent = t);
+  const ds = d.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+  $$('[data-date]').forEach(e => e.textContent = ds[0].toUpperCase() + ds.slice(1));
+}
+tick(); setInterval(tick, 10000);
+
+/* ---------- escala y parallax ---------- */
+const mobile = () => innerWidth <= 760;
+function fit() {
+  const s = mobile() ? 1 : Math.min(1, (innerHeight - 40) / 864);
+  phone.style.setProperty('--s', s.toFixed(3));
+  placePill();
+}
+addEventListener('resize', fit);
+const tilt = $('#tilt');
+let tx = 0, ty = 0, cx = 0, cy = 0, overPhone = false;
+addEventListener('pointermove', e => {
+  const k = overPhone ? .25 : 1;
+  tx = (e.clientX / innerWidth - .5) * 10 * k;
+  ty = (e.clientY / innerHeight - .5) * -8 * k;
+});
+phone.addEventListener('pointerenter', () => overPhone = true);
+phone.addEventListener('pointerleave', () => overPhone = false);
+(function loop() {
+  cx += (tx - cx) * .06; cy += (ty - cy) * .06;
+  if (!RM && !mobile()) tilt.style.transform = `rotateY(${cx.toFixed(2)}deg) rotateX(${cy.toFixed(2)}deg)`;
+  requestAnimationFrame(loop);
+})();
+
+/* ---------- iconos ---------- */
+const G = {
+  perfil: '<circle cx="12" cy="8" r="4"/><path d="M4 21c1.5-4 4.5-6 8-6s6.5 2 8 6"/>',
+  experiencia: '<rect x="3" y="7" width="18" height="13" rx="2.5"/><path d="M9 7V5a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2M3 13h18"/>',
+  proyectos: '<path d="M12 3l9 5-9 5-9-5z"/><path d="M3 13l9 5 9-5"/><path d="M3 17.5l9 5 9-5" opacity=".6"/>',
+  stack: '<path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16"/>',
+  wallet: '<rect x="3" y="5" width="18" height="15" rx="3"/><path d="M3 10h18M16 15h2"/>',
+  cv: '<path d="M7 3h7l5 5v13H7z"/><path d="M14 3v5h5M10 13h6M10 17h4"/>',
+  mensajes: '<path d="M21 12a8 8 0 0 1-11.6 7.1L4 20.5l1.4-4.8A8 8 0 1 1 21 12z"/>',
+  terminal: '<path d="M5 7l5 5-5 5M12 18h7"/>',
+  ajustes: '<circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1A1.7 1.7 0 0 0 9 19.4a1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1A1.7 1.7 0 0 0 4.6 9a1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/>',
+  correo: '<rect x="3" y="5" width="18" height="14" rx="2.5"/><path d="M3.5 6.5l8.5 6 8.5-6"/>'
+};
+const APPS = {
+  perfil: ['Perfil', 'linear-gradient(160deg,#ff9f43,#ff4d79)'],
+  experiencia: ['Experiencia', 'linear-gradient(160deg,#5b8cff,#4733d6)'],
+  proyectos: ['Proyectos', 'linear-gradient(160deg,#2ee6c5,#0f8f9f)'],
+  stack: ['Stack', 'linear-gradient(160deg,#4b4f5c,#1d1f26)'],
+  wallet: ['Formación', 'linear-gradient(160deg,#1b1b1f,#000)'],
+  cv: ['CV clásico', 'linear-gradient(160deg,#ffffff,#dfe3ea)'],
+  mensajes: ['Mensajes', 'linear-gradient(160deg,#65f08a,#1fbf4a)'],
+  terminal: ['Terminal', 'linear-gradient(160deg,#20242c,#05070a)'],
+  ajustes: ['Ajustes', 'linear-gradient(160deg,#a3a8b3,#5d6270)'],
+  correo: ['Correo', 'linear-gradient(160deg,#5ec4ff,#1673f0)']
+};
+function iconBtn(id, i) {
+  const [name, bg] = APPS[id];
+  const dark = id === 'cv' ? 'style="stroke:#1d1f26"' : '';
+  const extra = id === 'wallet' ? '<span style="position:absolute;inset:14px 10px auto;height:8px;border-radius:3px;background:linear-gradient(90deg,#ff5f57,#febc2e,#28c840,#5b8cff)"></span>' : '';
+  const badge = id === 'mensajes' ? '<span class="badge">1</span>' : '';
+  return `<button class="app" type="button" data-open="${id}" style="--i:${i}" aria-label="${name}">
+    <span class="icon" style="background:${bg}">${extra}<svg viewBox="0 0 24 24" ${dark}>${G[id]}</svg>${badge}</span><span>${name}</span></button>`;
+}
+$('#grid').innerHTML = ['perfil', 'experiencia', 'proyectos', 'stack', 'wallet', 'cv'].map((id, i) => iconBtn(id, i + 1)).join('');
+$('#dock').innerHTML = ['mensajes', 'terminal', 'ajustes', 'correo'].map((id, i) => iconBtn(id, i + 8)).join('');
+
+/* ---------- toast y email ---------- */
+let toastT;
+function toast(msg) {
+  const t = $('#toast'); t.textContent = msg; t.classList.add('show');
+  clearTimeout(toastT); toastT = setTimeout(() => t.classList.remove('show'), 2200);
+}
+async function copyEmail() {
+  try { await navigator.clipboard.writeText(EMAIL); toast('Email copiado ✓'); }
+  catch { toast(EMAIL); }
+}
+function mail() { toast('Abriendo correo…'); setTimeout(() => location.href = 'mailto:' + EMAIL, 350); }
+
+/* ---------- plataforma y tema ---------- */
+function placePill() {
+  const on = $('.plat button[aria-pressed=true]'), pill = $('.plat .pill');
+  if (!on || !pill) return;
+  pill.style.width = on.offsetWidth + 'px';
+  pill.style.transform = `translateX(${on.offsetLeft - 5}px)`;
+}
+function setOS(os) {
+  if (phone.dataset.os === os) return;
+  phone.classList.remove('morph'); void phone.offsetWidth; phone.classList.add('morph');
+  setTimeout(() => { phone.dataset.os = os; refreshChrome(); if (current === 'ajustes') render('ajustes', true); }, RM ? 0 : 260);
+  setTimeout(() => phone.classList.remove('morph'), 750);
+  $$('[data-os-btn]').forEach(b => b.setAttribute('aria-pressed', b.dataset.osBtn === os));
+  placePill();
+}
+function setTheme(th) { phone.dataset.theme = th; refreshChrome(); }
+function setHue(h) {
+  document.documentElement.style.setProperty('--h', h);
+  phone.style.setProperty('--h', h);
+}
+function refreshChrome() {
+  const os = phone.dataset.os, light = phone.dataset.theme === 'light';
+  const dark = current !== 'terminal' && (light || !!current);
+  statusEl.classList.toggle('dark', unlocked && dark);
+  navbar.classList.toggle('dark', unlocked && dark);
+  $('[data-os-label]').textContent = os === 'ios' ? 'iOS' : 'Android';
+  $('[data-theme-label]').textContent = light ? 'Desactivado' : 'Activado';
+  $('[data-cc-theme]').classList.toggle('on', !light);
+  $('[data-cc-os]').classList.toggle('on', os === 'android');
+}
+$$('[data-os-btn]').forEach(b => b.addEventListener('click', () => setOS(b.dataset.osBtn)));
+
+/* ---------- arranque ---------- */
+const boot = $('#boot');
+let booted = false;
+function finishBoot() {
+  if (booted) return; booted = true;
+  boot.classList.add('done');
+  setTimeout(() => lock.focus({ preventScroll: true }), 400);
+}
+(function runBoot() {
+  if (RM) return finishBoot();
+  const prog = $('#bootProg'), msg = $('#bootMsg');
+  const steps = ['Iniciando AB OS…', 'Compilando Kotlin…', 'Enlazando Swift…', 'Firmando la release…', 'Listo'];
+  const t0 = performance.now(), D = 2600;
+  (function f(t) {
+    if (booted) return;
+    const p = Math.min(1, (t - t0) / D), e = 1 - Math.pow(1 - p, 3);
+    prog.style.strokeDashoffset = 352 * (1 - e);
+    msg.textContent = steps[Math.min(steps.length - 1, Math.floor(p * steps.length))];
+    p < 1 ? requestAnimationFrame(f) : setTimeout(finishBoot, 300);
+  })(t0);
+})();
+$('#skipBoot').addEventListener('click', finishBoot);
+
+/* ---------- bloqueo ---------- */
+let drag = null;
+lock.addEventListener('pointerdown', e => {
+  if (unlocked || !booted) return;
+  drag = { y: e.clientY, t: performance.now(), dy: 0 };
+  lock.setPointerCapture(e.pointerId);
+  lock.style.transition = 'none';
+});
+lock.addEventListener('pointermove', e => {
+  if (!drag) return;
+  const s = parseFloat(phone.style.getPropertyValue('--s')) || 1;
+  let dy = (e.clientY - drag.y) / s;
+  if (dy > 0) dy = Math.sqrt(dy) * 4;
+  drag.dy = dy;
+  lock.style.transform = `translateY(${dy}px)`;
+  lock.style.opacity = Math.max(0, 1 + dy / 500);
+});
+lock.addEventListener('pointerup', e => {
+  if (!drag) return;
+  const v = drag.dy / (performance.now() - drag.t);
+  const moved = Math.abs(drag.dy);
+  if (drag.dy < -110 || v < -.6 || moved < 6) unlock();
+  else { lock.style.transition = 'transform .6s var(--spring),opacity .4s'; lock.style.transform = ''; lock.style.opacity = ''; }
+  drag = null;
+});
+lock.addEventListener('wheel', e => { if (e.deltaY > 20) unlock(); }, { passive: true });
+function unlock(viaKey) {
+  if (unlocked) return; unlocked = true;
+  lock.style.transition = RM ? 'none' : 'transform .55s cubic-bezier(.3,.7,.2,1),opacity .45s';
+  lock.style.transform = 'translateY(-100%)'; lock.style.opacity = '0';
+  lock.style.pointerEvents = 'none';
+  phone.classList.add('unlocked');
+  refreshChrome();
+  setTimeout(() => { lock.style.visibility = 'hidden'; if (viaKey) $('.home .widget')?.focus({ preventScroll: true }); }, 550);
+}
+function lockPhone() {
+  closeCC(); if (current) closeApp(true);
+  unlocked = false; phone.classList.remove('unlocked');
+  lock.style.visibility = ''; lock.style.pointerEvents = '';
+  lock.style.transition = 'transform .6s var(--spring),opacity .4s';
+  requestAnimationFrame(() => { lock.style.transform = ''; lock.style.opacity = ''; });
+  refreshChrome(); lock.focus({ preventScroll: true });
+}
+
+/* ---------- abrir / cerrar apps ---------- */
+let opener = null;
+function rectIn(el) {
+  const sr = screenEl.getBoundingClientRect(), r = el.getBoundingClientRect();
+  const k = sr.width / screenEl.offsetWidth;
+  return { x: (r.left - sr.left) / k, y: (r.top - sr.top) / k, w: r.width / k, h: r.height / k };
+}
+function zoomFrames(icon) {
+  const W = screenEl.offsetWidth, H = screenEl.offsetHeight;
+  const r = rectIn(icon), sx = r.w / W, sy = r.h / H;
+  const rad = phone.dataset.os === 'android' ? r.w / 2 : r.w * .26;
+  return [
+    { transform: `translate(${r.x}px,${r.y}px) scale(${sx},${sy})`, borderRadius: `${rad / sx}px / ${rad / sy}px` },
+    { transform: 'translate(0,0) scale(1,1)', borderRadius: phone.dataset.os === 'android' ? '44px' : '58px' }
+  ];
+}
+function splash(icon) {
+  const s = document.createElement('div'), svg = icon.querySelector('svg');
+  s.style.cssText = `position:absolute;inset:0;z-index:5;display:grid;place-items:center;pointer-events:none;background:${icon.style.background || 'var(--bg)'}`;
+  if (svg) {
+    s.innerHTML = svg.outerHTML;
+    const g = s.firstChild; g.style.cssText = 'width:30%;height:auto;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round';
+    if (svg.getAttribute('style')) g.style.stroke = '#1d1f26';
+  }
+  return s;
+}
+function openApp(id, from) {
+  if (id === 'correo') return mail();
+  if (id === 'cv') return openClassic();
+  if (current === id) return;
+  if (current) closeApp(true);
+  if (!unlocked) unlock();
+  closeCC();
+  current = id; opener = from || $(`.home [data-open="${id}"]`);
+  const icon = opener?.querySelector('.icon') || opener;
+  $('.home [data-open="mensajes"] .badge')?.remove();
+  render(id);
+  appwin.className = 'appwin open' + (id === 'terminal' ? ' term' : '');
+  refreshChrome();
+  appBody.scrollTop = 0;
+  const done = () => { appwin.classList.add('ready'); onReady(id); appwin.querySelector('[data-close]').focus({ preventScroll: true }); };
+  if (RM || !icon) return done();
+  const sp = splash(icon); appwin.appendChild(sp);
+  icon.style.visibility = 'hidden';
+  home.animate([{ transform: 'scale(1)', filter: 'blur(0)' }, { transform: 'scale(.9)', filter: 'blur(6px)' }], { duration: 500, easing: 'cubic-bezier(.2,.9,.1,1)', fill: 'forwards' });
+  appwin.animate(zoomFrames(icon), { duration: 560, easing: 'cubic-bezier(.2,.9,.12,1)' });
+  sp.animate([{ opacity: 1 }, { opacity: 1, offset: .35 }, { opacity: 0 }], { duration: 560, fill: 'forwards' }).onfinish = () => sp.remove();
+  setTimeout(() => { icon.style.visibility = ''; done(); }, 380);
+}
+function closeApp(instant) {
+  if (!current) return;
+  const icon = opener?.querySelector('.icon') || opener;
+  const id = current; current = null;
+  refreshChrome();
+  home.getAnimations().forEach(a => a.cancel());
+  const end = () => { appwin.className = 'appwin'; appBody.innerHTML = ''; opener?.focus({ preventScroll: true }); };
+  if (instant || RM || !icon || id === null) return end();
+  appwin.classList.remove('ready');
+  home.animate([{ transform: 'scale(.9)', filter: 'blur(6px)' }, { transform: 'scale(1)', filter: 'blur(0)' }], { duration: 480, easing: 'cubic-bezier(.2,.9,.1,1)' });
+  const sp = splash(icon); appwin.appendChild(sp);
+  sp.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 220, fill: 'forwards' });
+  appwin.animate(zoomFrames(icon).reverse(), { duration: 440, easing: 'cubic-bezier(.3,.7,.2,1)', fill: 'forwards' }).onfinish = a => { sp.remove(); appwin.getAnimations().forEach(x => x.cancel()); end(); };
+}
+appBody.addEventListener('scroll', () => appwin.classList.toggle('scrolled', appBody.scrollTop > 36), { passive: true });
+document.addEventListener('click', e => {
+  const o = e.target.closest('[data-open]'); if (o) return openApp(o.dataset.open, o);
+  if (e.target.closest('[data-close]')) return closeApp();
+  if (e.target.closest('[data-home]')) return goHome();
+  if (e.target.closest('[data-cc]')) return openCC();
+  if (e.target.closest('[data-classic]')) return openClassic();
+  if (e.target.closest('[data-copy]')) return copyEmail();
+  if (e.target.closest('[data-mail]')) return mail();
+});
+function goHome() { if (cc.classList.contains('open')) return closeCC(); if (current) return closeApp(); if (!unlocked) unlock(); }
+let nav0 = null;
+navbar.addEventListener('pointerdown', e => nav0 = e.clientY);
+navbar.addEventListener('pointerup', e => { if (nav0 !== null && nav0 - e.clientY > 25) goHome(); nav0 = null; });
+
+/* ---------- centro de control ---------- */
+function openCC() { if (!booted) return; refreshChrome(); cc.classList.add('open'); cc.querySelector('.tile').focus({ preventScroll: true }); }
+function closeCC() { cc.classList.remove('open'); }
+cc.addEventListener('click', e => { if (e.target === cc || e.target.classList.contains('note')) closeCC(); });
+$('[data-cc-os]').addEventListener('click', () => setOS(phone.dataset.os === 'ios' ? 'android' : 'ios'));
+$('[data-cc-theme]').addEventListener('click', () => setTheme(phone.dataset.theme === 'dark' ? 'light' : 'dark'));
+const HUES = [258, 152, 12, 200, 320, 38];
+$('[data-cc-color]').addEventListener('click', () => {
+  const h = parseInt(phone.style.getPropertyValue('--h')) || 258;
+  setHue(HUES[(HUES.indexOf(h) + 1) % HUES.length]);
+});
+$('[data-cc-lock]').addEventListener('click', lockPhone);
+
+/* ---------- teclado ---------- */
+addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    if ($('#classic').classList.contains('open')) return closeClassic();
+    if (!booted) return finishBoot();
+    if (cc.classList.contains('open')) return closeCC();
+    if (current) return closeApp();
+  }
+  if (!unlocked && booted && ['Enter', ' ', 'ArrowUp'].includes(e.key) && (document.activeElement === lock || document.activeElement === document.body)) { e.preventDefault(); unlock(true); }
+});
+
+/* ---------- contenido de las apps ---------- */
+const esc = s => String(s).replace(/[&<>"]/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;' }[c]));
+const initials = s => s.replace(/S\.L\.|in /g, '').split(/\s+/).filter(Boolean).slice(0, 2).map(w => w[0]).join('').toUpperCase();
+let I = 0; const rv = (c = '') => `class="rv ${c}" style="--i:${I++}"`;
+
+const VIEWS = {
+  perfil() {
+    return `<div ${rv('prof-head')}><span class="avatar">AB</span><h3>Alejandro Burdío García</h3><p>Desarrollador Mobile · Android & iOS</p><p>📍 Zaragoza, España</p></div>
+    <div class="kpis">
+      <div ${rv()}><div class="card"><b data-count="${YEARS}">0</b><span>años desarrollando apps</span></div></div>
+      <div ${rv()}><div class="card"><b data-count="2">0</b><span>plataformas nativas</span></div></div>
+      <div ${rv()}><div class="card"><b data-count="2">0</b><span>stores: Google Play y App Store</span></div></div>
+      <div ${rv()}><div class="card"><b data-count="4">0</b><span>empresas</span></div></div>
+    </div>
+    <p ${rv('label')}>Sobre mí</p><div ${rv()}><div class="card prose">${PROFILE}</div></div>
+    <p ${rv('label')}>Idiomas</p>
+    <div ${rv()}><div class="card">${LANGS.map(([l, lv, n]) => `<div class="lang"><div><b>${l}</b><div class="cefr" aria-hidden="true">${[1, 2, 3, 4, 5, 6].map(k => `<i class="${k <= n ? 'on' : k - .5 <= n ? 'half' : ''}"></i>`).join('')}</div></div><small>${lv}</small></div>`).join('')}</div></div>
+    <div ${rv('btns')}><button class="chip" style="padding:12px 16px;background:var(--accent);color:var(--on-accent,#fff)" data-mail>Escribir email</button><button class="chip" style="padding:12px 16px" data-open="experiencia">Ver experiencia</button></div>`;
+  },
+  experiencia() {
+    return `<h1 ${rv('big-t')}>Experiencia</h1><div class="tl">${JOBS.map((j, k) => `
+      <div ${rv()}><div class="job card ${k === 0 ? 'exp now' : ''}">
+        <button class="head" type="button" aria-expanded="${k === 0}">
+          <span class="logo" style="background:${j.color}">${initials(j.co)}</span>
+          <span><h4>${esc(j.co)}</h4><span class="sub">${esc(j.role)}</span><br><span class="sub">${fmt(j.from)} – ${fmt(j.to)} · ${span(j.from, j.to)}</span></span>
+          <svg class="chev" viewBox="0 0 24 24"><path d="M9 6l6 6-6 6"/></svg>
+        </button>
+        <div class="body"><div><ul>${j.bullets.map(b => `<li>${esc(b)}</li>`).join('')}</ul><div class="meta">${j.tags.map(t => `<span class="chip">${t}</span>`).join('')}</div></div></div>
+      </div></div>`).join('')}</div>`;
+  },
+  proyectos() {
+    const d = new Date().toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+    return `<p ${rv('today-d')}>${d}</p><h1 ${rv('big-t')}>Hoy</h1>${PROJECTS.map((p, k) => `
+      <div ${rv()}><article class="proj">
+        <button type="button" class="art" data-pj style="width:100%;background:linear-gradient(135deg,${p.g[0]},${p.g[1]})" aria-expanded="false">
+          <span class="lbl">${p.k}</span><span class="mock" aria-hidden="true"><i class="s"></i><i class="b"></i><i></i><i class="s"></i><i class="b"></i></span><h4>${esc(p.t)}</h4>
+        </button>
+        <div class="more"><div><p>${esc(p.d)}</p><div class="chips">${p.tags.map(t => `<span class="chip">${t}</span>`).join('')}</div></div></div>
+        <button class="foot" type="button" data-pj><span class="mini" style="background:linear-gradient(135deg,${p.g[0]},${p.g[1]})"></span><span><b>${esc(p.co)}</b><small>${p.k}</small></span><span class="get">VER</span></button>
+      </article></div>`).join('')}`;
+  },
+  stack() {
+    return `<h1 ${rv('big-t')}>Stack</h1>${STACK.map(g => `<p ${rv('label')}>${g.g}</p><div ${rv()}><div class="group">${g.items.map(([n, s, w, c, ab]) => `
+      <button class="row" type="button" data-tg><span class="sq" style="background:${c}">${ab}</span><span class="tx"><b>${n}</b><small>${s}${w ? ' · ' + w : ''}</small></span><span class="tg" aria-hidden="true"></span></button>`).join('')}</div></div>`).join('')}`;
+  },
+  wallet() {
+    const C = ['#1d3bd1,#5b8cff', '#0f766e,#2dd4bf', '#7c3aed,#c084fc', '#b4235a,#fb7185', '#c2410c,#fb923c', '#111827,#4b5563', '#a16207,#facc15'];
+    return `<h1 ${rv('big-t')}>Formación</h1><p ${rv('w-hint')}>Toca un pase para verlo entero.</p>
+    <div ${rv()}><div class="wallet" id="wallet">${EDU.map((e, k) => `
+      <button class="pass" type="button" data-pass="${k}" style="background:linear-gradient(135deg,${C[k % C.length]})">
+        <span class="top"><span class="iss">${e.kind}</span><span class="yr">${e.y}</span></span>
+        <h4>${esc(e.t)}</h4>
+        <span class="bot"><span>${esc(e.p)}</span><span class="qr" aria-hidden="true">${qr(k)}</span></span>
+      </button>`).join('')}</div></div>`;
+  },
+  mensajes() {
+    return `<div ${rv('chat-h')}><span class="avatar">AB</span><b>Alejandro</b><small>en línea</small></div><div class="msgs" id="msgs"></div><div class="replies" id="replies"></div>`;
+  },
+  terminal() {
+    return `<div class="term-out" id="tout"></div><label class="term-in"><span>alejandro@ab-os:~$</span><input id="tin" autocomplete="off" spellcheck="false" aria-label="Comando"></label>`;
+  },
+  ajustes() {
+    const os = phone.dataset.os, light = phone.dataset.theme === 'light';
+    const h = parseInt(phone.style.getPropertyValue('--h')) || 258;
+    return `<h1 ${rv('big-t')}>Ajustes</h1>
+    <div ${rv()}><div class="group"><button class="row" type="button" data-open="perfil"><span class="avatar" style="width:54px;height:54px;font-size:19px">AB</span><span class="tx"><b style="font-size:18px">Alejandro Burdío</b><small>Perfil, idiomas y contacto</small></span></button></div></div>
+    <p ${rv('label')}>Plataforma</p>
+    <div ${rv()}><div class="group" style="padding:10px 12px"><div class="seg" data-v="${os === 'android' ? 1 : 0}" role="group" aria-label="Plataforma"><span class="knob"></span><button type="button" data-set-os="ios" aria-pressed="${os === 'ios'}">iOS</button><button type="button" data-set-os="android" aria-pressed="${os === 'android'}">Android</button></div></div></div>
+    <p ${rv('label')}>Apariencia</p>
+    <div ${rv()}><div class="group">
+      <button class="row" type="button" data-set-theme><span class="sq" style="background:#5856d6">◐</span><span class="tx"><b>Modo oscuro</b></span><span class="tg ${light ? '' : 'on'}"></span></button>
+      <div class="row" style="display:block;padding:12px 14px 4px"><span class="tx"><b>Color del sistema</b><small>${os === 'android' ? 'Material You toma el color del fondo' : 'Cambia el fondo de pantalla'}</small></span></div>
+      <div class="swatches">${HUES.map(x => `<button type="button" style="--sw:${x}" data-hue="${x}" aria-label="Tono ${x}" aria-pressed="${x === h}"></button>`).join('')}</div>
+    </div></div>
+    <p ${rv('label')}>Información</p>
+    <div ${rv()}><div class="group">
+      ${[['Nombre', 'Alejandro Burdío García'], ['Software', 'AB OS ' + YEARS + '.0'], ['Ubicación', 'Zaragoza, España'], ['Idiomas', 'Español · Inglés']].map(([a, b]) => `<div class="row"><span class="tx"><b>${a}</b></span><small style="color:var(--text2)">${b}</small></div>`).join('')}
+      <button class="row" type="button" data-copy><span class="tx"><b>Email</b></span><small style="color:var(--accent)">Copiar</small></button>
+      <button class="row" type="button" data-classic><span class="tx"><b>Ver CV clásico</b></span><small style="color:var(--text2)">›</small></button>
+    </div></div>`;
+  }
+};
+function qr(seed) {
+  let s = seed * 9301 + 49297, out = '';
+  for (let i = 0; i < 49; i++) {
+    const x = i % 7, y = (i / 7) | 0;
+    const finder = (x < 2 && y < 2) || (x > 4 && y < 2) || (x < 2 && y > 4);
+    s = (s * 9301 + 49297) % 233280;
+    out += `<i class="${finder || s / 233280 > .5 ? '' : 'o'}"></i>`;
+  }
+  return out;
+}
+function render(id, keep) {
+  I = 0;
+  $('#appTitle').textContent = id === 'wallet' ? 'Formación' : APPS[id][0];
+  const top = appBody.scrollTop;
+  appBody.innerHTML = VIEWS[id]();
+  if (keep) { appBody.scrollTop = top; onReady(id); }
+}
+
+/* ---------- comportamiento por app ---------- */
+function onReady(id) {
+  if (id === 'perfil') countUp();
+  if (id === 'stack') $$('.tg', appBody).forEach((t, k) => setTimeout(() => t.classList.add('on'), 250 + k * 70));
+  if (id === 'wallet') layoutWallet(-1);
+  if (id === 'mensajes') chat();
+  if (id === 'terminal') termInit();
+}
+function countUp() {
+  $$('[data-count]', appBody).forEach(el => {
+    const n = +el.dataset.count, t0 = performance.now();
+    (function f(t) { const p = Math.min(1, (t - t0) / 900); el.textContent = Math.round(n * (1 - Math.pow(1 - p, 3))); if (p < 1) requestAnimationFrame(f); })(t0);
+  });
+}
+appBody.addEventListener('click', e => {
+  const h = e.target.closest('.job .head');
+  if (h) { const j = h.closest('.job'); j.classList.toggle('exp'); h.setAttribute('aria-expanded', j.classList.contains('exp')); return; }
+  const pj = e.target.closest('[data-pj]');
+  if (pj) { const p = pj.closest('.proj'); p.classList.toggle('exp'); p.querySelector('.get').textContent = p.classList.contains('exp') ? 'CERRAR' : 'VER'; $('.art', p).setAttribute('aria-expanded', p.classList.contains('exp')); return; }
+  const tg = e.target.closest('[data-tg]');
+  if (tg) { const t = $('.tg', tg); t.classList.remove('on'); setTimeout(() => t.classList.add('on'), 380); toast('Viene de serie: no se puede desactivar 😄'); return; }
+  const ps = e.target.closest('[data-pass]');
+  if (ps) { const k = +ps.dataset.pass; layoutWallet(walletSel === k ? -1 : k); return; }
+  const so = e.target.closest('[data-set-os]'); if (so) return setOS(so.dataset.setOs);
+  if (e.target.closest('[data-set-theme]')) { setTheme(phone.dataset.theme === 'dark' ? 'light' : 'dark'); return render('ajustes', true); }
+  const hu = e.target.closest('[data-hue]'); if (hu) { setHue(+hu.dataset.hue); return render('ajustes', true); }
+  const rp = e.target.closest('[data-reply]'); if (rp) reply(rp.dataset.reply);
+});
+let walletSel = -1;
+function layoutWallet(sel) {
+  walletSel = sel;
+  const ps = $$('.pass', appBody); let h;
+  ps.forEach((p, k) => {
+    let y;
+    if (sel < 0) y = k * 72;
+    else if (k === sel) y = 0;
+    else { const j = k < sel ? k : k - 1; y = 236 + j * 12; }
+    p.style.transform = `translateY(${y}px) scale(${sel >= 0 && k !== sel ? 1 - (ps.length - 1 - (k < sel ? k : k - 1)) * .015 : 1})`;
+    p.style.zIndex = k === sel ? 50 : k;
+  });
+  h = sel < 0 ? (ps.length - 1) * 72 + 220 : 236 + (ps.length - 2) * 12 + 220;
+  $('#wallet').style.setProperty('--wh', h + 'px');
+}
+
+/* mensajes */
+const CHAT = [
+  '¡Hola! 👋 Soy Alejandro.',
+  `Desarrollo apps nativas Android e iOS desde 2017: ya son ${YEARS} años.`,
+  'Ahora estoy en Logalty, un prestador cualificado de servicios de confianza (QTSP), trabajando en apps de firma electrónica e identidad digital.',
+  'También toco NativeScript + Angular, .NET y algo de C++ con el NDK.',
+  '¿Tienes un proyecto o una propuesta? Escríbeme 👇'
+];
+let chatGen = 0;
+async function chat() {
+  const g = ++chatGen, box = $('#msgs');
+  const wait = ms => new Promise(r => setTimeout(r, RM ? 0 : ms));
+  for (const m of CHAT) {
+    const t = document.createElement('div'); t.className = 'msg typing'; t.innerHTML = '<i></i><i></i><i></i>';
+    box.appendChild(t); await wait(500 + m.length * 12);
+    if (g !== chatGen || !box.isConnected) return;
+    t.className = 'msg'; t.textContent = m; await wait(250);
+  }
+  $('#replies').innerHTML = [['mail', 'Enviar email ✉️'], ['copy', 'Copiar email'], ['exp', 'Ver experiencia']].map(([k, l], i) => `<button type="button" data-reply="${k}" style="animation-delay:${i * 90}ms">${l}</button>`).join('');
+}
+function reply(k) {
+  const box = $('#msgs'), me = document.createElement('div');
+  me.className = 'msg me'; me.textContent = { mail: 'Te escribo un email', copy: '¿Me pasas tu email?', exp: 'Enséñame tu experiencia' }[k];
+  box.appendChild(me); appBody.scrollTo({ top: appBody.scrollHeight, behavior: 'smooth' });
+  setTimeout(() => {
+    if (k === 'mail') mail();
+    if (k === 'copy') { const r = document.createElement('div'); r.className = 'msg'; r.textContent = EMAIL; box.appendChild(r); copyEmail(); }
+    if (k === 'exp') openApp('experiencia');
+  }, 500);
+}
+
+/* terminal */
+const hist = []; let hi = 0;
+const CMDS = {
+  help: () => `<span class="y">Comandos disponibles</span>\n  whoami       quién soy\n  experiencia  dónde he trabajado\n  stack        con qué trabajo\n  formacion    qué he estudiado\n  contacto     cómo hablar conmigo\n  platform     ios | android\n  theme        dark | light\n  open <app>   abre una app\n  clear        limpia la pantalla\n  exit         vuelve al inicio`,
+  whoami: () => `<span class="c">Alejandro Burdío García</span>\nDesarrollador Mobile · Android & iOS · Zaragoza\n<span class="d">${YEARS} años publicando en Google Play y App Store.</span>`,
+  experiencia: () => JOBS.map(j => `<span class="m">${fmt(j.from).padEnd(9)}</span> <span class="c">${j.co}</span> <span class="d">· ${j.role}</span>`).join('\n'),
+  stack: () => STACK.map(g => `<span class="y">${g.g}</span>: ${g.items.map(i => i[0]).join(', ')}`).join('\n'),
+  formacion: () => EDU.map(e => `<span class="m">${e.y.padEnd(8)}</span> ${e.t} <span class="d">· ${e.p}</span>`).join('\n'),
+  contacto: () => { copyEmail(); return `<span class="c">${EMAIL}</span>  <span class="d">(copiado al portapapeles)</span>`; },
+  platform: a => { if (!['ios', 'android'].includes(a)) return '<span class="r">uso: platform ios|android</span>'; setOS(a); return `Cambiando a <span class="p">${a}</span>…`; },
+  theme: a => { if (!['dark', 'light'].includes(a)) return '<span class="r">uso: theme dark|light</span>'; setTheme(a); return `Tema <span class="p">${a}</span>`; },
+  open: a => { if (!VIEWS[a] || a === 'terminal') return `<span class="r">apps: ${Object.keys(VIEWS).filter(x => x !== 'terminal').join(', ')}</span>`; setTimeout(() => openApp(a), 300); return `Abriendo ${a}…`; },
+  sudo: a => a === 'make coffee' || a === 'make café' ? '[sudo] contraseña para alejandro: ********\nCafé preparado. El build ya no tiene excusa.' : '<span class="r">alejandro no está en el fichero sudoers. Este incidente será reportado.</span>',
+  ls: () => 'Perfil  Experiencia  Proyectos  Stack  Formación  Mensajes  Ajustes',
+  adb: () => 'List of devices attached\nAB-OS-' + YEARS + '\tdevice',
+  exit: () => { setTimeout(() => closeApp(), 200); return 'logout'; },
+  clear: () => null
+};
+function termInit() {
+  const out = $('#tout'), inp = $('#tin');
+  out.innerHTML = `<span class="d">AB OS ${YEARS}.0 · adb shell</span>\nEscribe <span class="y">help</span> para ver los comandos.\n\n`;
+  inp.focus({ preventScroll: true });
+  inp.addEventListener('keydown', e => {
+    if (e.key === 'ArrowUp' && hist.length) { hi = Math.max(0, hi - 1); inp.value = hist[hi]; e.preventDefault(); }
+    if (e.key === 'ArrowDown' && hist.length) { hi = Math.min(hist.length, hi + 1); inp.value = hist[hi] || ''; e.preventDefault(); }
+    if (e.key === 'Tab') { e.preventDefault(); const m = Object.keys(CMDS).filter(c => c.startsWith(inp.value)); if (m.length === 1) inp.value = m[0] + ' '; }
+    if (e.key !== 'Enter') return;
+    const raw = inp.value.trim(); inp.value = '';
+    if (raw) { hist.push(raw); hi = hist.length; }
+    const [c, ...rest] = raw.split(/\s+/), arg = rest.join(' ').toLowerCase();
+    out.innerHTML += `<span class="p">alejandro@ab-os:~$</span> ${esc(raw)}\n`;
+    if (!raw) return;
+    const fn = CMDS[c.toLowerCase()];
+    if (c.toLowerCase() === 'clear') { out.innerHTML = ''; return; }
+    const r = fn ? fn(arg) : `<span class="r">comando no encontrado: ${esc(c)}</span>. Prueba <span class="y">help</span>.`;
+    if (r) out.innerHTML += r + '\n\n';
+    appBody.scrollTop = appBody.scrollHeight;
+  });
+  appBody.onclick = e => { if (!e.target.closest('button')) inp.focus({ preventScroll: true }); };
+}
+
+/* ---------- CV clásico ---------- */
+$('#classicSheet').innerHTML = `
+  <button class="x" type="button" aria-label="Cerrar" data-close-classic>×</button>
+  <h2>Alejandro Burdío García</h2>
+  <div class="c-meta"><span>Desarrollador Mobile · Android & iOS</span><span>Zaragoza, España</span><a href="mailto:${EMAIL}">${EMAIL}</a></div>
+  <p class="lead">${PROFILE}</p>
+  <h3>Experiencia</h3>
+  ${JOBS.map(j => `<div class="c-job"><span class="when">${fmt(j.from)} – ${fmt(j.to)}</span><div><b>${j.co}</b> · ${j.role}<ul>${j.bullets.map(b => `<li>${b}</li>`).join('')}</ul></div></div>`).join('')}
+  <h3>Stack</h3>
+  <div class="c-cols">${STACK.map(g => `<p><b>${g.g}</b><br>${g.items.map(i => i[0] + (i[1] ? ' (' + i[1] + ')' : '')).join(', ')}</p>`).join('')}</div>
+  <h3>Formación</h3>
+  <div class="c-cols">${EDU.map(e => `<p><b>${e.t}</b><br>${e.p} · ${e.y}</p>`).join('')}</div>
+  <h3>Idiomas</h3>
+  <div class="c-cols">${LANGS.map(l => `<p><b>${l[0]}</b> · ${l[1]}</p>`).join('')}</div>`;
+let lastFocus = null;
+function openClassic() { lastFocus = document.activeElement; $('#classic').classList.add('open'); $('[data-close-classic]').focus(); }
+function closeClassic() { $('#classic').classList.remove('open'); lastFocus?.focus({ preventScroll: true }); }
+$('#classic').addEventListener('click', e => { if (e.target.id === 'classic' || e.target.closest('[data-close-classic]')) closeClassic(); });
+
+fit(); refreshChrome();
+</script></body></html>

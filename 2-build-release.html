@@ -1,0 +1,2025 @@
+<!doctype html>
+<html lang="es" data-theme="dark">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Alejandro Burdío García · Desarrollador Mobile</title>
+<meta name="description" content="Portfolio de Alejandro Burdío García, desarrollador mobile Android e iOS en Zaragoza.">
+<meta name="theme-color" content="#0a0b0d">
+<script>
+document.documentElement.classList.add('js');
+try{var t=localStorage.getItem('ab-theme');if(t)document.documentElement.dataset.theme=t;if(localStorage.getItem('ab-scan')==='1')document.documentElement.classList.add('scan')}catch(e){}
+</script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:ital,wght@0,400;0,500;0,700;1,400&family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0a0b0d;--bg2:#0f1114;--panel:#111418;--panel2:#171b21;--line:#1f242c;--line2:#2c323c;
+  --fg:#ebe8e2;--muted:#959ba5;--dim:#5f6671;
+  --green:#3DDC84;--orange:#F05138;--violet:#9d8cff;--blue:#5aa9ff;--yellow:#e8c46a;
+  --on-accent:#06110b;--grid:rgba(255,255,255,.035);
+  --glow1:rgba(61,220,132,.13);--glow2:rgba(240,81,56,.10);--glow3:rgba(110,100,255,.13);
+  --shadow:0 40px 90px -30px rgba(0,0,0,.75);
+  --mono:'JetBrains Mono',ui-monospace,SFMono-Regular,Menlo,Consolas,monospace;
+  --display:'Space Grotesk',ui-sans-serif,system-ui,sans-serif;
+  --serif:'Instrument Serif',Georgia,serif;
+  --top:52px;--sb:28px;--ease:cubic-bezier(.2,.75,.1,1);
+  color-scheme:dark;
+}
+[data-theme=light]{
+  --bg:#f3f1ec;--bg2:#ebe8e1;--panel:#fbfaf7;--panel2:#f1eee7;--line:#dcd8cf;--line2:#c6c1b6;
+  --fg:#15171b;--muted:#535963;--dim:#878c95;
+  --green:#0a8546;--orange:#c4361a;--violet:#5a43d4;--blue:#1b62c4;--yellow:#8d6200;
+  --on-accent:#fff;--grid:rgba(0,0,0,.05);
+  --glow1:rgba(10,133,70,.10);--glow2:rgba(196,54,26,.07);--glow3:rgba(90,67,212,.08);
+  --shadow:0 30px 70px -35px rgba(40,30,10,.35);color-scheme:light;
+}
+[data-theme=hc]{
+  --bg:#000;--bg2:#000;--panel:#000;--panel2:#0b0b0b;--line:#8c8c8c;--line2:#fff;
+  --fg:#fff;--muted:#ececec;--dim:#c2c2c2;
+  --green:#4dffa0;--orange:#ff8f6b;--violet:#cdc2ff;--blue:#93d2ff;--yellow:#ffe36b;
+  --on-accent:#000;--grid:transparent;--glow1:transparent;--glow2:transparent;--glow3:transparent;--shadow:none;
+}
+*,*::before,*::after{box-sizing:border-box}
+[hidden]{display:none!important}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%;background:var(--bg);overflow-x:hidden;overflow-x:clip}
+body{margin:0;color:var(--fg);font:400 15px/1.65 var(--mono);overflow-x:hidden;overflow-x:clip;padding-bottom:var(--sb);-webkit-font-smoothing:antialiased;transition:color .3s}
+::selection{background:var(--green);color:var(--on-accent)}
+a{color:inherit}
+button{font:inherit;color:inherit}
+kbd{font:500 11px/1 var(--mono);padding:3px 5px;border:1px solid var(--line2);border-bottom-width:2px;border-radius:5px;color:var(--muted);background:var(--panel2)}
+:focus-visible{outline:2px solid var(--green);outline-offset:3px;border-radius:4px}
+.sr-only{position:absolute;width:1px;height:1px;padding:0;margin:-1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap;border:0}
+.skip{position:fixed;left:16px;top:-60px;z-index:200;background:var(--green);color:var(--on-accent);padding:10px 14px;border-radius:8px;text-decoration:none;font-weight:700;transition:top .2s}
+.skip:focus{top:12px}
+.wrap{width:min(1240px,100% - 64px);margin-inline:auto}
+section{scroll-margin-top:calc(var(--top) + 8px)}
+
+/* Fondo */
+.bg{position:fixed;inset:0;z-index:-1;pointer-events:none;overflow:hidden}
+.bg-grid{position:absolute;inset:-64px;background-image:linear-gradient(var(--grid) 1px,transparent 1px),linear-gradient(90deg,var(--grid) 1px,transparent 1px);background-size:64px 64px;-webkit-mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 25%,transparent 75%);mask-image:radial-gradient(ellipse 80% 70% at 50% 30%,#000 25%,transparent 75%);animation:drift 50s linear infinite}
+@keyframes drift{to{transform:translate3d(64px,64px,0)}}
+.bg-glow{position:absolute;width:62vmax;height:62vmax;border-radius:50%;filter:blur(70px);will-change:transform}
+.g1{background:radial-gradient(circle,var(--glow1),transparent 65%);left:-22vmax;top:-26vmax;animation:float1 28s ease-in-out infinite alternate}
+.g2{background:radial-gradient(circle,var(--glow2),transparent 65%);right:-26vmax;top:30vh;animation:float2 34s ease-in-out infinite alternate}
+.g3{background:radial-gradient(circle,var(--glow3),transparent 65%);left:20vw;bottom:-40vmax;animation:float1 40s ease-in-out infinite alternate-reverse}
+@keyframes float1{to{transform:translate3d(12vw,10vh,0) scale(1.1)}}
+@keyframes float2{to{transform:translate3d(-10vw,-12vh,0) scale(.9)}}
+.bg-noise{position:absolute;inset:-50%;opacity:.055;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='180' height='180'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");animation:noise .9s steps(4) infinite}
+[data-theme=light] .bg-noise{opacity:.07;mix-blend-mode:multiply}
+[data-theme=hc] .bg-noise{display:none}
+@keyframes noise{0%{transform:translate3d(0,0,0)}25%{transform:translate3d(-4%,3%,0)}50%{transform:translate3d(3%,-4%,0)}75%{transform:translate3d(-2%,5%,0)}100%{transform:translate3d(0,0,0)}}
+.scanlines{position:fixed;inset:0;z-index:95;pointer-events:none;display:none;background:repeating-linear-gradient(to bottom,transparent 0 2px,rgba(0,0,0,.16) 2px 3px);mix-blend-mode:multiply}
+.scan .scanlines{display:block}
+.scan .scanlines::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at center,transparent 60%,rgba(0,0,0,.35));}
+
+/* Cursor */
+.cursor{position:fixed;left:0;top:0;z-index:120;width:9px;height:17px;background:var(--green);border-radius:1px;pointer-events:none;opacity:0;transition:opacity .25s,width .25s var(--ease),height .25s var(--ease),background .25s,border-color .25s;will-change:transform}
+.has-cursor .cursor{opacity:.85}
+.cursor.idle{animation:blink 1.05s steps(1) infinite}
+.cursor.hover{width:22px;height:22px;background:transparent;border:2px solid var(--orange);border-radius:6px}
+.cursor.gone{opacity:0!important}
+@keyframes blink{50%{opacity:0}}
+
+/* Barra superior */
+.topbar{position:fixed;inset:0 0 auto 0;height:var(--top);z-index:60;display:flex;align-items:center;gap:16px;padding:0 20px;background:color-mix(in srgb,var(--bg) 72%,transparent);-webkit-backdrop-filter:blur(14px) saturate(1.4);backdrop-filter:blur(14px) saturate(1.4);border-bottom:1px solid transparent;transition:border-color .3s,background .3s}
+.topbar.scrolled{border-bottom-color:var(--line)}
+.brand{display:flex;align-items:center;gap:10px;text-decoration:none;flex:none}
+.brand-mark{display:grid;place-items:center;width:30px;height:30px;border-radius:8px;background:linear-gradient(135deg,var(--green),var(--orange));color:#0a0b0d;font:700 13px/1 var(--display);letter-spacing:-.02em;transition:transform .4s var(--ease)}
+.brand:hover .brand-mark{transform:rotate(-8deg) scale(1.06)}
+.brand-path{color:var(--muted);font-size:13px}
+.tabs{position:relative;display:flex;align-items:stretch;height:100%;margin:0 auto;overflow-x:auto;scrollbar-width:none}
+.tabs::-webkit-scrollbar{display:none}
+.tab{position:relative;display:flex;align-items:center;gap:8px;padding:0 14px;font-size:12.5px;color:var(--muted);text-decoration:none;white-space:nowrap;border-right:1px solid var(--line);transition:color .2s,background .2s}
+.tab:first-of-type{border-left:1px solid var(--line)}
+.tab:hover{color:var(--fg);background:var(--panel)}
+.tab.on{color:var(--fg);background:var(--panel)}
+.tab .x{opacity:0;color:var(--dim);margin-left:2px;transition:opacity .2s}
+.tab.on .x,.tab:hover .x{opacity:1}
+.tab-ind{position:absolute;left:0;top:0;height:2px;width:0;background:var(--green);transition:transform .45s var(--ease),width .45s var(--ease),background .3s;pointer-events:none}
+.ficon{display:inline-block;width:8px;height:8px;border-radius:2px;flex:none}
+.f-md{background:var(--blue)}.f-kt{background:var(--violet)}.f-swift{background:var(--orange)}.f-kts{background:var(--green)}.f-json{background:var(--yellow)}.f-sh{background:var(--fg)}
+.kbtn{flex:none;display:flex;align-items:center;gap:10px;height:32px;padding:0 8px 0 12px;border:1px solid var(--line2);border-radius:8px;background:var(--panel);cursor:pointer;font-size:12.5px;color:var(--muted);transition:border-color .2s,color .2s,transform .2s}
+.kbtn:hover{border-color:var(--green);color:var(--fg)}
+.kbtn:active{transform:scale(.97)}
+.tabs-m{display:none;position:relative;margin-left:auto}
+.tm-btn{display:flex;align-items:center;gap:8px;height:32px;padding:0 12px;border:1px solid var(--line2);border-radius:8px;background:var(--panel);cursor:pointer;font-size:12.5px}
+.tm-btn .chev{transition:transform .3s}
+.tm-btn[aria-expanded=true] .chev{transform:rotate(180deg)}
+.tm-menu{position:absolute;right:0;top:calc(100% + 8px);min-width:230px;margin:0;padding:6px;list-style:none;background:var(--panel);border:1px solid var(--line2);border-radius:12px;box-shadow:var(--shadow);animation:pop .25s var(--ease)}
+.tm-menu a{display:flex;align-items:center;gap:10px;padding:10px 12px;border-radius:8px;text-decoration:none;font-size:13.5px;color:var(--muted)}
+.tm-menu a:hover,.tm-menu a.on{background:var(--panel2);color:var(--fg)}
+@keyframes pop{from{opacity:0;transform:translateY(-6px) scale(.98)}}
+.chev{display:inline-block;width:7px;height:7px;border-right:1.5px solid currentColor;border-bottom:1.5px solid currentColor;transform:rotate(45deg) translateY(-2px)}
+
+/* Barra de estado */
+.statusbar{position:fixed;inset:auto 0 0 0;height:var(--sb);z-index:60;display:flex;align-items:stretch;font-size:11.5px;line-height:var(--sb);background:var(--panel);border-top:1px solid var(--line);color:var(--muted);user-select:none}
+.sb-mode{min-width:92px;padding:0 18px 0 12px;font-weight:700;letter-spacing:.06em;color:var(--on-accent);background:var(--green);clip-path:polygon(0 0,calc(100% - 9px) 0,100% 50%,calc(100% - 9px) 100%,0 100%);transition:background .25s}
+.sb-mode[data-mode=INSERT]{background:var(--orange)}
+.sb-mode[data-mode=VISUAL]{background:var(--violet)}
+.sb-mode[data-mode=COMMAND]{background:var(--blue)}
+.sb-seg{padding:0 12px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.sb-branch{background:var(--panel2);color:var(--fg);clip-path:polygon(0 0,calc(100% - 9px) 0,100% 50%,calc(100% - 9px) 100%,0 100%);padding-right:20px;margin-left:-6px;padding-left:16px}
+.sb-file{color:var(--fg)}
+.sb-fill{flex:1}
+.sb-btn{all:unset;cursor:pointer;padding:0 12px}
+.sb-btn:hover{color:var(--fg)}
+.sb-btn:focus-visible{outline:2px solid var(--green);outline-offset:-2px}
+.sb-pct{min-width:58px;text-align:center;background:var(--panel2);color:var(--fg)}
+.sb-pos{min-width:120px;text-align:center;background:color-mix(in srgb,var(--green) 18%,var(--panel2));color:var(--fg)}
+
+/* Toast */
+.toast{position:fixed;left:50%;bottom:calc(var(--sb) + 18px);z-index:150;transform:translate(-50%,20px);opacity:0;padding:10px 16px 10px 12px;display:flex;gap:10px;align-items:center;max-width:calc(100% - 32px);background:var(--panel);border:1px solid var(--line2);border-radius:10px;box-shadow:var(--shadow);font-size:13px;transition:opacity .3s,transform .4s var(--ease);pointer-events:none}
+.toast::before{content:'✓';display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:var(--green);color:var(--on-accent);font-size:11px;font-weight:700;flex:none}
+.toast.show{opacity:1;transform:translate(-50%,0)}
+
+/* Revelados */
+.js .reveal{opacity:0;transform:translate3d(0,28px,0);transition:opacity .9s var(--ease),transform .9s var(--ease);transition-delay:calc(var(--i,0) * 90ms)}
+.js .reveal.in{opacity:1;transform:none}
+
+/* Comunes de sección */
+.sec{padding:140px 0 60px;position:relative}
+.sec-head{margin-bottom:56px;max-width:880px}
+.sec-file{display:flex;align-items:center;gap:10px;flex-wrap:wrap;font-size:12.5px;color:var(--muted);margin-bottom:22px}
+.sec-num{color:var(--green)}
+.sec-path{color:var(--dim)}
+.sec-title{margin:0;font:600 clamp(2.4rem,6.2vw,5.6rem)/.95 var(--display);letter-spacing:-.045em}
+.sec-title em{font:italic 400 1.08em/1 var(--serif);letter-spacing:-.01em;color:var(--green)}
+.sec-lead{margin:22px 0 0;color:var(--muted);max-width:620px}
+.c-and{color:var(--green)}.c-ios{color:var(--orange)}.c-ai{color:var(--violet)}
+
+/* Ventanas */
+.win{background:var(--panel);border:1px solid var(--line);border-radius:14px;box-shadow:var(--shadow);overflow:hidden}
+.win-bar{display:flex;align-items:center;gap:12px;height:40px;padding:0 10px 0 14px;border-bottom:1px solid var(--line);background:var(--panel2);font-size:12px;color:var(--muted)}
+.lights{display:flex;gap:7px;flex:none}
+.lights i{width:11px;height:11px;border-radius:50%;background:var(--line2)}
+.win:hover .lights i:nth-child(1){background:#ff5f57}.win:hover .lights i:nth-child(2){background:#febc2e}.win:hover .lights i:nth-child(3){background:#28c840}
+.win-title{flex:1;min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;text-align:center}
+.wbtn{flex:none;display:inline-flex;align-items:center;gap:6px;height:26px;padding:0 10px;border:1px solid var(--line2);border-radius:6px;background:var(--panel);cursor:pointer;font-size:11.5px;color:var(--muted);transition:color .2s,border-color .2s}
+.wbtn:hover{color:var(--fg);border-color:var(--green)}
+
+/* Hero */
+.hero{min-height:100vh;min-height:100svh;padding:calc(var(--top) + 36px) 0 64px;display:flex;align-items:center}
+.hero-wrap{display:grid;gap:28px}
+.hero-meta{display:flex;flex-wrap:wrap;gap:8px 22px;font-size:12px;color:var(--muted)}
+.hero-meta span{display:inline-flex;align-items:center;gap:8px}
+.pulse{width:7px;height:7px;border-radius:50%;background:var(--green);box-shadow:0 0 0 0 var(--green);animation:pulse 2s infinite}
+@keyframes pulse{70%{box-shadow:0 0 0 8px transparent}100%{box-shadow:0 0 0 0 transparent}}
+.term-build{width:100%;min-width:0}
+.term-body{height:304px;overflow:hidden;padding:16px 18px 6px;font-size:13px;line-height:1.7;position:relative;scroll-behavior:auto}
+.tl{white-space:pre-wrap;word-break:break-word;animation:lineIn .25s var(--ease)}
+@keyframes lineIn{from{opacity:0;transform:translateX(-6px)}}
+.tl .pr{color:var(--green)}.tl .pr-dir{color:var(--blue)}.tl .pr-d{color:var(--muted)}
+.tl .cmd{color:var(--fg)}
+.caret{display:inline-block;width:.6em;height:1.1em;vertical-align:-.2em;background:var(--fg);animation:blink 1s steps(1) infinite}
+.t-gt{color:var(--dim)}.t-kw{color:var(--muted)}.t-name{color:var(--fg)}.t-note{color:var(--dim)}
+.tl.cfg .t-name{color:var(--violet)}
+.tl.info{color:var(--muted)}
+.tl.warn{color:var(--yellow)}
+.tl.ok{color:var(--green);font-weight:700}
+.tl.sum{color:var(--muted)}
+.term-progress{padding:8px 18px 16px;font-size:12.5px;color:var(--muted)}
+.tp-text{white-space:pre;overflow:hidden;text-overflow:ellipsis}
+.tp-text b{color:var(--green);font-weight:500}
+.tp-track{margin-top:8px;height:3px;border-radius:2px;background:var(--line);overflow:hidden}
+.tp-fill{height:100%;width:100%;transform-origin:left;transform:scaleX(0);background:linear-gradient(90deg,var(--green),var(--blue),var(--violet),var(--orange));transition:transform .25s linear}
+.hero-id{min-width:0;transition:opacity .7s var(--ease),transform .9s var(--ease),filter .7s var(--ease)}
+.js .hero-id:not(.done){opacity:.12;transform:translateY(10px);filter:grayscale(1)}
+.hero-id.done{opacity:1;transform:none}
+.hero-kicker{margin:0 0 10px;font-size:12.5px;color:var(--green);transition:opacity .5s}
+.js .hero-id:not(.done) .hero-kicker{opacity:0}
+.hero-name{margin:0;font:700 clamp(2.8rem,10.4vw,10.2rem)/.88 var(--display);letter-spacing:-.055em}
+.hero-name em{font:italic 400 1.1em/.8 var(--serif);letter-spacing:-.02em;color:var(--orange)}
+.hero-name .w{display:inline-block;white-space:nowrap}
+.hero-name .ch{display:inline-block;text-align:center}
+.hero-name .ch.scr{color:var(--green);font-family:var(--mono);font-weight:400;font-style:normal;font-size:.8em}
+.hero-name .l1{display:block}
+.hero-foot{display:flex;flex-wrap:wrap;align-items:flex-end;justify-content:space-between;gap:24px;margin-top:30px}
+.hero-role{margin:0;font:500 clamp(1.05rem,1.9vw,1.45rem)/1.4 var(--display);letter-spacing:-.01em}
+.hero-role small{display:block;font:400 13px/1.6 var(--mono);color:var(--muted);margin-top:6px}
+.cta-row{display:flex;flex-wrap:wrap;gap:12px}
+.btn{position:relative;display:inline-flex;align-items:center;gap:10px;height:48px;padding:0 20px;border-radius:12px;border:1px solid var(--line2);background:var(--panel);text-decoration:none;font-size:14px;cursor:pointer;overflow:hidden;transition:transform .3s var(--ease),border-color .3s,background .3s,color .3s}
+.btn:hover{border-color:var(--fg);transform:translateY(-2px)}
+.btn:active{transform:translateY(0) scale(.98)}
+.btn-p{background:var(--green);border-color:var(--green);color:var(--on-accent);font-weight:700}
+.btn-p:hover{border-color:var(--green);background:color-mix(in srgb,var(--green) 85%,#fff)}
+.btn .arr{transition:transform .3s var(--ease)}
+.btn:hover .arr{transform:translate(3px,-3px)}
+.hint{font-size:12px;color:var(--dim);display:flex;gap:16px;flex-wrap:wrap;margin-top:22px}
+.hint span{display:inline-flex;gap:6px;align-items:center}
+@media (min-width:1100px){
+  .hero{padding-bottom:calc(var(--sb) + 36px)}
+  .hero-wrap{grid-template-columns:minmax(0,1fr) minmax(0,1.08fr);grid-template-areas:"meta meta" "id term";column-gap:56px;row-gap:34px;align-items:center}
+  .hero-meta{grid-area:meta}
+  .term-build{grid-area:term}
+  .term-body{height:clamp(220px,calc(100svh - 360px),304px);font-size:12.5px}
+  .hero-id{grid-area:id;container-type:inline-size}
+  .hero-name{font-size:clamp(3rem,6.4vw,7rem);font-size:clamp(3rem,14.5cqi,7.5rem)}
+  .hero-foot{flex-direction:column;align-items:flex-start;gap:22px;margin-top:28px}
+}
+
+/* README */
+.readme-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:40px;align-items:center}
+.editor .win-bar{justify-content:space-between}
+.ed-tab{display:flex;align-items:center;gap:8px;color:var(--fg)}
+.ed-body{display:flex;font-size:14px;line-height:1.75;padding:18px 0}
+.ed-lines{list-style:none;margin:0;padding:0 22px 0 0;counter-reset:ln;flex:1;min-width:0}
+.ed-lines li{counter-increment:ln;position:relative;padding-left:62px;min-height:1.75em;white-space:pre-wrap;word-break:break-word;transition:background .2s}
+.ed-lines li::before{content:counter(ln);position:absolute;left:0;width:40px;text-align:right;color:var(--dim);font-size:12.5px}
+.ed-lines li:hover{background:color-mix(in srgb,var(--fg) 4%,transparent)}
+.ed-lines li:hover::before{color:var(--fg)}
+.md-m{color:var(--dim)}
+.md-h1{font:700 1.65em/1.25 var(--display);letter-spacing:-.03em}
+.md-h2{font:600 1.15em/1.6 var(--display);color:var(--blue)}
+.md-q{color:var(--muted);font-style:italic}
+.md-b{font-weight:700;color:var(--fg)}
+.md-c{color:var(--orange);background:color-mix(in srgb,var(--orange) 10%,transparent);padding:1px 5px;border-radius:4px}
+.md-li{color:var(--muted)}
+.md-li .md-m{color:var(--green)}
+.code-k{color:var(--violet)}.code-s{color:var(--green)}.code-f{color:var(--blue)}.code-c{color:var(--dim);font-style:italic}.code-p{color:var(--muted)}.code-n{color:var(--yellow)}
+.ed-cur{display:inline-block;width:.55em;height:1.2em;vertical-align:-.25em;background:var(--green);animation:blink 1.05s steps(1) infinite}
+.phones{position:relative;height:520px;display:flex;justify-content:center;align-items:center}
+.phone-par{position:absolute;will-change:transform}
+.phone-par.pa{left:4%;top:4%}
+.phone-par.pi{right:4%;bottom:0}
+.phone-f{animation:bob 7s ease-in-out infinite}
+.pi .phone-f{animation-delay:-3.5s}
+@keyframes bob{50%{transform:translateY(-12px)}}
+.phone{display:block;width:210px;height:auto;color:var(--dim);overflow:visible}
+.pa .phone{transform:rotate(-7deg)}
+.pi .phone{transform:rotate(6deg)}
+.phone .s1{stroke-width:2}.phone .s2{stroke-width:1.5}
+.pa .ac{color:var(--green)}.pi .ac{color:var(--orange)}
+.phone .ac{stroke:currentColor}
+.phone *{stroke:currentColor}
+.phone-cap{position:absolute;font-size:11.5px;color:var(--muted);white-space:nowrap}
+.pa .phone-cap{left:0;top:-26px}.pi .phone-cap{right:0;bottom:-28px}
+.draw{stroke-dasharray:1 1;stroke-dashoffset:1;transition:stroke-dashoffset 2s cubic-bezier(.6,.05,.2,1);transition-delay:calc(var(--d,0) * .22s)}
+.in .draw{stroke-dashoffset:0}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);margin-top:72px;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.stat{padding:28px 24px;border-left:1px solid var(--line)}
+.stat:first-child{border-left:0;padding-left:0}
+.stat b{display:block;font:600 clamp(2.6rem,5vw,4.4rem)/1 var(--display);letter-spacing:-.05em;white-space:nowrap;font-variant-numeric:tabular-nums}
+.stat b sup{font-size:.4em;line-height:1;color:var(--green);vertical-align:top;margin-left:4px;letter-spacing:-.01em}
+.stat > span{display:block;margin-top:10px;font-size:12.5px;color:var(--muted)}
+
+/* Experiencia */
+.gl-head{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;margin-bottom:22px;font-size:13px}
+.gl-cmd{color:var(--muted)}
+.gl-cmd b{color:var(--green);font-weight:500}
+.legend{display:flex;flex-wrap:wrap;gap:8px 16px;font-size:12px;color:var(--muted)}
+.legend span{display:inline-flex;align-items:center;gap:7px}
+.legend i{width:16px;height:3px;border-radius:2px;background:currentColor}
+.gl-actions{display:flex;gap:8px}
+.gitlog{position:relative;--gw:136px}
+.graph{position:absolute;left:0;top:0;width:var(--gw);overflow:visible;pointer-events:none}
+.gp{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-dasharray:1 1;stroke-dashoffset:1}
+.gp.main{opacity:.45;stroke-width:1.5}
+.gd{fill:var(--bg);stroke:currentColor;stroke-width:2;transition:fill .35s}
+.gd.on{fill:currentColor}
+.gt{fill:var(--bg);stroke:currentColor;stroke-width:2}
+.gt.on{fill:var(--green)}
+.gt-ring{fill:none;stroke:var(--green);stroke-width:1;opacity:0;transform-box:fill-box;transform-origin:center;transition:opacity .4s}
+.gt-ring.on{opacity:.5;animation:ring 2.4s ease-out infinite}
+@keyframes ring{from{transform:scale(.6);opacity:.7}to{transform:scale(1.8);opacity:0}}
+.l-android{color:var(--green)}.l-ios{color:var(--orange)}.l-cross{color:var(--violet)}.l-desktop{color:var(--blue)}.l-it{color:var(--dim)}.l-main{color:var(--fg)}
+.log{list-style:none;margin:0;padding:0}
+.g-row{padding-left:var(--gw);opacity:.28;transition:opacity .6s var(--ease)}
+.g-row.lit{opacity:1}
+.g-commit{display:flex;gap:16px;align-items:baseline;padding:9px 0 9px var(--gw);font-size:14px}
+.g-commit:hover .g-msg{color:var(--fg)}
+.g-hash{color:var(--yellow);flex:none;font-size:13px}
+.g-msg{color:var(--muted);transition:color .2s}
+.cc-t{color:var(--fg);font-weight:500}
+.g-tag{padding-top:18px;padding-bottom:6px}
+.tag-btn{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;width:100%;padding:14px 18px;text-align:left;border:1px solid var(--line);border-radius:12px;background:var(--panel);cursor:pointer;transition:border-color .3s,background .3s,transform .3s var(--ease)}
+.tag-btn:hover{border-color:var(--green);transform:translateX(4px)}
+.ref{font-size:11.5px;padding:2px 8px;border-radius:999px;white-space:nowrap}
+.ref-head{background:var(--blue);color:#06101c;font-weight:700}
+[data-theme=light] .ref-head{color:#fff}
+.ref-tag{border:1px solid var(--green);color:var(--green)}
+.g-title{font:600 1.15rem/1.3 var(--display);letter-spacing:-.01em}
+.g-role{font:400 14px/1.4 var(--mono);color:var(--muted);margin-left:6px}
+.g-date{font-size:12.5px;color:var(--muted);margin-left:auto}
+.g-more{display:inline-flex;align-items:center;gap:8px;font-size:12px;color:var(--dim)}
+.g-more .chev{transition:transform .35s var(--ease)}
+.open .g-more .chev{transform:rotate(225deg) translate(-2px,-2px)}
+.open .tag-btn{border-color:var(--green)}
+.rn{display:grid;grid-template-rows:0fr;visibility:hidden;transition:grid-template-rows .55s var(--ease),visibility 0s .55s}
+.open .rn{grid-template-rows:1fr;visibility:visible;transition:grid-template-rows .55s var(--ease)}
+.rn-in{overflow:hidden;min-height:0}
+.rn-box{margin:10px 0 6px;padding:18px 22px;border:1px dashed var(--line2);border-radius:12px;background:color-mix(in srgb,var(--panel) 60%,transparent);font-size:14px}
+.rn-h{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px;margin:0 0 10px;color:var(--blue);font-size:13px}
+.rn-h span:last-child{color:var(--muted)}
+.rn-box ul{margin:0;padding:0;list-style:none}
+.rn-box li{position:relative;padding:5px 0 5px 22px;color:var(--fg)}
+.rn-box li::before{content:'+';position:absolute;left:2px;color:var(--green)}
+
+/* Proyectos */
+.cards{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:20px}
+.card{grid-column:span 2;perspective:1000px}
+.card:nth-child(1),.card:nth-child(2){grid-column:span 3}
+.card-in{position:relative;height:100%;display:flex;flex-direction:column;border:1px solid var(--line);border-radius:18px;background:var(--panel);overflow:hidden;transform-style:preserve-3d;transition:transform .6s var(--ease),border-color .3s;will-change:transform}
+.card-in::before{content:'';position:absolute;inset:0;border-radius:inherit;padding:1px;background:radial-gradient(320px circle at var(--mx,50%) var(--my,0%),var(--acc),transparent 65%);-webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;opacity:0;transition:opacity .35s;pointer-events:none;z-index:3}
+.card-in::after{content:'';position:absolute;inset:0;background:radial-gradient(520px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.08),transparent 42%);opacity:0;transition:opacity .35s;pointer-events:none;z-index:2}
+[data-theme=light] .card-in::after{background:radial-gradient(520px circle at var(--mx,50%) var(--my,0%),rgba(255,255,255,.7),transparent 42%)}
+.card-in:hover::before,.card-in:hover::after,.card-in:focus-within::before{opacity:1}
+.mock{position:relative;height:230px;display:grid;place-items:center;overflow:hidden;border-bottom:1px solid var(--line);background:radial-gradient(circle at 25% 15%,color-mix(in srgb,var(--acc) 20%,transparent),transparent 60%),repeating-linear-gradient(90deg,var(--grid) 0 1px,transparent 1px 24px),var(--bg2)}
+.mock-stage{position:relative;display:flex;align-items:flex-end;gap:14px;transform:translateZ(40px);transition:transform .6s var(--ease)}
+.card-in:hover .mock-stage{transform:translateZ(60px) translateY(-6px)}
+.m-phone{position:relative;width:98px;height:184px;padding:18px 9px 10px;border:1.5px solid var(--line2);border-radius:18px;background:var(--panel);display:flex;flex-direction:column;gap:6px;box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
+.m-phone::before{content:'';position:absolute;top:7px;left:50%;width:26px;height:5px;margin-left:-13px;border-radius:4px;background:var(--line2)}
+.m-phone.and::before{width:5px;margin-left:-2.5px;border-radius:50%}
+.m-phone.sm{width:72px;height:136px;padding-top:14px;border-radius:14px}
+.m-bar{height:12px;border-radius:4px;background:var(--acc);opacity:.85}
+.m-l{height:5px;border-radius:3px;background:var(--line2)}
+.m-l.s{width:60%}.m-l.xs{width:38%}
+.m-box{border:1px solid var(--line2);border-radius:7px;padding:6px;display:flex;flex-direction:column;gap:4px;flex:1}
+.m-sig{width:100%;height:30px;color:var(--acc)}
+.m-sig path{fill:none;stroke:currentColor;stroke-width:2;stroke-linecap:round;stroke-dasharray:1 1;stroke-dashoffset:1;transition:stroke-dashoffset 1.2s var(--ease)}
+.card-in:hover .m-sig path,.card-in:focus-within .m-sig path,.mock.auto .m-sig path{stroke-dashoffset:0}
+.m-ok{align-self:flex-start;font-size:8.5px;padding:1px 6px;border-radius:999px;background:var(--acc);color:var(--on-accent);font-weight:700}
+.m-browser{width:176px;height:118px;border:1.5px solid var(--line2);border-radius:9px;background:var(--panel);overflow:hidden;display:flex;flex-direction:column}
+.m-browser .tb{display:flex;gap:3px;padding:5px 6px;border-bottom:1px solid var(--line2)}
+.m-browser .tb i{width:5px;height:5px;border-radius:50%;background:var(--line2)}
+.m-browser .bd{padding:8px;display:flex;flex-direction:column;gap:5px}
+.m-tablet{width:250px;height:150px;border:1.5px solid var(--line2);border-radius:14px;background:var(--panel);padding:12px;display:grid;grid-template-columns:1fr 1.5fr;gap:10px;box-shadow:0 20px 40px -20px rgba(0,0,0,.6)}
+.m-tablet .m-box{justify-content:flex-end}
+.m-pdf{flex:1;border:1px solid var(--line2);border-radius:6px;padding:6px;display:flex;flex-direction:column;gap:4px;background:var(--bg2);position:relative}
+.m-lock{position:absolute;right:-12px;bottom:-12px;width:38px;height:38px;border-radius:10px;background:var(--acc);display:grid;place-items:center;color:var(--on-accent);box-shadow:0 10px 20px -8px rgba(0,0,0,.5);transition:transform .5s var(--ease)}
+.card-in:hover .m-lock{transform:rotate(-10deg) scale(1.08)}
+.m-row{display:flex;align-items:center;gap:5px}
+.m-row i{width:13px;height:13px;border-radius:50%;background:var(--line2);flex:none}
+.m-row .m-l{flex:1}
+.m-fab{position:absolute;right:8px;bottom:9px;width:22px;height:22px;border-radius:7px;background:var(--acc);color:var(--on-accent);display:grid;place-items:center;font:700 14px/1 var(--display)}
+.m-chip{position:absolute;font-size:10px;padding:3px 8px;border-radius:6px;border:1px solid var(--line2);background:var(--panel);color:var(--muted);white-space:nowrap}
+.card-body{padding:22px 24px 24px;display:flex;flex-direction:column;gap:12px;flex:1;transform:translateZ(20px)}
+.card-meta{display:flex;justify-content:space-between;gap:10px;font-size:12px;color:var(--dim)}
+.card-meta b{color:var(--acc);font-weight:500}
+.card h3{margin:0;font:600 1.45rem/1.15 var(--display);letter-spacing:-.025em}
+.card p{margin:0;color:var(--muted);font-size:13.5px}
+.badges{display:flex;flex-wrap:wrap;gap:6px;margin-top:auto;padding-top:8px;list-style:none;padding-left:0}
+.badges li{font-size:11.5px;padding:3px 9px;border:1px solid var(--line2);border-radius:999px;color:var(--muted);transition:border-color .2s,color .2s}
+.card-in:hover .badges li{border-color:color-mix(in srgb,var(--acc) 60%,var(--line2));color:var(--fg)}
+
+/* Stack */
+.seg{display:inline-flex;padding:3px;border:1px solid var(--line2);border-radius:10px;background:var(--panel);position:relative}
+.seg button{position:relative;z-index:1;border:0;background:none;padding:7px 14px;font-size:12.5px;color:var(--muted);cursor:pointer;border-radius:7px;transition:color .25s}
+.seg button[aria-pressed=true]{color:var(--on-accent)}
+.seg-ind{position:absolute;top:3px;bottom:3px;left:0;border-radius:7px;background:var(--green);transition:transform .45s var(--ease),width .45s var(--ease)}
+.stack-top{display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:14px;margin-bottom:20px}
+.stack-top p{margin:0;font-size:12.5px;color:var(--dim)}
+.code{margin:0;padding:20px 0;font-size:14px;line-height:1.8;counter-reset:ln;overflow:hidden}
+.code .ln{display:block;position:relative;padding:0 24px 0 66px;white-space:pre-wrap;word-break:break-word;counter-increment:ln}
+.code .ln::before{content:counter(ln);position:absolute;left:0;width:44px;text-align:right;color:var(--dim);font-size:12.5px}
+.code .ln:hover{background:color-mix(in srgb,var(--fg) 4%,transparent)}
+.dep{border:0;padding:0 2px;margin:0 -2px;background:none;color:var(--green);cursor:pointer;border-radius:4px;transition:background .2s,color .2s;text-align:left}
+.dep:hover,.dep:focus-visible,.dep.act{background:color-mix(in srgb,var(--green) 18%,transparent)}
+.grid-view{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px;padding:20px}
+.gv-card{border:1px solid var(--line);border-radius:12px;padding:16px;background:var(--panel2)}
+.gv-card h3{margin:0 0 4px;font:600 1.05rem/1.2 var(--display)}
+.gv-card small{display:block;color:var(--dim);font-size:11.5px;margin-bottom:12px}
+.gv-card ul{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.chip{border:1px solid var(--line2);background:var(--panel);border-radius:8px;padding:6px 10px;font-size:12.5px;cursor:pointer;transition:border-color .2s,transform .2s var(--ease)}
+.chip:hover,.chip:focus-visible,.chip.act{border-color:var(--green);transform:translateY(-2px)}
+.view{animation:viewIn .45s var(--ease)}
+@keyframes viewIn{from{opacity:0;transform:translateY(8px)}}
+.depcard{position:fixed;z-index:130;width:min(320px,calc(100vw - 32px));padding:14px 16px;border:1px solid var(--line2);border-radius:12px;background:var(--panel);box-shadow:var(--shadow);font-size:13px;opacity:0;transform:translateY(6px) scale(.98);transition:opacity .2s,transform .25s var(--ease);pointer-events:none}
+.depcard.show{opacity:1;transform:none}
+.depcard .dc-k{font-size:11px;color:var(--green);margin-bottom:4px}
+.depcard .dc-t{font:600 1.05rem/1.25 var(--display);margin-bottom:8px}
+.depcard .dc-c{color:var(--muted);margin:0}
+.depcard .dc-g{margin-top:10px;font-size:11px;color:var(--dim)}
+
+/* Formación */
+.edu-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:28px;align-items:start}
+.json{padding:18px 20px 22px;font-size:13.5px;line-height:1.8}
+.jn{white-space:pre-wrap;word-break:break-word}
+.jt{border:0;background:none;padding:0 4px 0 0;margin-left:-18px;cursor:pointer;text-align:left;border-radius:4px}
+.jt:hover .jk{text-decoration:underline;text-decoration-color:var(--dim)}
+.tw{display:inline-block;width:18px;color:var(--dim);transition:transform .25s var(--ease)}
+.tw::before{content:'▾'}
+.jo.closed>.jt .tw{transform:rotate(-90deg)}
+.jc{padding-left:1.5em;margin-left:.3em;border-left:1px dashed var(--line2)}
+.jo.closed>.jc,.jo.closed>.jend{display:none}
+.jo:not(.closed)>.jt .jsum{display:none}
+.jk{color:var(--blue)}.js{color:var(--green)}.jnum{color:var(--yellow)}.jp,.jb{color:var(--muted)}.jcm{color:var(--dim);font-style:italic}
+.json-root{padding-left:18px}
+.side{display:grid;gap:20px}
+.panel{border:1px solid var(--line);border-radius:14px;background:var(--panel);padding:22px}
+.panel h3{margin:0 0 4px;font:600 1.3rem/1.2 var(--display);letter-spacing:-.02em}
+.panel .sub{margin:0 0 18px;font-size:12px;color:var(--dim)}
+.lang{margin-bottom:18px}
+.lang:last-child{margin-bottom:0}
+.lang-h{display:flex;justify-content:space-between;font-size:13.5px;margin-bottom:8px}
+.lang-h span{color:var(--muted)}
+.cefr{display:grid;grid-template-columns:repeat(6,1fr);gap:4px}
+.cefr i{height:26px;border-radius:5px;border:1px solid var(--line2);font:normal 10.5px/24px var(--mono);text-align:center;color:var(--dim);transition:background .5s var(--ease),color .5s,border-color .5s;transition-delay:calc(var(--k) * 80ms)}
+.in .cefr i.on{background:var(--green);border-color:var(--green);color:var(--on-accent)}
+.in .cefr i.half{background:color-mix(in srgb,var(--green) 35%,transparent);border-color:var(--green);color:var(--fg)}
+.tl-mini{list-style:none;margin:0;padding:0;position:relative}
+.tl-mini::before{content:'';position:absolute;left:5px;top:8px;bottom:8px;width:1px;background:var(--line2)}
+.tl-mini li{position:relative;padding:0 0 14px 24px;font-size:13px}
+.tl-mini li:last-child{padding-bottom:0}
+.tl-mini li::before{content:'';position:absolute;left:0;top:6px;width:11px;height:11px;border-radius:50%;border:2px solid var(--orange);background:var(--panel)}
+.tl-mini b{display:block;font-weight:500}
+.tl-mini span{color:var(--muted);font-size:12px}
+
+/* Contacto */
+.contact-grid{display:grid;grid-template-columns:minmax(0,7fr) minmax(0,5fr);gap:28px;align-items:stretch}
+.shell .win-bar{justify-content:flex-start}
+.sh-body{height:400px;overflow-y:auto;padding:16px 18px;font-size:13.5px;line-height:1.7;cursor:text;scrollbar-width:thin;scrollbar-color:var(--line2) transparent}
+.sh-out div{white-space:pre-wrap;word-break:break-word}
+.sh-line{display:flex;align-items:baseline;gap:10px;margin:0}
+.sh-pr{color:var(--green);white-space:nowrap}
+.sh-pr b{color:var(--blue);font-weight:400}
+.sh-in{flex:1;min-width:0;border:0;outline:0;background:none;color:var(--fg);font:inherit;caret-color:var(--orange);padding:0}
+.sh-in:focus-visible{outline:none}
+.shell:focus-within{border-color:var(--green)}
+.o-dim{color:var(--dim)}.o-mut{color:var(--muted)}.o-g{color:var(--green)}.o-o{color:var(--orange)}.o-v{color:var(--violet)}.o-b{color:var(--blue)}.o-y{color:var(--yellow)}.o-err{color:var(--orange)}
+.sh-chips{display:flex;flex-wrap:wrap;gap:8px;padding:12px 18px 16px;border-top:1px solid var(--line)}
+.sh-chips button{border:1px solid var(--line2);background:var(--panel2);border-radius:7px;padding:5px 10px;font-size:12px;color:var(--muted);cursor:pointer;transition:color .2s,border-color .2s}
+.sh-chips button:hover{color:var(--fg);border-color:var(--green)}
+.cta-panel{display:flex;flex-direction:column;justify-content:space-between;gap:28px;padding:30px;border:1px solid var(--line);border-radius:14px;background:radial-gradient(circle at 100% 0%,color-mix(in srgb,var(--orange) 16%,transparent),transparent 55%),radial-gradient(circle at 0% 100%,color-mix(in srgb,var(--green) 14%,transparent),transparent 55%),var(--panel)}
+.cta-panel h3{margin:0;font:600 clamp(2.6rem,5vw,4.4rem)/.95 var(--display);letter-spacing:-.05em}
+.cta-panel h3 em{font:italic 400 1.1em/1 var(--serif);color:var(--green)}
+.cta-panel p{margin:0;color:var(--muted);font-size:13.5px}
+.mail-big{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:20px 22px;border-radius:14px;background:var(--fg);color:var(--bg);text-decoration:none;font:600 clamp(.95rem,1.5vw,1.15rem)/1.3 var(--display);word-break:break-all;transition:transform .35s var(--ease),background .3s}
+.mail-big:hover{transform:translateY(-3px);background:var(--green);color:var(--on-accent)}
+.mail-big .arr{font-size:1.4em;transition:transform .35s var(--ease);flex:none}
+.mail-big:hover .arr{transform:translate(4px,-4px)}
+.mini-row{display:flex;flex-wrap:wrap;gap:10px;align-items:center;font-size:12.5px;color:var(--muted)}
+.linkbtn{border:1px solid var(--line2);background:none;border-radius:8px;padding:7px 12px;font-size:12.5px;cursor:pointer;color:var(--fg);transition:border-color .2s}
+.linkbtn:hover{border-color:var(--green)}
+
+/* Footer */
+.foot{padding:120px 0 60px}
+.foot-big{margin:0;font:600 clamp(2rem,6vw,5.4rem)/1 var(--display);letter-spacing:-.05em;color:var(--dim)}
+.foot-big em{font:italic 400 1.08em/1 var(--serif);color:var(--fg)}
+.foot-row{display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;margin-top:48px;padding-top:22px;border-top:1px solid var(--line);font-size:12.5px;color:var(--muted)}
+.foot-row .linkbtn{color:var(--muted)}
+
+/* Paleta */
+.pal-bd{position:fixed;inset:0;z-index:140;display:flex;align-items:flex-start;justify-content:center;padding:14vh 16px 16px;background:color-mix(in srgb,var(--bg) 55%,transparent);-webkit-backdrop-filter:blur(6px);backdrop-filter:blur(6px);animation:fade .2s}
+@keyframes fade{from{opacity:0}}
+.pal{width:min(640px,100%);border:1px solid var(--line2);border-radius:16px;background:var(--panel);box-shadow:var(--shadow),0 0 0 1px rgba(0,0,0,.2);overflow:hidden;animation:pop .28s var(--ease)}
+.pal-in{display:flex;align-items:center;gap:10px;padding:0 16px;border-bottom:1px solid var(--line)}
+.pal-gt{color:var(--green);font-weight:700}
+.pal-in input{flex:1;min-width:0;height:56px;border:0;outline:0;background:none;color:var(--fg);font:400 16px var(--mono)}
+.pal-list{list-style:none;margin:0;padding:6px;max-height:min(52vh,420px);overflow-y:auto}
+.pal-list li{display:flex;align-items:center;gap:12px;padding:10px 12px;border-radius:9px;cursor:pointer;font-size:14px;color:var(--muted)}
+.pal-list li .pi-ic{width:22px;text-align:center;color:var(--dim);flex:none}
+.pal-list li .pi-t{flex:1;min-width:0;color:var(--fg);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.pal-list li .pi-g{font-size:11px;color:var(--dim);flex:none}
+.pal-list li mark{background:none;color:var(--green);font-weight:700}
+.pal-list li[aria-selected=true]{background:var(--panel2);box-shadow:inset 2px 0 0 var(--green)}
+.pal-list li[aria-selected=true] .pi-ic{color:var(--green)}
+.pal-empty{padding:22px;text-align:center;color:var(--dim);font-size:13px}
+.pal-foot{display:flex;gap:16px;flex-wrap:wrap;padding:10px 16px;border-top:1px solid var(--line);font-size:11.5px;color:var(--dim)}
+.pal-foot span{display:inline-flex;gap:5px;align-items:center}
+
+/* Responsive */
+@media (max-width:1240px){.brand-path{display:none}}
+@media (max-width:1080px){
+  .tabs{display:none}
+  .tabs-m{display:block}
+  .kbtn span{display:none}
+  .readme-grid,.edu-grid,.contact-grid{grid-template-columns:1fr}
+  .phones{height:460px}
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .card,.card:nth-child(1),.card:nth-child(2){grid-column:span 1}
+  .card:nth-child(5){grid-column:span 2}
+  .term-build{justify-self:stretch}
+}
+@media (max-width:720px){
+  .wrap{width:calc(100% - 32px)}
+  .topbar{padding:0 16px;gap:10px}
+  body{font-size:14px}
+  .sec{padding:96px 0 40px}
+  .sec-head{margin-bottom:36px}
+  .hero{padding-top:calc(var(--top) + 20px)}
+  .term-body{height:250px;font-size:11.5px;padding:12px 12px 4px}
+  .term-progress{padding:6px 12px 12px;font-size:11px}
+  .hero-foot{margin-top:20px}
+  .hint{display:none}
+  .btn{height:46px;padding:0 16px;font-size:13.5px}
+  .ed-body{font-size:13px}
+  .ed-lines li{padding-left:40px}
+  .ed-lines li::before{width:26px;font-size:11px}
+  .ed-lines{padding-right:14px}
+  .phones{height:380px}
+  .phone{width:150px}
+  .phone-par.pa{left:0}.phone-par.pi{right:0}
+  .stats{grid-template-columns:repeat(2,1fr)}
+  .stat{padding:20px 14px}
+  .stat:nth-child(3){border-left:0;padding-left:0}
+  .stat:nth-child(n+3){border-top:1px solid var(--line)}
+  .gitlog{--gw:74px}
+  .g-commit{font-size:12.5px;gap:10px;flex-wrap:wrap;row-gap:0}
+  .g-hash{font-size:11.5px}
+  .tag-btn{padding:12px 14px;gap:6px 10px}
+  .g-title{font-size:1.05rem;width:100%}
+  .g-role{display:block;margin:2px 0 0;font-size:12.5px}
+  .g-date{margin-left:0}
+  .rn-box{padding:14px;font-size:13px}
+  .cards{grid-template-columns:1fr}
+  .card,.card:nth-child(1),.card:nth-child(2),.card:nth-child(5){grid-column:span 1}
+  .mock{height:210px}
+  .m-tablet{width:220px}
+  .code{font-size:12px}
+  .code .ln{padding:0 12px 0 40px}
+  .code .ln::before{width:26px;font-size:11px}
+  .json{font-size:12.5px;padding:14px 12px 18px}
+  .jc{padding-left:1em}
+  .sh-body{height:340px;font-size:12.5px;padding:12px}
+  .sh-in{font-size:16px}
+  .cta-panel{padding:22px}
+  .sb-hide-m{display:none}
+  .sb-mode{min-width:0}
+  .pal-bd{padding-top:10vh}
+  .legend{gap:6px 12px}
+  .gl-head{font-size:12px}
+}
+@media (prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;transition-delay:0s!important}
+  .js .reveal{opacity:1;transform:none}
+  .draw,.gp{stroke-dashoffset:0}
+  .cursor{display:none}
+}
+</style>
+</head>
+<body>
+<a class="skip" href="#main">Saltar al contenido</a>
+<div class="bg" aria-hidden="true"><div class="bg-grid"></div><div class="bg-glow g1"></div><div class="bg-glow g2"></div><div class="bg-glow g3"></div><div class="bg-noise"></div></div>
+<div class="scanlines" aria-hidden="true"></div>
+<div class="cursor" id="cursor" aria-hidden="true"></div>
+
+<header class="topbar" id="topbar">
+  <a class="brand" href="#top" aria-label="Alejandro Burdío García, volver al inicio">
+    <span class="brand-mark" aria-hidden="true">AB</span><span class="brand-path">~/alejandro</span>
+  </a>
+  <nav class="tabs" id="tabs" aria-label="Secciones">
+    <a class="tab" href="#readme" data-sec="readme"><i class="ficon f-md"></i>README.md<span class="x" aria-hidden="true">×</span></a>
+    <a class="tab" href="#experiencia" data-sec="experiencia"><i class="ficon f-kt"></i>Experience.kt<span class="x" aria-hidden="true">×</span></a>
+    <a class="tab" href="#proyectos" data-sec="proyectos"><i class="ficon f-swift"></i>Projects.swift<span class="x" aria-hidden="true">×</span></a>
+    <a class="tab" href="#stack" data-sec="stack"><i class="ficon f-kts"></i>build.gradle.kts<span class="x" aria-hidden="true">×</span></a>
+    <a class="tab" href="#formacion" data-sec="formacion"><i class="ficon f-json"></i>Education.json<span class="x" aria-hidden="true">×</span></a>
+    <a class="tab" href="#contacto" data-sec="contacto"><i class="ficon f-sh"></i>Contact.sh<span class="x" aria-hidden="true">×</span></a>
+    <span class="tab-ind" id="tabInd" aria-hidden="true"></span>
+  </nav>
+  <div class="tabs-m">
+    <button class="tm-btn" id="tmBtn" type="button" aria-expanded="false" aria-controls="tmMenu" aria-label="Menú de secciones"><i class="ficon f-md" id="tmIcon"></i><span id="tmCur">README.md</span><i class="chev" aria-hidden="true"></i></button>
+    <ul class="tm-menu" id="tmMenu" hidden>
+      <li><a href="#readme" data-sec="readme"><i class="ficon f-md"></i>README.md</a></li>
+      <li><a href="#experiencia" data-sec="experiencia"><i class="ficon f-kt"></i>Experience.kt</a></li>
+      <li><a href="#proyectos" data-sec="proyectos"><i class="ficon f-swift"></i>Projects.swift</a></li>
+      <li><a href="#stack" data-sec="stack"><i class="ficon f-kts"></i>build.gradle.kts</a></li>
+      <li><a href="#formacion" data-sec="formacion"><i class="ficon f-json"></i>Education.json</a></li>
+      <li><a href="#contacto" data-sec="contacto"><i class="ficon f-sh"></i>Contact.sh</a></li>
+    </ul>
+  </div>
+  <button class="kbtn" id="palBtn" type="button" aria-label="Abrir paleta de comandos" aria-haspopup="dialog"><span>Comandos</span><kbd id="kbdHint">⌘K</kbd></button>
+</header>
+
+<main id="main">
+<section class="hero" id="top" aria-label="Inicio">
+  <div class="wrap hero-wrap">
+    <div class="hero-meta">
+      <span><i class="pulse" aria-hidden="true"></i>Zaragoza, España</span>
+      <span>Android · iOS · Cross-platform</span>
+      <span id="heroClock">Hora local en Zaragoza</span>
+    </div>
+    <div class="win term-build" id="buildWin">
+      <div class="win-bar">
+        <span class="lights" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span class="win-title">alejandro@zaragoza: ~/career · gradle</span>
+        <button class="wbtn" id="buildBtn" type="button">Saltar</button>
+      </div>
+      <div class="term-body" id="buildBody" aria-hidden="true"><div id="buildLines"></div></div>
+      <div class="term-progress" aria-hidden="true">
+        <div class="tp-text" id="tpText">&lt;-------------&gt; 0% CONFIGURING [0s]</div>
+        <div class="tp-track"><div class="tp-fill" id="tpFill"></div></div>
+      </div>
+      <p class="sr-only" id="buildSr" aria-live="polite"></p>
+    </div>
+    <div class="hero-id" id="heroId">
+      <p class="hero-kicker" id="heroKicker">// assembleRelease completado</p>
+      <h1 class="hero-name" id="heroName" aria-label="Alejandro Burdío García"><span class="l1">Alejandro</span> <span class="l2">Burdío <em>García</em></span></h1>
+      <div class="hero-foot">
+        <p class="hero-role">Desarrollador Mobile · <span class="c-and">Android</span> &amp; <span class="c-ios">iOS</span><small>Apps nativas publicadas en Google Play y App Store, desde <span data-years-text></span>.</small></p>
+        <div class="cta-row">
+          <a class="btn btn-p" id="heroMail" href="mailto:alejandroburdiogarcia@gmail.com">Escríbeme <span class="arr" aria-hidden="true">↗</span></a>
+          <a class="btn" href="#experiencia">Ver el git log <span class="arr" aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      <div class="hint" aria-hidden="true"><span><kbd class="kbd-mod">⌘</kbd><kbd>K</kbd> paleta</span><span><kbd>j</kbd><kbd>k</kbd> scroll</span><span><kbd>g</kbd><kbd>g</kbd> arriba</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="readme" aria-labelledby="h-readme">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <div class="sec-file"><span class="sec-num">01</span><i class="ficon f-md"></i>README.md<span class="sec-path">~/alejandro/</span></div>
+      <h2 class="sec-title" id="h-readme" tabindex="-1">Quién firma <em>esta build</em></h2>
+    </header>
+    <div class="readme-grid">
+      <div class="win editor reveal" style="--i:1">
+        <div class="win-bar"><span class="ed-tab"><i class="ficon f-md"></i>README.md</span><span>markdown · utf-8</span></div>
+        <div class="ed-body">
+          <ol class="ed-lines">
+            <li><span class="md-m"># </span><span class="md-h1">Alejandro Burdío García</span></li>
+            <li><span class="md-m">&gt; </span><span class="md-q">Desarrollador Mobile · Android &amp; iOS · Zaragoza, España</span></li>
+            <li></li>
+            <li><span class="md-m">## </span><span class="md-h2">Perfil</span></li>
+            <li>Desarrollador mobile especializado en aplicaciones nativas <span class="md-m">**</span><span class="md-b c-and">Android</span><span class="md-m">**</span> (Java / Kotlin) e <span class="md-m">**</span><span class="md-b c-ios">iOS</span><span class="md-m">**</span> (Swift), con publicación y soporte en Google Play y App Store.</li>
+            <li>También he desarrollado apps cross-platform con NativeScript + Angular y una aplicación .NET / WinForms para tabletas de firma DTU.</li>
+            <li>Actualmente en <span class="md-c">Logalty</span>, prestador cualificado de servicios de confianza (QTSP), en apps del ámbito de la firma electrónica y la identidad digital.</li>
+            <li></li>
+            <li><span class="md-m">## </span><span class="md-h2">Plataformas</span></li>
+            <li class="md-li"><span class="md-m">- </span>Android nativo · Java · Kotlin</li>
+            <li class="md-li"><span class="md-m">- </span>iOS nativo · Swift</li>
+            <li class="md-li"><span class="md-m">- </span>Cross-platform · NativeScript + Angular</li>
+            <li class="md-li"><span class="md-m">- </span>Escritorio · .NET · C# · WinForms</li>
+            <li></li>
+            <li><span class="md-m">```kotlin</span></li>
+            <li><span class="code-k">val</span> now = <span class="code-f">Role</span>(company = <span class="code-s">"Logalty"</span>, since = <span class="code-n">2020</span>)</li>
+            <li><span class="md-m">```</span><span class="ed-cur" aria-hidden="true"></span></li>
+          </ol>
+        </div>
+      </div>
+      <div class="phones reveal" id="phones" style="--i:2">
+        <div class="phone-par pa" data-par="-0.08">
+          <div class="phone-f">
+            <span class="phone-cap">app/src/main · <span class="c-and">Kotlin</span></span>
+            <svg class="phone" viewBox="0 0 220 440" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Esquema de un teléfono Android">
+              <rect class="draw s1" pathLength="1" x="12" y="8" width="196" height="424" rx="30"/>
+              <rect class="draw s2" style="--d:1" pathLength="1" x="22" y="18" width="176" height="404" rx="22"/>
+              <circle class="draw s2" style="--d:2" pathLength="1" cx="110" cy="34" r="5"/>
+              <path class="draw s1" style="--d:2" pathLength="1" d="M210 110v46"/>
+              <path class="draw s1" style="--d:2" pathLength="1" d="M210 170v30"/>
+              <rect class="draw s2 ac" style="--d:3" pathLength="1" x="36" y="54" width="148" height="26" rx="8"/>
+              <rect class="draw s2" style="--d:3" pathLength="1" x="36" y="94" width="148" height="122" rx="12"/>
+              <path class="draw s2" style="--d:4" pathLength="1" d="M50 112h80M50 126h56"/>
+              <path class="draw s2 ac" style="--d:5" pathLength="1" d="M52 182c8-26 18-26 20-6s10 16 18-4 14-18 18 0 10 12 24-8"/>
+              <path class="draw s2" style="--d:5" pathLength="1" d="M50 198h120"/>
+              <rect class="draw s2" style="--d:4" pathLength="1" x="36" y="230" width="68" height="62" rx="10"/>
+              <rect class="draw s2" style="--d:4" pathLength="1" x="116" y="230" width="68" height="62" rx="10"/>
+              <path class="draw s2" style="--d:5" pathLength="1" d="M36 312h148M36 328h104M36 344h124"/>
+              <circle class="draw s2 ac" style="--d:6" pathLength="1" cx="166" cy="380" r="15"/>
+              <path class="draw s2 ac" style="--d:6" pathLength="1" d="M166 373v14M159 380h14"/>
+              <path class="draw s1" style="--d:6" pathLength="1" d="M92 410h36"/>
+            </svg>
+          </div>
+        </div>
+        <div class="phone-par pi" data-par="0.1">
+          <div class="phone-f">
+            <svg class="phone" viewBox="0 0 220 440" fill="none" stroke-linecap="round" stroke-linejoin="round" role="img" aria-label="Esquema de un iPhone">
+              <rect class="draw s1" pathLength="1" x="12" y="8" width="196" height="424" rx="42"/>
+              <rect class="draw s2" style="--d:1" pathLength="1" x="22" y="18" width="176" height="404" rx="34"/>
+              <rect class="draw s2" style="--d:2" pathLength="1" x="82" y="30" width="56" height="17" rx="8.5"/>
+              <path class="draw s1" style="--d:2" pathLength="1" d="M10 96v22M10 132v40M10 184v40"/>
+              <path class="draw s1" style="--d:2" pathLength="1" d="M210 130v62"/>
+              <path class="draw s1 ac" style="--d:3" pathLength="1" d="M38 76h78"/>
+              <rect class="draw s2" style="--d:3" pathLength="1" x="36" y="92" width="148" height="22" rx="11"/>
+              <rect class="draw s2" style="--d:4" pathLength="1" x="36" y="128" width="148" height="92" rx="14"/>
+              <circle class="draw s2 ac" style="--d:5" pathLength="1" cx="72" cy="166" r="16"/>
+              <path class="draw s2 ac" style="--d:5" pathLength="1" d="M56 204c4-14 28-14 32 0"/>
+              <path class="draw s2" style="--d:5" pathLength="1" d="M102 154h66M102 170h48M102 186h58"/>
+              <circle class="draw s2 ac" style="--d:5" pathLength="1" cx="110" cy="268" r="28"/>
+              <path class="draw s2 ac" style="--d:6" pathLength="1" d="M97 268l9 9 17-18"/>
+              <path class="draw s2" style="--d:6" pathLength="1" d="M36 326h148M36 352h148M36 378h112"/>
+              <path class="draw s1" style="--d:6" pathLength="1" d="M82 414h56"/>
+            </svg>
+            <span class="phone-cap">ios/Sources · <span class="c-ios">Swift</span></span>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="stats reveal" style="--i:1">
+      <div class="stat"><b><span data-count="0" id="statYears">0</span><sup>años</sup></b><span>desarrollando apps, desde marzo de 2017</span></div>
+      <div class="stat"><b><span data-count="2">0</span><sup>stores</sup></b><span>Google Play y App Store</span></div>
+      <div class="stat"><b><span data-count="2">0</span><sup>nativas</sup></b><span>plataformas: Android e iOS</span></div>
+      <div class="stat"><b><span data-count="7">0</span><sup>lenguajes</sup></b><span>Java, Kotlin, Swift, TypeScript, C#, C++ y PHP</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="experiencia" aria-labelledby="h-exp">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <div class="sec-file"><span class="sec-num">02</span><i class="ficon f-kt"></i>Experience.kt<span class="sec-path">src/main/kotlin/career/</span></div>
+      <h2 class="sec-title" id="h-exp" tabindex="-1">El <em>git log</em> de mi carrera</h2>
+      <p class="sec-lead">Cada empresa es un tag de release; cada logro, un commit. Pulsa un release para leer sus notas.</p>
+    </header>
+    <div class="gl-head reveal">
+      <span class="gl-cmd"><b>$</b> git log --graph --oneline --decorate</span>
+      <div class="legend" aria-label="Leyenda de ramas">
+        <span class="l-android"><i></i>android</span><span class="l-ios"><i></i>ios</span><span class="l-cross"><i></i>cross-platform</span><span class="l-desktop"><i></i>desktop</span><span class="l-it"><i></i>it</span>
+      </div>
+      <div class="gl-actions"><button class="wbtn" type="button" id="rnAll">Desplegar todas</button></div>
+    </div>
+    <div class="gitlog" id="gitlog">
+      <svg class="graph" id="graph" aria-hidden="true"></svg>
+      <ol class="log" id="log"></ol>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="proyectos" aria-labelledby="h-proj">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <div class="sec-file"><span class="sec-num">03</span><i class="ficon f-swift"></i>Projects.swift<span class="sec-path">Sources/Portfolio/</span></div>
+      <h2 class="sec-title" id="h-proj" tabindex="-1">Apps en <em>producción</em></h2>
+      <p class="sec-lead">Proyectos derivados de mi experiencia profesional, de la firma electrónica a la educación y la gestión comercial.</p>
+    </header>
+    <div class="cards">
+      <article class="card reveal" style="--i:0">
+        <div class="card-in" style="--acc:var(--green)">
+          <div class="mock" aria-hidden="true">
+            <div class="mock-stage">
+              <div class="m-phone and" style="--acc:var(--green)"><div class="m-bar"></div><div class="m-box"><div class="m-l s"></div><div class="m-l"></div><div class="m-l xs"></div><svg class="m-sig" viewBox="0 0 80 30" preserveAspectRatio="none"><path pathLength="1" d="M4 22c6-16 12-16 14-4s8 10 12-2 10-12 13 0 8 8 16-6 10-4 16 2"/></svg><span class="m-ok">firmado</span></div><div class="m-l s"></div></div>
+              <div class="m-phone" style="--acc:var(--orange)"><div class="m-bar"></div><div class="m-box"><div class="m-l"></div><div class="m-l s"></div><svg class="m-sig" viewBox="0 0 80 30" preserveAspectRatio="none"><path pathLength="1" d="M4 20c8-14 10-14 14-2s10 6 14-6 8-10 12 4 10 6 14-4 8-4 14 0"/></svg><span class="m-ok">firmado</span></div><div class="m-l xs"></div></div>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>// 01 · <b>Logalty</b></span><span>Android + iOS</span></div>
+            <h3>Firma e identidad digital</h3>
+            <p>Apps nativas del ámbito de la firma electrónica y la identidad digital para un prestador cualificado de servicios de confianza (QTSP), publicadas y mantenidas en Google Play y App Store.</p>
+            <ul class="badges" aria-label="Tecnologías"><li>Kotlin</li><li>Java</li><li>Swift</li><li>Google Play Console</li><li>App Store Connect</li></ul>
+          </div>
+        </div>
+      </article>
+      <article class="card reveal" style="--i:1">
+        <div class="card-in" style="--acc:var(--violet)">
+          <div class="mock" aria-hidden="true">
+            <div class="mock-stage" style="--acc:var(--violet)">
+              <div class="m-browser"><div class="tb"><i></i><i></i><i></i></div><div class="bd"><div class="m-bar"></div><div class="m-l"></div><div class="m-l s"></div><div class="m-l xs"></div><div class="m-l s"></div></div></div>
+              <div class="m-phone sm and"><div class="m-bar"></div><div class="m-l"></div><div class="m-l s"></div><div class="m-l xs"></div></div>
+              <div class="m-phone sm"><div class="m-bar"></div><div class="m-l"></div><div class="m-l s"></div><div class="m-l xs"></div></div>
+            </div>
+            <span class="m-chip" style="left:14px;top:14px">web · android · ios</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>// 02 · <b>Logalty</b></span><span>Cross-platform</span></div>
+            <h3>Apps multiplataforma</h3>
+            <p>Un mismo código con NativeScript + Angular (TypeScript) para llevar las apps a Web, Android e iOS.</p>
+            <ul class="badges" aria-label="Tecnologías"><li>NativeScript</li><li>Angular</li><li>TypeScript</li></ul>
+          </div>
+        </div>
+      </article>
+      <article class="card reveal" style="--i:0">
+        <div class="card-in" style="--acc:var(--blue)">
+          <div class="mock" aria-hidden="true">
+            <div class="mock-stage" style="--acc:var(--blue)">
+              <div class="m-tablet"><div style="display:flex;flex-direction:column;gap:5px"><div class="m-bar"></div><div class="m-l"></div><div class="m-l s"></div><div class="m-l"></div><div class="m-l xs"></div></div><div class="m-box"><svg class="m-sig" viewBox="0 0 80 30" preserveAspectRatio="none" style="height:44px"><path pathLength="1" d="M4 24c4-18 10-20 12-6s6 8 10-4 8-14 12 0 6 10 12-2 6-6 10 0 6 4 14-4"/></svg><div class="m-l"></div></div></div>
+            </div>
+            <span class="m-chip" style="right:14px;top:14px">WinForms</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>// 03 · <b>Logalty</b></span><span>Escritorio</span></div>
+            <h3>Tabletas de firma DTU</h3>
+            <p>Aplicación .NET / C# (WinForms) para la integración con tabletas de firma DTU.</p>
+            <ul class="badges" aria-label="Tecnologías"><li>.NET</li><li>C#</li><li>WinForms</li></ul>
+          </div>
+        </div>
+      </article>
+      <article class="card reveal" style="--i:1">
+        <div class="card-in" style="--acc:var(--green)">
+          <div class="mock" aria-hidden="true">
+            <div class="mock-stage" style="--acc:var(--green)">
+              <div class="m-phone and"><div class="m-bar"></div><div class="m-pdf"><div class="m-l"></div><div class="m-l"></div><div class="m-l s"></div><div class="m-l"></div><div class="m-l xs"></div><div class="m-l"></div><div class="m-l s"></div><div class="m-lock"><svg width="16" height="18" viewBox="0 0 16 18" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="8" width="12" height="9" rx="2"/><path d="M5 8V5a3 3 0 016 0v3"/></svg></div></div></div>
+            </div>
+            <span class="m-chip" style="left:14px;bottom:14px">C++ · JNI</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>// 04 · <b>BlinkLearning</b></span><span>Android</span></div>
+            <h3>BlinkLearning</h3>
+            <p>App educativa Android con cifrado de ficheros nativo en C++ (NDK / CMake) integrado con la capa Java, visor PDF sobre PDFTron personalizado y SQLite.</p>
+            <ul class="badges" aria-label="Tecnologías"><li>Java</li><li>C++</li><li>NDK</li><li>CMake</li><li>PDFTron</li><li>SQLite</li></ul>
+          </div>
+        </div>
+      </article>
+      <article class="card reveal" style="--i:2">
+        <div class="card-in" style="--acc:var(--orange)">
+          <div class="mock" aria-hidden="true">
+            <div class="mock-stage" style="--acc:var(--orange)">
+              <div class="m-phone and"><div class="m-bar"></div><div class="m-row"><i></i><div class="m-l"></div></div><div class="m-row"><i></i><div class="m-l s"></div></div><div class="m-row"><i></i><div class="m-l"></div></div><div class="m-row"><i></i><div class="m-l xs"></div></div><div class="m-row"><i></i><div class="m-l s"></div></div><span class="m-fab">+</span></div>
+            </div>
+            <span class="m-chip" style="right:14px;bottom:14px">PHP · SQL · SQLite</span>
+          </div>
+          <div class="card-body">
+            <div class="card-meta"><span>// 05 · <b>Business in Store</b></span><span>Android</span></div>
+            <h3>SimonRack · gestión comercial y logística</h3>
+            <p>App Android nativa para gestión comercial y alta de clientes de SimonRack, con backend PHP / SQL y SQLite local, y una app de gestión logística.</p>
+            <ul class="badges" aria-label="Tecnologías"><li>Java</li><li>PHP</li><li>SQL</li><li>SQLite</li><li>Fabric</li></ul>
+          </div>
+        </div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="stack" aria-labelledby="h-stack">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <div class="sec-file"><span class="sec-num">04</span><i class="ficon f-kts"></i>build.gradle.kts<span class="sec-path">:alejandro</span></div>
+      <h2 class="sec-title" id="h-stack" tabindex="-1">Las <em>dependencias</em> de mi día a día</h2>
+      <p class="sec-lead">Pasa el ratón (o el foco) por una dependencia para ver dónde la he usado.</p>
+    </header>
+    <div class="stack-top reveal">
+      <div class="seg" role="group" aria-label="Vista del stack" id="seg">
+        <span class="seg-ind" id="segInd" aria-hidden="true"></span>
+        <button type="button" data-view="gradle" aria-pressed="true">build.gradle.kts</button>
+        <button type="button" data-view="swift" aria-pressed="false">Package.swift</button>
+        <button type="button" data-view="grid" aria-pressed="false">grid</button>
+      </div>
+      <p id="stackHint">// sync OK · 0 conflictos</p>
+    </div>
+    <div class="win reveal" style="--i:1">
+      <div class="win-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="win-title" id="stackTitle">build.gradle.kts</span></div>
+      <div id="stackView"></div>
+    </div>
+  </div>
+  <div class="depcard" id="depcard" role="tooltip"></div>
+</section>
+
+<section class="sec" id="formacion" aria-labelledby="h-edu">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <div class="sec-file"><span class="sec-num">05</span><i class="ficon f-json"></i>Education.json<span class="sec-path">res/raw/</span></div>
+      <h2 class="sec-title" id="h-edu" tabindex="-1">Formación, <em>parseada</em></h2>
+    </header>
+    <div class="edu-grid">
+      <div class="win reveal">
+        <div class="win-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="win-title">Education.json</span><button class="wbtn" type="button" id="jsonToggle">Plegar todo</button></div>
+        <div class="json" id="json"></div>
+      </div>
+      <div class="side">
+        <div class="panel reveal" style="--i:1">
+          <h3>Idiomas</h3>
+          <p class="sub">// escala MCER</p>
+          <div class="lang"><div class="lang-h"><b>Español</b><span>nativo</span></div><div class="cefr" aria-label="Español: nativo"><i class="on" style="--k:0">A1</i><i class="on" style="--k:1">A2</i><i class="on" style="--k:2">B1</i><i class="on" style="--k:3">B2</i><i class="on" style="--k:4">C1</i><i class="on" style="--k:5">C2</i></div></div>
+          <div class="lang"><div class="lang-h"><b>Inglés</b><span>intermedio (B1–B2)</span></div><div class="cefr" aria-label="Inglés: intermedio, B1 a B2"><i class="on" style="--k:0">A1</i><i class="on" style="--k:1">A2</i><i class="on" style="--k:2">B1</i><i class="half" style="--k:3">B2</i><i style="--k:4">C1</i><i style="--k:5">C2</i></div></div>
+        </div>
+        <div class="panel reveal" style="--i:2">
+          <h3>Último commit de formación</h3>
+          <p class="sub">// git log --format=%s -- learning/</p>
+          <ul class="tl-mini">
+            <li><b>Curso certificado de IA <span class="c-ai">·</span> Google</b><span>nov 2024 · Santander Open Academy</span></li>
+            <li><b>Kotlin para Android</b><span>2019 · Platzi</span></li>
+            <li><b>Swift 4 en iOS 11</b><span>2017 · Udemy</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="contacto" aria-labelledby="h-contact">
+  <div class="wrap">
+    <header class="sec-head reveal">
+      <div class="sec-file"><span class="sec-num">06</span><i class="ficon f-sh"></i>Contact.sh<span class="sec-path">scripts/</span></div>
+      <h2 class="sec-title" id="h-contact" tabindex="-1">Ejecuta <em>./contact.sh</em></h2>
+      <p class="sec-lead">Una terminal de verdad: escribe <span class="md-c">help</span>. O, si lo prefieres, el botón grande de siempre.</p>
+    </header>
+    <div class="contact-grid">
+      <div class="win shell reveal" id="shell">
+        <div class="win-bar"><span class="lights" aria-hidden="true"><i></i><i></i><i></i></span><span class="win-title">Contact.sh · zsh · 80×24</span></div>
+        <div class="sh-body" id="shBody">
+          <div class="sh-out" id="shOut" role="log" aria-live="polite"></div>
+          <form class="sh-line" id="shForm" autocomplete="off">
+            <label class="sh-pr" for="shIn">alejandro@zaragoza:<b>~</b>$</label>
+            <input class="sh-in" id="shIn" type="text" autocomplete="off" autocapitalize="off" autocorrect="off" spellcheck="false" enterkeyhint="send">
+          </form>
+        </div>
+        <div class="sh-chips" aria-label="Comandos rápidos">
+          <button type="button" data-cmd="help">help</button><button type="button" data-cmd="whoami">whoami</button><button type="button" data-cmd="email">email</button><button type="button" data-cmd="cv">cv</button><button type="button" data-cmd="stack">stack</button><button type="button" data-cmd="clear">clear</button>
+        </div>
+      </div>
+      <div class="cta-panel reveal" style="--i:1">
+        <div>
+          <h3>¿Hablamos <em>de tu app?</em></h3>
+        </div>
+        <p>Android, iOS o las dos. El email es el único canal: respondo desde Zaragoza.</p>
+        <div>
+          <a class="mail-big" href="mailto:alejandroburdiogarcia@gmail.com"><span>alejandroburdiogarcia@gmail.com</span><span class="arr" aria-hidden="true">↗</span></a>
+          <div class="mini-row" style="margin-top:14px"><button class="linkbtn" type="button" id="copyMail">Copiar email</button><span>o escribe <span class="md-c">email</span> en la terminal</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="foot">
+  <div class="wrap">
+    <p class="foot-big reveal">// hecho con <em>cariño</em>,<br>publicado en <span class="c-and">las dos</span> <span class="c-ios">stores</span>.</p>
+    <div class="foot-row">
+      <span>© <span id="year"></span> Alejandro Burdío García · Zaragoza, España</span>
+      <span><button class="linkbtn" type="button" id="footPal">Paleta de comandos</button> <button class="linkbtn" type="button" id="toTop">↑ Volver arriba</button></span>
+    </div>
+  </div>
+</footer>
+
+<div class="statusbar" aria-label="Barra de estado">
+  <span class="sb-mode" id="sbMode" data-mode="NORMAL">NORMAL</span>
+  <span class="sb-seg sb-branch sb-hide-m"><span aria-hidden="true">⎇ </span>main</span>
+  <span class="sb-seg sb-file" id="sbFile">~/alejandro</span>
+  <span class="sb-fill"></span>
+  <button class="sb-btn sb-hide-m" type="button" id="sbScan" aria-pressed="false" title="Alternar scanlines">crt</button>
+  <span class="sb-seg sb-hide-m">utf-8</span>
+  <span class="sb-seg sb-hide-m" id="sbType">gradle</span>
+  <span class="sb-seg sb-pct" id="sbPct">Top</span>
+  <span class="sb-seg sb-pos sb-hide-m" id="sbPos">Ln 1, Col 1</span>
+  <span class="sb-seg sb-hide-m" id="sbClock">--:--</span>
+</div>
+
+<div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+<div class="pal-bd" id="palette" hidden>
+  <div class="pal" role="dialog" aria-modal="true" aria-labelledby="palTitle">
+    <h2 class="sr-only" id="palTitle">Paleta de comandos</h2>
+    <div class="pal-in">
+      <span class="pal-gt" aria-hidden="true">&gt;</span>
+      <input id="palInput" type="text" role="combobox" aria-expanded="true" aria-controls="palList" aria-autocomplete="list" aria-label="Buscar comando" placeholder="Busca una sección, acción o tema…" autocomplete="off" spellcheck="false">
+      <kbd>esc</kbd>
+    </div>
+    <ul class="pal-list" id="palList" role="listbox" aria-label="Resultados"></ul>
+    <div class="pal-foot"><span><kbd>↑</kbd><kbd>↓</kbd> navegar</span><span><kbd>↵</kbd> ejecutar</span><span><kbd>esc</kbd> cerrar</span></div>
+  </div>
+</div>
+
+<script>
+(() => {
+'use strict';
+const $ = (s, r = document) => r.querySelector(s);
+const $$ = (s, r = document) => Array.from(r.querySelectorAll(s));
+const root = document.documentElement;
+const mqRM = matchMedia('(prefers-reduced-motion: reduce)');
+let reduced = mqRM.matches;
+if (mqRM.addEventListener) mqRM.addEventListener('change', e => { reduced = e.matches; });
+const FINE = matchMedia('(hover: hover) and (pointer: fine)').matches;
+const IS_MAC = /Mac|iPhone|iPad/.test(navigator.platform || navigator.userAgent);
+const EMAIL = 'alejandroburdiogarcia@gmail.com';
+const MESES = ['ene', 'feb', 'mar', 'abr', 'may', 'jun', 'jul', 'ago', 'sep', 'oct', 'nov', 'dic'];
+const NOW = new Date();
+const monthsBetween = (a, b) => (b[0] * 12 + b[1]) - (a[0] * 12 + a[1]);
+const START = [2017, 3];
+const TOTAL_M = monthsBetween(START, [NOW.getFullYear(), NOW.getMonth() + 1]);
+const YEARS = Math.floor(TOTAL_M / 12);
+const REM_M = TOTAL_M % 12;
+const sleep = ms => new Promise(r => setTimeout(r, ms));
+const clamp = (v, a = 0, b = 1) => Math.min(b, Math.max(a, v));
+const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+const store = {
+  get(k) { try { return localStorage.getItem(k); } catch (e) { return null; } },
+  set(k, v) { try { localStorage.setItem(k, v); } catch (e) { /* sin almacenamiento */ } }
+};
+const plural = (n, s, p) => n + ' ' + (n === 1 ? s : p);
+const fmtDur = m => {
+  const y = Math.floor(m / 12), r = m % 12;
+  return [y ? plural(y, 'año', 'años') : '', r ? plural(r, 'mes', 'meses') : ''].filter(Boolean).join(' y ');
+};
+const fmtYM = ym => ym ? MESES[ym[1] - 1] + ' ' + ym[0] : 'actualidad';
+
+$('#statYears').dataset.count = YEARS;
+$$('[data-years-text]').forEach(el => { el.textContent = 'hace ' + plural(YEARS, 'año', 'años'); });
+$('#year').textContent = NOW.getFullYear();
+if (!IS_MAC) { $('#kbdHint').textContent = 'Ctrl K'; $$('.kbd-mod').forEach(k => { k.textContent = 'Ctrl'; }); }
+
+/* Toast y portapapeles */
+const toastEl = $('#toast');
+let toastT = 0;
+function toast(msg) {
+  toastEl.textContent = msg;
+  toastEl.classList.add('show');
+  clearTimeout(toastT);
+  toastT = setTimeout(() => toastEl.classList.remove('show'), 2600);
+}
+async function copyEmail() {
+  let ok = false;
+  try { await navigator.clipboard.writeText(EMAIL); ok = true; } catch (e) {
+    const ta = document.createElement('textarea');
+    ta.value = EMAIL; ta.setAttribute('readonly', '');
+    ta.style.cssText = 'position:fixed;top:0;left:0;opacity:0';
+    document.body.appendChild(ta); ta.select();
+    try { ok = document.execCommand('copy'); } catch (_) { ok = false; }
+    ta.remove();
+  }
+  toast(ok ? 'Email copiado: ' + EMAIL : 'No se ha podido copiar. Email: ' + EMAIL);
+  return ok;
+}
+
+/* Tema y scanlines */
+const THEMES = { dark: 'oscuro', light: 'claro', hc: 'alto contraste' };
+function setTheme(t, silent) {
+  if (!THEMES[t]) t = 'dark';
+  root.dataset.theme = t;
+  store.set('ab-theme', t);
+  const bg = getComputedStyle(root).getPropertyValue('--bg').trim();
+  $('meta[name="theme-color"]').setAttribute('content', bg || '#0a0b0d');
+  if (!silent) toast('Tema ' + THEMES[t]);
+  requestAnimationFrame(layoutSeg);
+}
+setTheme(root.dataset.theme, true);
+function setScan(on) {
+  root.classList.toggle('scan', on);
+  store.set('ab-scan', on ? '1' : '0');
+  $('#sbScan').setAttribute('aria-pressed', String(on));
+}
+function toggleScan() { setScan(!root.classList.contains('scan')); toast(root.classList.contains('scan') ? 'Scanlines activadas' : 'Scanlines desactivadas'); }
+$('#sbScan').setAttribute('aria-pressed', String(root.classList.contains('scan')));
+$('#sbScan').addEventListener('click', toggleScan);
+
+/* Navegación */
+const SECTIONS = [
+  { id: 'top', file: '~/alejandro', label: 'Inicio', type: 'gradle', icon: 'f-kts' },
+  { id: 'readme', file: 'README.md', label: 'Perfil', type: 'markdown', icon: 'f-md' },
+  { id: 'experiencia', file: 'Experience.kt', label: 'Experiencia', type: 'kotlin', icon: 'f-kt' },
+  { id: 'proyectos', file: 'Projects.swift', label: 'Proyectos', type: 'swift', icon: 'f-swift' },
+  { id: 'stack', file: 'build.gradle.kts', label: 'Stack', type: 'kotlin-script', icon: 'f-kts' },
+  { id: 'formacion', file: 'Education.json', label: 'Formación', type: 'json', icon: 'f-json' },
+  { id: 'contacto', file: 'Contact.sh', label: 'Contacto', type: 'sh', icon: 'f-sh' }
+];
+const SEC_COLORS = { readme: '--blue', experiencia: '--violet', proyectos: '--orange', stack: '--green', formacion: '--yellow', contacto: '--fg' };
+function goTo(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  el.scrollIntoView({ behavior: reduced ? 'auto' : 'smooth', block: 'start' });
+  const h = el.querySelector('h2[tabindex]');
+  if (h) setTimeout(() => h.focus({ preventScroll: true }), reduced ? 0 : 600);
+}
+let activeSec = 'top';
+const tabInd = $('#tabInd');
+function placeTabInd() {
+  const t = $(`.tab[data-sec="${activeSec}"]`);
+  if (!t || !t.offsetWidth) { tabInd.style.width = '0'; return; }
+  tabInd.style.width = t.offsetWidth + 'px';
+  tabInd.style.transform = `translateX(${t.offsetLeft}px)`;
+  tabInd.style.background = `var(${SEC_COLORS[activeSec] || '--green'})`;
+}
+function setActive(id) {
+  if (id === activeSec) return;
+  activeSec = id;
+  const s = SECTIONS.find(x => x.id === id) || SECTIONS[0];
+  $$('.tab, .tm-menu a').forEach(t => {
+    const on = t.dataset.sec === id;
+    t.classList.toggle('on', on);
+    if (on) t.setAttribute('aria-current', 'location'); else t.removeAttribute('aria-current');
+  });
+  placeTabInd();
+  $('#sbFile').textContent = s.file;
+  $('#sbType').textContent = s.type;
+  $('#tmCur').textContent = id === 'top' ? 'Inicio' : s.file;
+  $('#tmIcon').className = 'ficon ' + s.icon;
+}
+const secIO = new IntersectionObserver(es => {
+  es.forEach(e => { if (e.isIntersecting) setActive(e.target.id); });
+}, { rootMargin: '-42% 0px -55% 0px' });
+SECTIONS.forEach(s => { const el = document.getElementById(s.id); if (el) secIO.observe(el); });
+addEventListener('resize', placeTabInd);
+
+const tmBtn = $('#tmBtn'), tmMenu = $('#tmMenu');
+function setMenu(open) {
+  tmMenu.hidden = !open;
+  tmBtn.setAttribute('aria-expanded', String(open));
+  if (open) { const a = $('a.on', tmMenu) || $('a', tmMenu); a.focus(); }
+}
+tmBtn.addEventListener('click', () => setMenu(tmMenu.hidden));
+tmMenu.addEventListener('click', e => { if (e.target.closest('a')) setMenu(false); });
+tmMenu.addEventListener('keydown', e => {
+  const links = $$('a', tmMenu);
+  const i = links.indexOf(document.activeElement);
+  if (e.key === 'ArrowDown') { e.preventDefault(); links[(i + 1) % links.length].focus(); }
+  if (e.key === 'ArrowUp') { e.preventDefault(); links[(i - 1 + links.length) % links.length].focus(); }
+  if (e.key === 'Escape') { setMenu(false); tmBtn.focus(); }
+});
+document.addEventListener('click', e => { if (!tmMenu.hidden && !e.target.closest('.tabs-m')) setMenu(false); });
+
+/* Revelados y contadores */
+function countUp(el) {
+  if (el.dataset.done) return;
+  el.dataset.done = '1';
+  const target = +el.dataset.count;
+  if (reduced) { el.textContent = target; return; }
+  const s = performance.now(), d = 1500;
+  const f = t => {
+    const p = clamp((t - s) / d);
+    el.textContent = Math.round(target * (1 - Math.pow(1 - p, 4)));
+    if (p < 1) requestAnimationFrame(f);
+  };
+  requestAnimationFrame(f);
+}
+const revIO = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add('in');
+  $$('[data-count]', e.target).forEach(countUp);
+  revIO.unobserve(e.target);
+}), { threshold: 0.12, rootMargin: '0px 0px -6% 0px' });
+$$('.reveal').forEach(el => revIO.observe(el));
+
+/* Build del hero */
+const buildLines = $('#buildLines'), buildBody = $('#buildBody'), buildBtn = $('#buildBtn');
+const tpText = $('#tpText'), tpFill = $('#tpFill'), heroId = $('#heroId'), heroName = $('#heroName');
+const CMD = './gradlew :alejandro:assembleRelease';
+const TASKS = [
+  ['info', 'Starting a Gradle Daemon (las siguientes builds irán más rápido)'],
+  ['cfg', ':alejandro', 'Zaragoza, España'],
+  ['task', ':laso:repairHardware', '2014 · UP-TO-DATE'],
+  ['task', ':ies:assembleDam', 'CFGS · 2017'],
+  ['task', ':businessInStore:compileJava', 'SimonRack'],
+  ['task', ':businessInStore:mergeSqlite', 'PHP · SQL · SQLite'],
+  ['task', ':blinklearning:externalNativeBuildRelease', 'NDK · CMake'],
+  ['task', ':blinklearning:encryptFiles', 'C++ → JNI'],
+  ['task', ':blinklearning:customizePdfTron'],
+  ['task', ':crashlytics:uploadMappingFile', 'Fabric → Firebase'],
+  ['cfg', ':logalty', 'QTSP · eIDAS'],
+  ['task', ':kotlin:compileReleaseKotlin'],
+  ['task', ':swift:link', 'vía xcodebuild; que no se entere Gradle'],
+  ['task', ':nativescript:bundle', 'web · android · ios'],
+  ['task', ':dotnet:buildWinForms', 'tabletas de firma DTU'],
+  ['task', ':logalty:signRelease', 'firmado, cómo no'],
+  ['warn', 'w: nivel de café por debajo del umbral recomendado; se continúa igualmente'],
+  ['task', ':play:publishRelease', 'Google Play'],
+  ['task', ':appstore:upload', 'App Store Connect']
+];
+const N_TASKS = TASKS.filter(t => t[0] === 'task').length;
+const pad = (s, n) => s.length >= n ? s + '  ' : s + ' '.repeat(n - s.length);
+function taskHTML(t) {
+  const [kind, name, note] = t;
+  if (kind === 'info' || kind === 'warn') return esc(name);
+  const kw = kind === 'cfg' ? 'Configure project' : 'Task';
+  const base = kw + ' ' + name;
+  const padded = pad(base, 46).slice(base.length);
+  return `<span class="t-gt">&gt;</span> <span class="t-kw">${kw}</span> <span class="t-name">${esc(name)}</span>${note ? `<span class="t-note">${padded}${esc(note)}</span>` : ''}`;
+}
+function addLine(html, cls) {
+  const d = document.createElement('div');
+  d.className = 'tl ' + (cls || '');
+  d.innerHTML = html;
+  buildLines.appendChild(d);
+  buildBody.scrollTop = buildBody.scrollHeight;
+  return d;
+}
+let buildRun = 0, skip = false, buildDone = false, buildT0 = 0, tpTimer = 0, curPct = 0, curState = 'CONFIGURING';
+function renderProgress() {
+  const secs = Math.max(0, Math.round((performance.now() - buildT0) / 1000));
+  const n = Math.round(curPct * 13);
+  const bar = '&lt;<b>' + '='.repeat(n) + '</b>' + '-'.repeat(13 - n) + '&gt;';
+  tpText.innerHTML = `${bar} ${Math.round(curPct * 100)}% ${curState} [${secs}s]`;
+  tpFill.style.transform = `scaleX(${curPct})`;
+}
+function setProgress(p, state) { curPct = p; curState = state; renderProgress(); }
+async function runBuild() {
+  const run = ++buildRun;
+  skip = false; buildDone = false;
+  buildLines.innerHTML = '';
+  heroId.classList.remove('done');
+  buildBtn.textContent = 'Saltar';
+  buildBtn.setAttribute('aria-label', 'Saltar la animación de la build');
+  buildT0 = performance.now();
+  clearInterval(tpTimer);
+  tpTimer = setInterval(renderProgress, 1000);
+  setProgress(0, 'CONFIGURING');
+  const fast = () => skip || reduced;
+  const p = addLine('<span class="pr">➜</span> <span class="pr-dir">~/career</span> <span class="pr-d">$</span> <span class="cmd"></span><span class="caret"></span>', 'prompt');
+  const cmdEl = p.querySelector('.cmd');
+  if (!fast()) await sleep(220);
+  for (let i = 1; i <= CMD.length; i++) {
+    if (run !== buildRun) return;
+    if (fast()) { cmdEl.textContent = CMD; break; }
+    cmdEl.textContent = CMD.slice(0, i);
+    await sleep(9 + Math.random() * 17);
+  }
+  p.querySelector('.caret').remove();
+  if (!fast()) await sleep(160);
+  for (let i = 0; i < TASKS.length; i++) {
+    if (run !== buildRun) return;
+    const t = TASKS[i];
+    addLine(taskHTML(t), t[0]);
+    setProgress((i + 1) / TASKS.length * 0.98, i < 2 ? 'CONFIGURING' : 'EXECUTING');
+    if (!fast()) await sleep(t[0] === 'warn' ? 300 : t[0] === 'cfg' ? 150 : 55 + Math.random() * 70);
+  }
+  if (run !== buildRun) return;
+  addLine(' ', 'sum');
+  addLine(`BUILD SUCCESSFUL in ${YEARS}y ${REM_M}m`, 'ok');
+  addLine(`${N_TASKS} actionable tasks: ${N_TASKS} executed`, 'sum');
+  setProgress(1, 'DONE');
+  clearInterval(tpTimer);
+  buildDone = true;
+  buildBtn.textContent = '↻ Repetir';
+  buildBtn.setAttribute('aria-label', 'Repetir la animación de la build');
+  $('#buildSr').textContent = `Build completada en ${plural(YEARS, 'año', 'años')} y ${plural(REM_M, 'mes', 'meses')}.`;
+  if (!fast()) await sleep(120);
+  if (run !== buildRun) return;
+  heroId.classList.add('done');
+  scramble(heroName);
+}
+buildBtn.addEventListener('click', () => { if (buildDone) runBuild(); else skip = true; });
+heroId.addEventListener('focusin', () => { if (!buildDone) skip = true; });
+
+/* Efecto de decodificado */
+const GLYPHS = '!<>-_\\/[]{}=+*^?#$%&01ABCDEF';
+(function prepScramble(el) {
+  const walk = node => {
+    Array.from(node.childNodes).forEach(n => {
+      if (n.nodeType === 3) {
+        const frag = document.createDocumentFragment();
+        n.textContent.split(/(\s+)/).forEach(part => {
+          if (!part) return;
+          if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(part)); return; }
+          const w = document.createElement('span');
+          w.className = 'w'; w.setAttribute('aria-hidden', 'true');
+          for (const c of part) {
+            const s = document.createElement('span');
+            s.className = 'ch'; s.dataset.c = c; s.textContent = c;
+            w.appendChild(s);
+          }
+          frag.appendChild(w);
+        });
+        n.replaceWith(frag);
+      } else if (n.nodeType === 1) walk(n);
+    });
+  };
+  walk(el);
+})(heroName);
+let scrambleRun = 0;
+async function scramble(el) {
+  const run = ++scrambleRun;
+  const chs = $$('.ch', el);
+  chs.forEach(c => { c.textContent = c.dataset.c; c.classList.remove('scr'); c.style.width = ''; });
+  if (reduced) return;
+  try { await document.fonts.ready; } catch (e) { /* sin API de fuentes */ }
+  chs.forEach(c => { c.style.width = c.getBoundingClientRect().width + 'px'; });
+  const start = performance.now(), dur = 850;
+  chs.forEach((c, i) => { c._t = 60 + (i / chs.length) * dur * 0.75 + Math.random() * 180; });
+  const frame = t => {
+    if (run !== scrambleRun) return;
+    const e = t - start;
+    let done = true;
+    for (const c of chs) {
+      if (e >= c._t) {
+        if (c.classList.contains('scr') || c.textContent !== c.dataset.c) { c.textContent = c.dataset.c; c.classList.remove('scr'); }
+      } else {
+        done = false;
+        if (Math.random() < 0.45) { c.textContent = GLYPHS[(Math.random() * GLYPHS.length) | 0]; c.classList.add('scr'); }
+      }
+    }
+    if (done) chs.forEach(c => { c.style.width = ''; });
+    else requestAnimationFrame(frame);
+  };
+  requestAnimationFrame(frame);
+}
+
+/* Experiencia: git log --graph */
+const EXP = [
+  {
+    tag: 'v4.0-logalty', company: 'Logalty', role: 'Desarrollador Mobile / Multiplataforma', from: [2020, 2], to: null,
+    notes: [
+      'Desarrollo y mantenimiento de apps Android (Java y Kotlin) con publicación y soporte en Google Play.',
+      'Desarrollo y mantenimiento de apps iOS en Swift con publicación y soporte en App Store Connect.',
+      'Desarrollo cross-platform con NativeScript + Angular (TypeScript) para Web, Android e iOS.',
+      'Aplicación .NET / C# (WinForms) para la integración con tabletas de firma DTU.'
+    ],
+    commits: [
+      ['android', 'feat', 'android', 'apps nativas en Java y Kotlin'],
+      ['ios', 'feat', 'ios', 'apps nativas en Swift'],
+      ['android', 'chore', 'release', 'publicación y soporte en Google Play'],
+      ['ios', 'chore', 'release', 'publicación y soporte en App Store Connect'],
+      ['cross', 'feat', 'cross', 'NativeScript + Angular (TypeScript) para Web, Android e iOS'],
+      ['desktop', 'feat', 'desktop', '.NET / C# WinForms para tabletas de firma DTU']
+    ]
+  },
+  {
+    tag: 'v3.0-blinklearning', company: 'BlinkLearning S.L.', role: 'Desarrollador Android', from: [2018, 1], to: [2020, 2],
+    notes: [
+      'Mantenimiento y nuevas funcionalidades de las apps de la plataforma educativa BlinkLearning (Google Play) en Android nativo (Java).',
+      'Encriptación de ficheros en C++ vía NDK / CMake e integración con la capa Java.',
+      'Diseño y mantenimiento de bases de datos SQLite y personalización de la librería de PDF PDFTron.',
+      'Publicación en Google Play, con monitorización de errores en Fabric / Firebase Crashlytics.',
+      'Soporte de versiones desde Android 4.0 (API 15) y control de dependencias con Gradle.'
+    ],
+    commits: [
+      ['android', 'feat', 'android', 'nuevas funcionalidades de la plataforma educativa'],
+      ['android', 'feat', 'ndk', 'cifrado de ficheros en C++ vía NDK / CMake + capa Java'],
+      ['android', 'feat', 'db', 'diseño y mantenimiento de SQLite'],
+      ['android', 'refactor', 'pdf', 'personalización de PDFTron'],
+      ['android', 'chore', 'release', 'Google Play + Fabric / Firebase Crashlytics'],
+      ['android', 'build', 'gradle', 'minSdk 15 (Android 4.0) y control de dependencias']
+    ]
+  },
+  {
+    tag: 'v2.0-business-in-store', company: 'Business in Store', role: 'Desarrollador Android (prácticas → contrato)', from: [2017, 3], to: [2018, 1],
+    notes: [
+      'App Android nativa (Java) para gestión comercial y alta de clientes de SimonRack, con backend PHP / SQL y SQLite local.',
+      'App Android para gestión logística: nuevos desarrollos y mantenimiento.',
+      'Diseño de bases de datos y monitorización de errores con Fabric.'
+    ],
+    commits: [
+      ['android', 'feat', 'android', 'gestión comercial y alta de clientes de SimonRack'],
+      ['android', 'feat', 'api', 'backend PHP / SQL y SQLite local'],
+      ['android', 'feat', 'logistics', 'nuevos desarrollos y mantenimiento'],
+      ['android', 'chore', 'monitoring', 'diseño de bases de datos y Fabric']
+    ]
+  },
+  {
+    tag: 'v1.0-laso', company: 'Laso S.L.', role: 'Técnico informático (prácticas)', from: [2014, 3], to: [2014, 6],
+    notes: ['Reparación hardware de equipos, atención al cliente y administración de usuarios.'],
+    commits: [
+      ['it', 'fix', 'hardware', 'reparación de equipos'],
+      ['it', 'chore', 'support', 'atención al cliente y administración de usuarios']
+    ]
+  }
+];
+function hash(str) {
+  let h = 0x811c9dc5;
+  for (let i = 0; i < str.length; i++) { h ^= str.charCodeAt(i); h = Math.imul(h, 0x01000193); }
+  return (h >>> 0).toString(16).padStart(8, '0').slice(0, 7);
+}
+const gitlog = $('#gitlog'), logEl = $('#log'), graph = $('#graph');
+logEl.innerHTML = EXP.map((r, gi) => {
+  const nowYM = [NOW.getFullYear(), NOW.getMonth() + 1];
+  const dur = fmtDur(monthsBetween(r.from, r.to || nowYM) + 1);
+  const refs = (gi === 0 ? '<span class="ref ref-head">HEAD → main</span>' : '') + `<span class="ref ref-tag">tag: ${r.tag}</span>`;
+  let h = `<li class="g-row g-tag" data-lane="main" data-g="${gi}">
+    <button type="button" class="tag-btn" aria-expanded="false" aria-controls="rn-${gi}">
+      <span class="g-hash">${hash(r.tag)}</span>${refs}
+      <span class="g-title">${r.company}<span class="g-role">${r.role}</span></span>
+      <span class="g-date">${fmtYM(r.from)} — ${fmtYM(r.to)}</span>
+      <span class="g-more"><span>release notes</span><i class="chev" aria-hidden="true"></i></span>
+    </button>
+    <div class="rn" id="rn-${gi}" role="region" aria-label="Release notes de ${r.company}"><div class="rn-in"><div class="rn-box">
+      <p class="rn-h"><span>## ${r.tag} · ${r.role}</span><span>${dur}</span></p>
+      <ul>${r.notes.map(n => `<li>${n}</li>`).join('')}</ul>
+    </div></div></div>
+  </li>`;
+  r.commits.forEach(([lane, type, scope, msg]) => {
+    h += `<li class="g-row g-commit" data-lane="${lane}" data-g="${gi}"><span class="g-hash">${hash(r.tag + msg)}</span><span class="g-msg"><span class="cc-t">${type}</span><span class="l-${lane}">(${scope})</span>: ${msg}</span></li>`;
+  });
+  return h;
+}).join('');
+const LANES = { main: 0, android: 1, it: 1, ios: 2, cross: 3, desktop: 4 };
+let gPaths = [], gDots = [], gRows = [];
+function layoutGraph() {
+  const box = gitlog.getBoundingClientRect();
+  const gw = parseFloat(getComputedStyle(gitlog).getPropertyValue('--gw')) || 136;
+  // Las lanes deben acabar al menos 20px antes del texto (padding-left = --gw)
+  const padX = gw > 100 ? 18 : 10, step = Math.min(22, Math.floor((gw - padX - 20) / Math.max(...Object.values(LANES))));
+  const lx = l => padX + LANES[l] * step;
+  const rows = $$('.g-row', logEl);
+  rows.forEach(r => {
+    const a = $('.g-hash', r).getBoundingClientRect();
+    r._y = a.top - box.top + a.height / 2;
+  });
+  const H = gitlog.offsetHeight;
+  graph.setAttribute('width', gw);
+  graph.setAttribute('height', H);
+  graph.style.height = H + 'px';
+  const mx = lx('main');
+  const tags = rows.filter(r => r.classList.contains('g-tag'));
+  let svg = '';
+  const paths = [];
+  const y0 = tags[0]._y, yEnd = rows[rows.length - 1]._y + 34;
+  paths.push({ d: `M${mx} ${y0} V${yEnd}`, cls: 'main l-main', a: y0, b: yEnd });
+  tags.forEach(tag => {
+    const g = tag.dataset.g;
+    const commits = rows.filter(r => r.dataset.g === g && r.classList.contains('g-commit'));
+    const lanes = [...new Set(commits.map(c => c.dataset.lane))];
+    lanes.forEach(l => {
+      const ys = commits.filter(c => c.dataset.lane === l).map(c => c._y);
+      const ty = tag._y, ye = Math.max(...ys), x = lx(l);
+      const rr = Math.min(16, (ys[0] - ty) * 0.8);
+      paths.push({ d: `M${mx} ${ty} C${mx} ${ty + rr * 0.75} ${x} ${ty + rr * 0.25} ${x} ${ty + rr} L${x} ${ye} C${x} ${ye + rr * 0.75} ${mx} ${ye + rr * 0.25} ${mx} ${ye + rr}`, cls: 'l-' + l, a: ty, b: ye + rr });
+    });
+  });
+  paths.forEach(p => { svg += `<path class="gp ${p.cls}" pathLength="1" d="${p.d}"/>`; });
+  rows.forEach(r => {
+    const l = r.dataset.lane;
+    if (l === 'main') {
+      svg += `<circle class="gt-ring" cx="${mx}" cy="${r._y}" r="9"/><circle class="gt l-main" cx="${mx}" cy="${r._y}" r="6.5"/>`;
+    } else {
+      svg += `<circle class="gd l-${l}" cx="${lx(l)}" cy="${r._y}" r="${gw > 100 ? 4.5 : 3.5}"/>`;
+    }
+  });
+  graph.innerHTML = svg;
+  gPaths = $$('.gp', graph).map((el, i) => ({ el, a: paths[i].a, b: paths[i].b }));
+  const circles = $$('.gt, .gd', graph), rings = $$('.gt-ring', graph);
+  let ti = 0;
+  gDots = rows.map((r, i) => ({ el: circles[i], ring: r.dataset.lane === 'main' ? rings[ti++] : null, y: r._y }));
+  gRows = rows;
+  updateGraph();
+}
+function updateGraph() {
+  if (!gPaths.length) return;
+  const top = gitlog.getBoundingClientRect().top;
+  const yp = reduced ? Infinity : innerHeight * 0.68 - top;
+  gPaths.forEach(p => { p.el.style.strokeDashoffset = 1 - clamp((yp - p.a) / Math.max(1, p.b - p.a)); });
+  gDots.forEach((d, i) => {
+    const on = yp >= d.y;
+    d.el.classList.toggle('on', on);
+    if (d.ring) d.ring.classList.toggle('on', on && i === 0);
+    gRows[i].classList.toggle('lit', on);
+  });
+}
+let graphRaf = 0;
+const scheduleGraph = () => { cancelAnimationFrame(graphRaf); graphRaf = requestAnimationFrame(layoutGraph); };
+new ResizeObserver(scheduleGraph).observe(gitlog);
+function setNotes(li, open) {
+  li.classList.toggle('open', open);
+  $('.tag-btn', li).setAttribute('aria-expanded', String(open));
+}
+logEl.addEventListener('click', e => {
+  const b = e.target.closest('.tag-btn');
+  if (b) setNotes(b.parentElement, !b.parentElement.classList.contains('open'));
+});
+function toggleAllNotes(force) {
+  const tags = $$('.g-tag', logEl);
+  const open = typeof force === 'boolean' ? force : !tags.every(t => t.classList.contains('open'));
+  tags.forEach(t => setNotes(t, open));
+  $('#rnAll').textContent = open ? 'Plegar todas' : 'Desplegar todas';
+}
+$('#rnAll').addEventListener('click', () => toggleAllNotes());
+
+/* Proyectos: tilt 3D y brillo */
+$$('.card-in').forEach(card => {
+  let raf = 0;
+  card.addEventListener('pointermove', e => {
+    if (reduced || e.pointerType !== 'mouse') return;
+    const r = card.getBoundingClientRect();
+    const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+    cancelAnimationFrame(raf);
+    raf = requestAnimationFrame(() => {
+      card.style.setProperty('--mx', (px * 100).toFixed(1) + '%');
+      card.style.setProperty('--my', (py * 100).toFixed(1) + '%');
+      card.style.transition = 'transform .12s linear, border-color .3s';
+      card.style.transform = `rotateX(${((0.5 - py) * 9).toFixed(2)}deg) rotateY(${((px - 0.5) * 11).toFixed(2)}deg) translateZ(0)`;
+    });
+  });
+  card.addEventListener('pointerleave', () => {
+    cancelAnimationFrame(raf);
+    card.style.transition = '';
+    card.style.transform = '';
+  });
+});
+if (!FINE) {
+  const autoIO = new IntersectionObserver(es => es.forEach(e => e.target.classList.toggle('auto', e.isIntersecting)), { threshold: 0.6 });
+  $$('.mock').forEach(m => autoIO.observe(m));
+}
+
+/* Stack */
+const STACK = [
+  { cfg: 'implementation', target: 'Mobile', title: 'Mobile', items: [
+    ['mobile', 'android-java', 'native', 'Android · Java', 'Logalty, BlinkLearning y Business in Store: apps Android nativas en Java publicadas en Google Play.'],
+    ['mobile', 'android-kotlin', 'native', 'Android · Kotlin', 'Logalty: desarrollo y mantenimiento de apps Android en Kotlin. Curso «Kotlin para Android» (Platzi, 2019).'],
+    ['mobile', 'ios-swift', 'native', 'iOS · Swift', 'Logalty: apps iOS en Swift con publicación y soporte en App Store Connect. Curso «Swift 4 en iOS 11» (Udemy, 2017).'],
+    ['mobile', 'nativescript-angular', 'typescript', 'NativeScript + Angular', 'Logalty: desarrollo cross-platform en TypeScript para Web, Android e iOS.']
+  ] },
+  { cfg: 'api', target: 'Platforms', title: 'Otros lenguajes y entornos', items: [
+    ['lang', 'dotnet-csharp', 'winforms', '.NET · C# · WinForms', 'Logalty: aplicación de escritorio para la integración con tabletas de firma DTU.'],
+    ['lang', 'cpp', 'ndk-cmake', 'C++ (NDK / CMake)', 'BlinkLearning: encriptación de ficheros en C++ vía NDK / CMake e integración con la capa Java.'],
+    ['lang', 'php', 'backend', 'PHP', 'Business in Store: backend PHP / SQL de la app de gestión comercial de SimonRack.'],
+    ['lang', 'rest', 'api', 'API REST', 'Parte del stack de integración de las apps con servicios externos.']
+  ] },
+  { cfg: 'runtimeOnly', target: 'Data', title: 'Bases de datos', items: [
+    ['db', 'sqlite', 'local', 'SQLite', 'BlinkLearning: diseño y mantenimiento de bases de datos SQLite. Business in Store: SQLite local en la app de gestión comercial.'],
+    ['db', 'sql-server', 'server', 'SQL Server', 'Incluido en el stack de bases de datos.'],
+    ['db', 'mysql', 'server', 'MySQL', 'Incluido en el stack de bases de datos.']
+  ] },
+  { cfg: 'tooling', target: 'Tooling', title: 'Herramientas', items: [
+    ['tools', 'gradle', 'kts', 'Gradle', 'BlinkLearning: control de dependencias con Gradle y soporte desde Android 4.0 (API 15).'],
+    ['tools', 'firebase-crashlytics', 'monitoring', 'Firebase Crashlytics', 'BlinkLearning: monitorización de errores con Fabric / Firebase Crashlytics. Business in Store: Fabric.'],
+    ['tools', 'google-play-console', 'release', 'Google Play Console', 'Publicación y soporte de apps Android en Logalty y BlinkLearning.'],
+    ['tools', 'app-store-connect', 'release', 'App Store Connect', 'Logalty: publicación y soporte de apps iOS.']
+  ] },
+  { cfg: 'labs', target: 'Labs', title: 'Otros', items: [
+    ['labs', 'generative-ai', 'certified', 'IA generativa', 'Curso certificado de IA de Google (Santander Open Academy, nov 2024).'],
+    ['labs', 'unity', 'engine', 'Unity', 'Incluido en el stack, en el ámbito de los motores de juego.'],
+    ['labs', 'unreal-engine', '4', 'Unreal Engine 4', 'Programación de videojuegos con Unreal Engine 4 (iDesigner, 2018–2019).']
+  ] }
+];
+const DEPS = [];
+STACK.forEach(g => g.items.forEach(it => DEPS.push({ g: it[0], a: it[1], v: it[2], name: it[3], ctx: it[4], group: g.title })));
+const depKey = d => `${d.g}:${d.a}:${d.v}`;
+const L = s => `<span class="ln">${s}</span>`;
+function depBtn(d, label) { return `<button type="button" class="dep" data-dep="${DEPS.indexOf(d)}">${label}</button>`; }
+function gradleView() {
+  let out = L('<span class="code-c">// :alejandro · build.gradle.kts</span>');
+  out += L('<span class="code-f">plugins</span> <span class="code-p">{</span>');
+  out += L('    <span class="code-f">id</span><span class="code-p">(</span><span class="code-s">"com.android.application"</span><span class="code-p">)</span>');
+  out += L('    <span class="code-f">kotlin</span><span class="code-p">(</span><span class="code-s">"android"</span><span class="code-p">)</span>');
+  out += L('<span class="code-p">}</span>') + L('');
+  out += L(`<span class="code-f">android</span> <span class="code-p">{</span> namespace = <span class="code-s">"es.zaragoza.alejandro"</span> <span class="code-p">}</span>`) + L('');
+  out += L('<span class="code-f">dependencies</span> <span class="code-p">{</span>');
+  STACK.forEach((g, gi) => {
+    out += L(`    <span class="code-c">// ${g.title}</span>`);
+    g.items.forEach(it => {
+      const d = DEPS.find(x => x.a === it[1]);
+      out += L(`    <span class="code-f">${g.cfg}</span><span class="code-p">(</span>${depBtn(d, `"${depKey(d)}"`)}<span class="code-p">)</span>`);
+    });
+    if (gi < STACK.length - 1) out += L('');
+  });
+  out += L('<span class="code-p">}</span>');
+  return `<pre class="code view">${out}</pre>`;
+}
+function swiftView() {
+  const cap = s => s.split('-').map(w => w.charAt(0).toUpperCase() + w.slice(1)).join('');
+  let out = L('<span class="code-c">// swift-tools-version: 5.9</span>');
+  out += L('<span class="code-k">import</span> PackageDescription') + L('');
+  out += L('<span class="code-k">let</span> package = <span class="code-f">Package</span><span class="code-p">(</span>');
+  out += L('    name: <span class="code-s">"Alejandro"</span>,');
+  out += L('    targets: <span class="code-p">[</span>');
+  STACK.forEach((g, gi) => {
+    out += L(`        <span class="code-p">.</span><span class="code-f">target</span><span class="code-p">(</span>name: <span class="code-s">"${g.target}"</span>, dependencies: <span class="code-p">[</span>`);
+    g.items.forEach((it, ii) => {
+      const d = DEPS.find(x => x.a === it[1]);
+      out += L(`            ${depBtn(d, `"${cap(d.a)}"`)}${ii < g.items.length - 1 ? ',' : ''}`);
+    });
+    out += L(`        <span class="code-p">])</span>${gi < STACK.length - 1 ? ',' : ''}`);
+  });
+  out += L('    <span class="code-p">]</span>');
+  out += L('<span class="code-p">)</span>');
+  return `<pre class="code view">${out}</pre>`;
+}
+function gridView() {
+  return `<div class="grid-view view">${STACK.map(g => `<div class="gv-card"><h3>${g.title}</h3><small>${g.cfg}(…)</small><ul>${g.items.map(it => {
+    const d = DEPS.find(x => x.a === it[1]);
+    return `<li><button type="button" class="chip" data-dep="${DEPS.indexOf(d)}">${d.name}</button></li>`;
+  }).join('')}</ul></div>`).join('')}</div>`;
+}
+const stackView = $('#stackView'), seg = $('#seg'), segInd = $('#segInd');
+const VIEWS = { gradle: [gradleView, 'build.gradle.kts', '// sync OK · 0 conflictos'], swift: [swiftView, 'Package.swift', '// resolved · swift package resolve'], grid: [gridView, 'stack · vista grid', '// ' + DEPS.length + ' dependencias'] };
+function layoutSeg() {
+  const b = $('button[aria-pressed="true"]', seg);
+  if (!b) return;
+  segInd.style.width = b.offsetWidth + 'px';
+  segInd.style.transform = `translateX(${b.offsetLeft}px)`;
+}
+function setView(v) {
+  $$('button', seg).forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === v)));
+  const [fn, title, hint] = VIEWS[v];
+  stackView.innerHTML = fn();
+  $('#stackTitle').textContent = title;
+  $('#stackHint').textContent = hint;
+  layoutSeg();
+  hideDep();
+}
+seg.addEventListener('click', e => { const b = e.target.closest('button'); if (b) setView(b.dataset.view); });
+addEventListener('resize', layoutSeg);
+const depcard = $('#depcard');
+let depFor = null;
+function showDep(btn) {
+  const d = DEPS[+btn.dataset.dep];
+  if (!d) return;
+  if (depFor && depFor !== btn) depFor.classList.remove('act');
+  depFor = btn;
+  btn.classList.add('act');
+  depcard.id = 'depcard';
+  btn.setAttribute('aria-describedby', 'depcard');
+  depcard.innerHTML = `<div class="dc-k">${esc(depKey(d))}</div><div class="dc-t">${esc(d.name)}</div><p class="dc-c">${esc(d.ctx)}</p><div class="dc-g">// ${esc(d.group)}</div>`;
+  const r = btn.getBoundingClientRect();
+  const w = depcard.offsetWidth, h = depcard.offsetHeight;
+  let x = r.left, y = r.bottom + 10;
+  x = clamp(x, 16, innerWidth - w - 16);
+  if (y + h > innerHeight - 40) y = r.top - h - 10;
+  depcard.style.left = x + 'px';
+  depcard.style.top = Math.max(60, y) + 'px';
+  depcard.classList.add('show');
+}
+function hideDep() {
+  depcard.classList.remove('show');
+  if (depFor) { depFor.classList.remove('act'); depFor.removeAttribute('aria-describedby'); depFor = null; }
+}
+stackView.addEventListener('pointerover', e => { const b = e.target.closest('[data-dep]'); if (b && e.pointerType === 'mouse') showDep(b); });
+stackView.addEventListener('pointerout', e => { const b = e.target.closest('[data-dep]'); if (b && e.pointerType === 'mouse' && !b.contains(e.relatedTarget)) hideDep(); });
+stackView.addEventListener('focusin', e => { const b = e.target.closest('[data-dep]'); if (b) showDep(b); });
+stackView.addEventListener('focusout', hideDep);
+stackView.addEventListener('click', e => {
+  const b = e.target.closest('[data-dep]');
+  if (!b) return;
+  if (depFor === b && depcard.classList.contains('show') && document.activeElement !== b) hideDep(); else showDep(b);
+});
+addEventListener('scroll', () => { if (depFor) hideDep(); }, { passive: true });
+setView('gradle');
+
+/* Education.json */
+const EDU = {
+  formacionAcademica: [
+    { año: 2017, titulo: 'CFGS Desarrollo de Aplicaciones Multiplataforma', centro: 'I.E.S. Santiago Hernández', ciudad: 'Zaragoza' },
+    { año: 2014, titulo: 'CFGM Sistemas Microinformáticos y Redes', centro: 'I.E.S. Santiago Hernández', ciudad: 'Zaragoza' }
+  ],
+  formacionComplementaria: [
+    { fecha: 'nov 2024', curso: 'Curso certificado de IA', entidad: 'Google (Santander Open Academy)' },
+    { fecha: '2019', curso: 'Kotlin para Android', entidad: 'Platzi' },
+    { fecha: '2019', curso: 'React Native', entidad: 'Platzi' },
+    { fecha: '2018–2019', curso: 'Programación de videojuegos con Unreal Engine 4', entidad: 'iDesigner' },
+    { fecha: '2017', curso: 'Swift 4 en iOS 11', entidad: 'Udemy' }
+  ],
+  idiomas: { español: 'nativo', inglés: 'intermedio (B1–B2)' }
+};
+function jsonHTML(key, val, last) {
+  const comma = last ? '' : '<span class="jp">,</span>';
+  const k = key === null ? '' : `<span class="jk">"${esc(key)}"</span><span class="jp">: </span>`;
+  if (val !== null && typeof val === 'object') {
+    const arr = Array.isArray(val);
+    const ent = arr ? val.map(v => [null, v]) : Object.entries(val);
+    const o = arr ? '[' : '{', c = arr ? ']' : '}';
+    const n = ent.length;
+    const sum = arr ? plural(n, 'elemento', 'elementos') : plural(n, 'clave', 'claves');
+    const label = key !== null ? key : (val.titulo || val.curso || 'objeto');
+    return `<div class="jn jo"><button type="button" class="jt" aria-expanded="true" aria-label="${esc(label)}, ${sum}"><span class="tw" aria-hidden="true"></span>${k}<span class="jb">${o}</span><span class="jsum"><span class="jb"> … ${c}</span>${comma}<span class="jcm">  // ${sum}</span></span></button><div class="jc">${ent.map(([kk, v], i) => jsonHTML(kk, v, i === n - 1)).join('')}</div><div class="jend"><span class="jb">${c}</span>${comma}</div></div>`;
+  }
+  const cls = typeof val === 'number' ? 'jnum' : 'js';
+  const v = typeof val === 'number' ? val : `"${esc(val)}"`;
+  return `<div class="jn">${k}<span class="${cls}">${v}</span>${comma}</div>`;
+}
+const jsonEl = $('#json');
+jsonEl.innerHTML = `<div class="json-root">${jsonHTML(null, EDU, true)}</div>`;
+function setJsonNode(node, open) {
+  node.classList.toggle('closed', !open);
+  $('.jt', node).setAttribute('aria-expanded', String(open));
+}
+jsonEl.addEventListener('click', e => {
+  const b = e.target.closest('.jt');
+  if (b) setJsonNode(b.parentElement, b.parentElement.classList.contains('closed'));
+});
+$('#jsonToggle').addEventListener('click', e => {
+  const nodes = $$('.jo', jsonEl).slice(1);
+  const anyOpen = nodes.some(n => !n.classList.contains('closed'));
+  nodes.forEach(n => setJsonNode(n, !anyOpen));
+  e.currentTarget.textContent = anyOpen ? 'Expandir todo' : 'Plegar todo';
+});
+
+/* Contact.sh */
+const shOut = $('#shOut'), shIn = $('#shIn'), shBody = $('#shBody');
+const hist = [];
+let hIdx = 0;
+const OPENABLE = { readme: 'readme', perfil: 'readme', experiencia: 'experiencia', experience: 'experiencia', proyectos: 'proyectos', projects: 'proyectos', stack: 'stack', formacion: 'formacion', 'formación': 'formacion', education: 'formacion', contacto: 'contacto', contact: 'contacto', inicio: 'top' };
+function out(html, cls) {
+  const d = document.createElement('div');
+  if (cls) d.className = cls;
+  d.innerHTML = html;
+  shOut.appendChild(d);
+  shBody.scrollTop = shBody.scrollHeight;
+}
+const COMMANDS = {
+  help() {
+    out(`<span class="o-g">Comandos disponibles</span>
+  <span class="o-b">help</span>        muestra esta ayuda
+  <span class="o-b">whoami</span>      quién soy
+  <span class="o-b">email</span>       copia mi email al portapapeles
+  <span class="o-b">cv</span>          resumen de experiencia
+  <span class="o-b">stack</span>       tecnologías que uso
+  <span class="o-b">ls</span>          ficheros del proyecto
+  <span class="o-b">open</span> &lt;s&gt;    abre una sección (readme, experiencia, proyectos, stack, formacion)
+  <span class="o-b">theme</span> &lt;t&gt;   cambia el tema (dark, light, hc)
+  <span class="o-b">build</span>       relanza la build
+  <span class="o-b">clear</span>       limpia la terminal
+<span class="o-dim">↑/↓ recorre el historial · Tab autocompleta · hay algún comando oculto</span>`);
+  },
+  whoami() {
+    out(`<span class="o-g">alejandro</span> · Alejandro Burdío García
+Desarrollador Mobile · <span class="o-g">Android</span> &amp; <span class="o-o">iOS</span> · Zaragoza, España
+Ahora en Logalty (QTSP): apps de firma electrónica e identidad digital.`);
+  },
+  async email() {
+    out(`<span class="o-mut">→</span> <a href="mailto:${EMAIL}" class="o-g">${EMAIL}</a>`);
+    const ok = await copyEmail();
+    out(ok ? '<span class="o-dim">copiado al portapapeles ✓</span>' : '<span class="o-err">no se ha podido copiar; usa el enlace</span>');
+  },
+  cv() {
+    const nowYM = [NOW.getFullYear(), NOW.getMonth() + 1];
+    out(`<span class="o-g">Alejandro Burdío García</span> · Desarrollador Mobile · Android &amp; iOS
+${plural(YEARS, 'año', 'años')} desarrollando apps (desde mar 2017)
+${EXP.map(r => `  <span class="o-y">${(fmtYM(r.from) + ' – ' + fmtYM(r.to)).padEnd(22)}</span>${r.company} · <span class="o-mut">${r.role}</span> <span class="o-dim">(${fmtDur(monthsBetween(r.from, r.to || nowYM) + 1)})</span>`).join('\n')}
+<span class="o-dim">→ detalle completo: open experiencia</span>`);
+  },
+  stack() {
+    out(STACK.map(g => `<span class="o-v">${g.title.padEnd(27)}</span>${g.items.map(i => i[3]).join(', ')}`).join('\n'));
+  },
+  ls() {
+    out('<span class="o-b">README.md</span>  <span class="o-v">Experience.kt</span>  <span class="o-o">Projects.swift</span>  <span class="o-g">build.gradle.kts</span>  <span class="o-y">Education.json</span>  Contact.sh');
+  },
+  open(arg) {
+    const id = OPENABLE[(arg || '').toLowerCase()];
+    if (!id) { out('<span class="o-err">uso: open &lt;readme|experiencia|proyectos|stack|formacion|contacto&gt;</span>'); return; }
+    out(`<span class="o-dim">abriendo ${id}…</span>`);
+    setTimeout(() => goTo(id), 250);
+  },
+  theme(arg) {
+    const t = (arg || '').toLowerCase();
+    if (!THEMES[t]) { out('<span class="o-err">uso: theme &lt;dark|light|hc&gt;</span>'); return; }
+    setTheme(t);
+    out(`<span class="o-dim">tema → ${THEMES[t]}</span>`);
+  },
+  build() {
+    out('<span class="o-dim">./gradlew :alejandro:assembleRelease (subiendo al hero)…</span>');
+    setTimeout(() => { goTo('top'); runBuild(); }, 300);
+  },
+  clear() { shOut.innerHTML = ''; },
+  sudo() { out('<span class="o-err">alejandro no está en el fichero sudoers. Este incidente será reportado.</span>'); },
+  coffee() {
+    out(`<span class="o-o">     ( (
+      ) )
+   ........
+   |      |]
+   \\      /
+    \`----'</span>
+<span class="o-y">HTTP 418</span>: soy una tetera. Pero para ti, café recién hecho.`);
+  },
+  vim() { out('Entrando en vim… <span class="o-dim">es broma. Para salir: :q</span>'); },
+  ':q'() { out('No hay nada que cerrar. Ya estás fuera de vim (o eso crees).'); },
+  exit() { out('logout… <span class="o-dim">no, mejor quédate y escribe</span> <span class="o-b">email</span>.'); },
+  rm() { out('<span class="o-err">Buen intento.</span> Hay copia en las dos stores.'); },
+  hola() { out('¡Hola! Escribe <span class="o-b">help</span> para ver qué puedo hacer, o <span class="o-b">email</span> para escribirme.'); },
+  git() { out('<span class="o-dim">el historial completo está en Experience.kt</span>'); setTimeout(() => goTo('experiencia'), 250); },
+  date() { out(new Date().toLocaleString('es-ES', { dateStyle: 'full', timeStyle: 'short', timeZone: 'Europe/Madrid' })); },
+  pwd() { out('/Users/alejandro/career'); }
+};
+COMMANDS['café'] = COMMANDS.coffee;
+COMMANDS.cafe = COMMANDS.coffee;
+COMMANDS.hello = COMMANDS.hola;
+COMMANDS[':wq'] = COMMANDS[':q'];
+const VISIBLE = ['help', 'whoami', 'email', 'cv', 'stack', 'ls', 'open', 'theme', 'build', 'clear'];
+const COMPLETABLE = VISIBLE.concat(['date', 'pwd', 'git']);
+async function exec(raw) {
+  const line = raw.trim();
+  out(`<span class="sh-pr">alejandro@zaragoza:<b>~</b>$</span> ${esc(line)}`);
+  if (!line) return;
+  hist.push(line);
+  hIdx = hist.length;
+  const [cmd, ...args] = line.split(/\s+/);
+  const fn = COMMANDS[cmd.toLowerCase()];
+  if (fn) await fn(args.join(' '));
+  else out(`<span class="o-err">zsh: comando no encontrado: ${esc(cmd)}</span> <span class="o-dim">(prueba help)</span>`);
+}
+$('#shForm').addEventListener('submit', e => {
+  e.preventDefault();
+  const v = shIn.value;
+  shIn.value = '';
+  exec(v);
+});
+shIn.addEventListener('keydown', e => {
+  if (e.key === 'ArrowUp') {
+    if (!hist.length) return;
+    e.preventDefault();
+    hIdx = Math.max(0, hIdx - 1);
+    shIn.value = hist[hIdx];
+  } else if (e.key === 'ArrowDown') {
+    if (!hist.length) return;
+    e.preventDefault();
+    hIdx = Math.min(hist.length, hIdx + 1);
+    shIn.value = hist[hIdx] || '';
+  } else if (e.key === 'Tab' && shIn.value.trim()) {
+    const v = shIn.value.trimStart();
+    const parts = v.split(/\s+/);
+    let pool, prefix;
+    if (parts.length === 1) { pool = COMPLETABLE; prefix = parts[0].toLowerCase(); }
+    else if (parts[0] === 'open') { pool = ['readme', 'experiencia', 'proyectos', 'stack', 'formacion', 'contacto']; prefix = parts[1].toLowerCase(); }
+    else if (parts[0] === 'theme') { pool = Object.keys(THEMES); prefix = parts[1].toLowerCase(); }
+    else return;
+    const m = pool.filter(c => c.startsWith(prefix));
+    if (!m.length) return;
+    e.preventDefault();
+    const head = parts.length === 1 ? '' : parts[0] + ' ';
+    if (m.length === 1) shIn.value = head + m[0] + (parts.length === 1 && (m[0] === 'open' || m[0] === 'theme') ? ' ' : '');
+    else {
+      let common = m[0];
+      m.forEach(x => { while (!x.startsWith(common)) common = common.slice(0, -1); });
+      shIn.value = head + common;
+      out(`<span class="o-dim">${m.join('   ')}</span>`);
+    }
+  } else if (e.key === 'l' && e.ctrlKey) {
+    e.preventDefault();
+    shOut.innerHTML = '';
+  }
+});
+shBody.addEventListener('click', () => { if (!getSelection().toString()) shIn.focus({ preventScroll: true }); });
+$$('.sh-chips button').forEach(b => b.addEventListener('click', () => { exec(b.dataset.cmd); shIn.focus({ preventScroll: true }); }));
+out(`<span class="o-dim">Último inicio de sesión: ${NOW.toLocaleDateString('es-ES', { weekday: 'short', day: 'numeric', month: 'short' })} en ttys001</span>`);
+out('Bienvenido a <span class="o-g">Contact.sh</span>. Escribe <span class="o-b">help</span> para empezar.');
+$('#copyMail').addEventListener('click', copyEmail);
+
+/* Paleta de comandos */
+const palette = $('#palette'), palInput = $('#palInput'), palList = $('#palList');
+const PAL = [
+  ...SECTIONS.slice(1).map(s => ({ g: 'Ir a', ic: '→', t: `${s.file} · ${s.label}`, k: s.label + ' ' + s.id, run: () => goTo(s.id) })),
+  { g: 'Ir a', ic: '↑', t: 'Inicio · consola de build', k: 'top arriba hero', run: () => goTo('top') },
+  { g: 'Acción', ic: '⧉', t: 'Copiar email', k: 'correo contacto mail ' + EMAIL, run: copyEmail },
+  { g: 'Acción', ic: '✉', t: 'Escribir un email', k: 'mailto correo contacto', run: () => { location.href = 'mailto:' + EMAIL; } },
+  { g: 'Acción', ic: '▶', t: 'Lanzar la build otra vez', k: 'gradle run rebuild repetir animacion', run: () => { goTo('top'); runBuild(); } },
+  { g: 'Acción', ic: '≡', t: 'Desplegar todas las release notes', k: 'experiencia notas abrir', run: () => { toggleAllNotes(true); goTo('experiencia'); } },
+  { g: 'Acción', ic: '$', t: 'Abrir la terminal de contacto', k: 'shell zsh contact', run: () => { goTo('contacto'); setTimeout(() => shIn.focus({ preventScroll: true }), reduced ? 0 : 700); } },
+  { g: 'Tema', ic: '◐', t: 'Tema: oscuro', k: 'dark noche', run: () => setTheme('dark') },
+  { g: 'Tema', ic: '◑', t: 'Tema: claro', k: 'light dia', run: () => setTheme('light') },
+  { g: 'Tema', ic: '◉', t: 'Tema: alto contraste', k: 'high contrast hc accesibilidad', run: () => setTheme('hc') },
+  { g: 'Vista', ic: '▤', t: 'Alternar scanlines (CRT)', k: 'crt retro lineas', run: toggleScan }
+];
+const norm = s => s.toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+function fuzzy(q, s) {
+  const t = norm(s);
+  let qi = 0, score = 0, prev = -2;
+  const idx = [];
+  for (let i = 0; i < t.length && qi < q.length; i++) {
+    if (t[i] === q[qi]) {
+      let sc = 1;
+      if (i === prev + 1) sc += 4;
+      if (i === 0 || /[\s\-·.:/(]/.test(t[i - 1])) sc += 5;
+      score += sc; idx.push(i); prev = i; qi++;
+    }
+  }
+  if (qi < q.length) return null;
+  return { score: score - idx[0] * 0.05 - t.length * 0.01, idx };
+}
+function hl(text, idx) {
+  const set = new Set(idx);
+  return Array.from(text).map((c, i) => set.has(i) ? `<mark>${esc(c)}</mark>` : esc(c)).join('');
+}
+let palItems = [], palSel = 0, palOpen = false, palReturn = null;
+function renderPal() {
+  const q = norm(palInput.value.trim()).replace(/\s+/g, ' ');
+  palItems = PAL.map((it, i) => {
+    if (!q) return { it, score: -i, html: esc(it.t) };
+    const a = fuzzy(q, it.t);
+    if (a) return { it, score: a.score + 10, html: hl(it.t, a.idx) };
+    const b = fuzzy(q, it.k);
+    if (b) return { it, score: b.score, html: esc(it.t) };
+    return null;
+  }).filter(Boolean).sort((a, b) => b.score - a.score);
+  palSel = clamp(palSel, 0, Math.max(0, palItems.length - 1));
+  if (!palItems.length) {
+    palList.innerHTML = '<li class="pal-empty" role="presentation">Sin resultados. Prueba «tema», «email» o «build».</li>';
+    palInput.removeAttribute('aria-activedescendant');
+    return;
+  }
+  palList.innerHTML = palItems.map((p, i) => `<li role="option" id="po-${i}" aria-selected="${i === palSel}" data-i="${i}"><span class="pi-ic" aria-hidden="true">${p.it.ic}</span><span class="pi-t">${p.html}</span><span class="pi-g">${p.it.g}</span></li>`).join('');
+  palInput.setAttribute('aria-activedescendant', 'po-' + palSel);
+}
+function movePal(d) {
+  if (!palItems.length) return;
+  palSel = (palSel + d + palItems.length) % palItems.length;
+  $$('li[role=option]', palList).forEach((li, i) => li.setAttribute('aria-selected', String(i === palSel)));
+  palInput.setAttribute('aria-activedescendant', 'po-' + palSel);
+  const el = $('#po-' + palSel);
+  if (el) el.scrollIntoView({ block: 'nearest' });
+}
+function openPal() {
+  if (palOpen) return;
+  palOpen = true;
+  palReturn = document.activeElement;
+  palette.hidden = false;
+  palInput.value = '';
+  palSel = 0;
+  renderPal();
+  palInput.focus();
+  renderMode();
+}
+function closePal(restore = true) {
+  if (!palOpen) return;
+  palOpen = false;
+  palette.hidden = true;
+  if (restore && palReturn && palReturn.focus) palReturn.focus({ preventScroll: true });
+  renderMode();
+}
+function runPal(i) {
+  const p = palItems[i];
+  if (!p) return;
+  closePal(false);
+  p.it.run();
+}
+palInput.addEventListener('input', () => { palSel = 0; renderPal(); });
+palInput.addEventListener('keydown', e => {
+  if (e.key === 'ArrowDown') { e.preventDefault(); movePal(1); }
+  else if (e.key === 'ArrowUp') { e.preventDefault(); movePal(-1); }
+  else if (e.key === 'Enter') { e.preventDefault(); runPal(palSel); }
+  else if (e.key === 'Escape') { e.preventDefault(); closePal(); }
+  else if (e.key === 'Tab') e.preventDefault();
+});
+palList.addEventListener('click', e => { const li = e.target.closest('li[data-i]'); if (li) runPal(+li.dataset.i); });
+palList.addEventListener('pointermove', e => {
+  const li = e.target.closest('li[data-i]');
+  if (li && +li.dataset.i !== palSel) { palSel = +li.dataset.i; movePal(0); }
+});
+palette.addEventListener('mousedown', e => { if (e.target === palette) closePal(); });
+$('#palBtn').addEventListener('click', openPal);
+$('#footPal').addEventListener('click', openPal);
+$('#toTop').addEventListener('click', () => goTo('top'));
+
+/* Teclado global */
+let lastG = 0;
+const typing = el => el && (el.matches('input, textarea, select, [contenteditable="true"]'));
+document.addEventListener('keydown', e => {
+  if ((e.metaKey || e.ctrlKey) && (e.key || "").toLowerCase() === "k") {
+    e.preventDefault();
+    if (palOpen) closePal(); else openPal();
+    return;
+  }
+  if (palOpen || typing(document.activeElement) || e.metaKey || e.ctrlKey || e.altKey) return;
+  if (e.key === ':') { e.preventDefault(); openPal(); }
+  else if (e.key === 'j') window.scrollBy({ top: 140, behavior: reduced ? 'auto' : 'smooth' });
+  else if (e.key === 'k') window.scrollBy({ top: -140, behavior: reduced ? 'auto' : 'smooth' });
+  else if (e.key === 'G') window.scrollTo({ top: document.documentElement.scrollHeight, behavior: reduced ? 'auto' : 'smooth' });
+  else if (e.key === 'g') {
+    const t = performance.now();
+    if (t - lastG < 450) { goTo('top'); lastG = 0; } else lastG = t;
+  }
+});
+
+/* Barra de estado */
+const sbMode = $('#sbMode'), sbPct = $('#sbPct'), sbPos = $('#sbPos'), sbClock = $('#sbClock');
+let hoverInteractive = false, hasSel = false, ln = 1, col = 1;
+function renderMode() {
+  const ae = document.activeElement;
+  const m = palOpen ? 'COMMAND' : typing(ae) ? 'INSERT' : hasSel ? 'VISUAL' : hoverInteractive ? 'INSERT' : 'NORMAL';
+  if (sbMode.dataset.mode !== m) { sbMode.dataset.mode = m; sbMode.textContent = m; }
+}
+document.addEventListener('focusin', renderMode);
+document.addEventListener('focusout', () => setTimeout(renderMode, 0));
+document.addEventListener('selectionchange', () => {
+  const s = getSelection();
+  hasSel = !!(s && s.toString().trim()) && !typing(document.activeElement);
+  renderMode();
+});
+const INTERACTIVE = 'a, button, [role=option], input, .tag-btn, .card-in, .dep, .chip';
+document.addEventListener('pointerover', e => {
+  const h = !!e.target.closest(INTERACTIVE);
+  if (h !== hoverInteractive) { hoverInteractive = h; renderMode(); }
+  if (cursorOn) cursorEl.classList.toggle('hover', h && !e.target.closest('input'));
+  if (cursorOn) cursorEl.classList.toggle('gone', !!e.target.closest('input, .sh-body'));
+});
+function tick() {
+  const t = new Date();
+  sbClock.textContent = t.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit' });
+  try {
+    $('#heroClock').textContent = 'Zaragoza · ' + t.toLocaleTimeString('es-ES', { hour: '2-digit', minute: '2-digit', timeZone: 'Europe/Madrid' });
+  } catch (e) { $('#heroClock').textContent = 'Zaragoza'; }
+}
+tick();
+setInterval(tick, 15000);
+function renderPos() { sbPos.textContent = `Ln ${ln}, Col ${col}`; }
+
+/* Cursor de terminal */
+const cursorEl = $('#cursor');
+let cursorOn = false;
+if (FINE && !reduced) {
+  cursorOn = true;
+  root.classList.add('has-cursor');
+  let x = -100, y = -100, cx = -100, cy = -100, raf = 0, idleT = 0;
+  const loop = () => {
+    cx += (x - cx) * 0.22; cy += (y - cy) * 0.22;
+    cursorEl.style.transform = `translate3d(${cx.toFixed(1)}px,${cy.toFixed(1)}px,0)`;
+    if (Math.abs(x - cx) + Math.abs(y - cy) > 0.3) raf = requestAnimationFrame(loop); else raf = 0;
+  };
+  addEventListener('pointermove', e => {
+    if (e.pointerType !== 'mouse') return;
+    const hov = cursorEl.classList.contains('hover');
+    x = e.clientX + (hov ? -11 : 12); y = e.clientY + (hov ? -11 : 10);
+    cursorEl.classList.remove('idle');
+    clearTimeout(idleT);
+    idleT = setTimeout(() => cursorEl.classList.add('idle'), 900);
+    if (!raf) raf = requestAnimationFrame(loop);
+    col = Math.max(1, Math.floor(e.clientX / 8.4) + 1);
+    renderPos();
+  }, { passive: true });
+  document.addEventListener('mouseleave', () => cursorEl.classList.add('gone'));
+  document.addEventListener('mouseenter', () => cursorEl.classList.remove('gone'));
+} else {
+  addEventListener('pointermove', e => { col = Math.max(1, Math.floor(e.clientX / 8.4) + 1); }, { passive: true });
+}
+
+/* Scroll */
+const topbar = $('#topbar'), phonesEl = $('#phones');
+const pars = $$('[data-par]');
+let scrollRaf = 0;
+function onScroll() {
+  scrollRaf = 0;
+  const y = scrollY, max = document.documentElement.scrollHeight - innerHeight;
+  topbar.classList.toggle('scrolled', y > 8);
+  const pct = max > 0 ? Math.round(y / max * 100) : 0;
+  sbPct.textContent = y < 4 ? 'Top' : pct >= 100 ? 'Bot' : pct + '%';
+  ln = Math.floor(y / 22) + 1;
+  renderPos();
+  updateGraph();
+  if (!reduced) {
+    const r = phonesEl.getBoundingClientRect();
+    if (r.bottom > 0 && r.top < innerHeight) {
+      const c = (r.top + r.height / 2 - innerHeight / 2);
+      pars.forEach(p => { p.style.transform = `translate3d(0,${(c * +p.dataset.par).toFixed(1)}px,0)`; });
+    }
+  }
+}
+addEventListener('scroll', () => { if (!scrollRaf) scrollRaf = requestAnimationFrame(onScroll); }, { passive: true });
+addEventListener('resize', () => { if (!scrollRaf) scrollRaf = requestAnimationFrame(onScroll); });
+
+/* Arranque */
+document.fonts && document.fonts.ready.then(() => { placeTabInd(); layoutSeg(); scheduleGraph(); });
+layoutGraph();
+onScroll();
+renderMode();
+setTimeout(runBuild, reduced ? 0 : 200);
+})();
+</script>
+</body>
+</html>
